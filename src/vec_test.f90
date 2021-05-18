@@ -1,6 +1,7 @@
 program vec_test
 
 use vector_m
+use matrix_m
 use iso_fortran_env, only: real64, real32
 
 implicit none
@@ -14,7 +15,14 @@ implicit none
     type(vector), dimension(2) :: orthonormal_basis
     type(vector), dimension(3) :: basis, copy_basis, ortho_3
     type(vector), dimension(2) :: basis_2
+    type(matrix) :: test_matrix
+    type(matrix) :: t2_mat, ortho_m
+    type(vector) :: vec_ptr
     real(dp) :: scalar
+
+    integer, dimension(4, 4) :: A
+
+    A = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], [4, 4])
 
     v1 = vector(2)
 
@@ -142,7 +150,54 @@ implicit none
     print *, "is orthonormal_basis orthonormal? ", is_orthonormal(orthonormal_basis)
     print *, "is ortho_3 orthonormal? ", is_orthonormal(ortho_3)
 
+    print *
+    print *
+    print 1
+    print *, "Starting matrix testing"
+    print 1
+    print *
+    print *
+
+    call test_matrix%new(2, 3)
+
+    vec_ptr = test_matrix%vec(1)
+
+    call vec_ptr%print()
+
+    call test_matrix%print()
+
+    print *, "element(1, 1) = ", test_matrix%at(1, 1)
+
+
+    t2_mat = A    
+    test_matrix = t2_mat
+
+    call test_matrix%set(1, 1, 10._real64)
+    call test_matrix%set(3, 2, 10)
 
     
+    print *, "test matrix: "
+    call test_matrix%print()
+
+    print *, "unmodified: "
+    call t2_mat%print()
+
+    ortho_m = test_matrix%gram_schmidt()
+
+    print *, "Gram-schmidt solve:"
+
+    call ortho_m%print()
+
+    print *, "Is ortho_m orthonormal? ", ortho_m%is_orthonormal()
+
+    test_matrix = reshape([1, 3, 4, 5, 9, -2], [3, 2])
+
+    call test_matrix%print()
+
+    ortho_m = test_matrix%gram_schmidt()
+    print *, "Gram-schmidt solution: "
+
+    call ortho_m%print()
+
 
 end program
