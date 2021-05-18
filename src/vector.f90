@@ -18,7 +18,7 @@ use iso_fortran_env, only: real64, real32, int32, int64
 
 implicit none
 private
-public :: print_basis, nd_test, gram_schmidt, is_orthonormal
+public :: print_basis, nd_test, gram_schmidt, is_orthonormal, deallocate_vector_data
 
     real(real64), parameter :: vector_epsilon = 1d-14
 
@@ -51,8 +51,8 @@ contains
     procedure, public :: allocated => vector_is_allocated
 
 
-    procedure :: alloc_ => allocate_vector_data
-    procedure :: dealloc_ => deallocate_vector_data
+    procedure, public :: alloc_ => allocate_vector_data
+    procedure, public :: dealloc_ => deallocate_vector_data
     procedure :: dot_ => vector_dot_vector
     procedure :: proj_ => vector_proj_vector
     procedure :: conform_ => vector_conform
@@ -735,8 +735,7 @@ contains
 
             bool = .false.
 
-        end if       
-
+        end if     
 
     end function
     
