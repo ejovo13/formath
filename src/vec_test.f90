@@ -20,6 +20,7 @@ implicit none
     type(vector) :: vec_ptr
     real(dp) :: scalar
     real(dp), allocatable, dimension(:) :: test_a
+    real(dp), allocatable, dimension(:,:) :: reg_array
 
     integer, dimension(4, 4) :: A
 
@@ -202,5 +203,8 @@ implicit none
 
     call ortho_m%print()
 
+    reg_array = ortho_m%as_array()
+
+    print *, reg_array
 
 end program

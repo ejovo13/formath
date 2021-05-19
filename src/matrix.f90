@@ -9,7 +9,6 @@ use iso_fortran_env, only: real64, real32
 implicit none
 private
 
-
 type, public :: matrix
 
     private
@@ -30,6 +29,7 @@ contains
     procedure, public :: at => at_index_matrix
     procedure, public :: gram_schmidt => gram_schmidt_matrix
     procedure, public :: is_orthonormal => is_orthonormal_matrix
+    procedure, public :: as_array => matrix_as_array
     
     generic, public :: set => set_int_, set_r32_, set_r64_
     generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_matrix
@@ -54,7 +54,7 @@ end type
 
 contains
 
-    subroutine new_matrix(self, n, k)
+    elemental subroutine new_matrix(self, n, k)
 
         class(matrix), intent(inout) :: self
         integer, intent(in) :: n !! The dimension of each constituent vector
@@ -71,7 +71,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_from_rank2_array_int(self, array) 
+    pure subroutine matrix_from_rank2_array_int(self, array) 
 
         class(matrix), intent(inout) :: self
         integer, dimension(:,:), intent(in) :: array
@@ -91,7 +91,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_from_rank2_array_r32(self, array) 
+    pure subroutine matrix_from_rank2_array_r32(self, array) 
 
         class(matrix), intent(inout) :: self
         real(real32), dimension(:,:), intent(in) :: array
@@ -111,7 +111,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_from_rank2_array_r64(self, array) 
+    pure subroutine matrix_from_rank2_array_r64(self, array) 
 
         class(matrix), intent(inout) :: self
         real(real64), dimension(:,:), intent(in) :: array
@@ -131,7 +131,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_from_matrix(self, m) 
+    elemental subroutine matrix_from_matrix(self, m) 
 
         class(matrix), intent(inout) :: self
         class(matrix), intent(in) :: m
@@ -151,7 +151,7 @@ contains
 
     end subroutine
 
-    subroutine clear_matrix(self)
+    elemental subroutine clear_matrix(self)
 
         class(matrix), intent(inout) :: self
 
@@ -166,7 +166,7 @@ contains
 
     end subroutine
 
-    subroutine allocate_matrix_data(self) 
+    elemental subroutine allocate_matrix_data(self) 
 
         class(matrix), intent(inout) :: self
         integer :: ierr
@@ -181,7 +181,7 @@ contains
 
     end subroutine
 
-    subroutine deallocate_matrix_data(self) 
+    elemental subroutine deallocate_matrix_data(self) 
 
         class(matrix), intent(inout) :: self
         integer :: ierr
@@ -219,7 +219,7 @@ contains
 
     end subroutine
 
-    function at_index_matrix(self, i, j) result(element)
+    elemental function at_index_matrix(self, i, j) result(element)
 
         class(matrix), intent(in) :: self
         integer, intent(in) :: i !! ith element
@@ -236,7 +236,7 @@ contains
         class(matrix), intent(in) :: self
         integer, intent(in) :: i !! ith element
         integer, intent(in) :: j !! jth vector        
-        integer :: x
+        integer, intent(in) :: x
         
         call self%m(j)%set(i, x)
 
@@ -264,7 +264,7 @@ contains
 
     end subroutine
 
-    function access_vector_matrix(self, v) result(vec)
+    elemental function access_vector_matrix(self, v) result(vec)
     !! Get a copy of the vth vector
 
         class(matrix), intent(in) :: self
@@ -278,7 +278,7 @@ contains
 
     end function
 
-    function gram_schmidt_matrix(self) result(ortho)
+    elemental function gram_schmidt_matrix(self) result(ortho)
 
         class(matrix), intent(in) :: self
         type(matrix) :: ortho
@@ -315,7 +315,7 @@ contains
         
     end function
     
-    function is_orthonormal_matrix(self) result(bool)
+    elemental function is_orthonormal_matrix(self) result(bool)
 
         class(matrix), intent(in) :: self
         logical :: bool
@@ -341,6 +341,21 @@ contains
             bool = .false.
 
         end if     
+
+    end function
+
+    pure function matrix_as_array(self) result(array)
+
+        class(matrix), intent(in) :: self
+        real(real64), dimension(self%n, self%k) :: array
+
+        integer :: i
+
+        forall(i = 1:self%k) 
+
+            array(i,:) = self%m(i)%as_array()
+
+        end forall
 
     end function
 

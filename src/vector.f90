@@ -370,11 +370,11 @@ contains
         
     end function
 
-    subroutine vector_set_index_int(self, index, val)
+    elemental subroutine vector_set_index_int(self, index, val)
         
         class(vector), intent(inout) :: self
         integer, intent(in) :: index
-        integer :: val
+        integer, intent(in) :: val
         
         if (index > self%dim) error stop "out of bounds error"
         
@@ -382,11 +382,11 @@ contains
         
     end subroutine
 
-    subroutine vector_set_index_r32(self, index, val)
+    elemental subroutine vector_set_index_r32(self, index, val)
         
         class(vector), intent(inout) :: self
         integer, intent(in) :: index
-        real(real32) :: val
+        real(real32), intent(in) :: val
         
         if (index > self%dim) error stop "out of bounds error"
         
@@ -394,11 +394,11 @@ contains
         
     end subroutine
 
-    subroutine vector_set_index_r64(self, index, val)
+    elemental subroutine vector_set_index_r64(self, index, val)
         
         class(vector), intent(inout) :: self
         integer, intent(in) :: index
-        real(real64) :: val
+        real(real64), intent(in) :: val
         
         if (index > self%dim) error stop "out of bounds error"
         
@@ -406,7 +406,7 @@ contains
         
     end subroutine
 
-    function vector_as_array(self) result(array)
+    pure function vector_as_array(self) result(array)
 
         class(vector), intent(in) :: self
         real(real64), dimension(self%dim) :: array
