@@ -19,6 +19,7 @@ implicit none
     type(matrix) :: t2_mat, ortho_m
     type(vector) :: vec_ptr
     real(dp) :: scalar
+    real(dp), allocatable, dimension(:) :: test_a
 
     integer, dimension(4, 4) :: A
 
@@ -190,9 +191,11 @@ implicit none
 
     print *, "Is ortho_m orthonormal? ", ortho_m%is_orthonormal()
 
-    test_matrix = reshape([1, 3, 4, 5, 9, -2], [3, 2])
+    test_matrix = reshape([1, 3, 4, 5, 9, -2], [2, 3])
 
     call test_matrix%print()
+
+    test_a = v2%as_array()
 
     ortho_m = test_matrix%gram_schmidt()
     print *, "Gram-schmidt solution: "

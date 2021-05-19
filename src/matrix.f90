@@ -16,7 +16,7 @@ type, public :: matrix
 
     integer :: k = 1 !! The number of vectors
     integer :: n = 1 !! Dimension of vectors
-    type(vector), dimension(:), allocatable :: m !! The vectors stored in a matrix
+    type(vector), dimension(:), pointer :: m !! The vectors stored in a matrix
     logical :: m_allocated = .false.
 
 contains 
@@ -283,9 +283,14 @@ contains
         class(matrix), intent(in) :: self
         type(matrix) :: ortho
 
-        integer i, j
+        integer i, j, n, k
 
-        call ortho%new(self%n, self%k)
+        n = self%n
+        k = self%k 
+
+        if(k > n) k = n !! If there are more vectors than the dimension of the vector, only output n vectors
+
+        call ortho%new(n, k)
 
         ! print *, "dimension of input basis = ", self%n
         ! print *, "number of basis vectors = ", self%k
@@ -293,7 +298,7 @@ contains
 
         ortho%m(1) = self%m(1)%normalize()
 
-        do i = 2,self%k
+        do i = 2,k
 
             ortho%m(i) = self%m(i)
 

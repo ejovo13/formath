@@ -43,6 +43,7 @@ contains
     procedure, public :: normalize => vector_normalize
     procedure, public :: is_ortho => vector_is_orthogonal
     procedure, public :: is_normal => vector_is_normal
+    procedure, public :: as_array => vector_as_array
 
     procedure, public :: zero => vector_zero
     
@@ -404,6 +405,15 @@ contains
         self%v(index) = val
         
     end subroutine
+
+    function vector_as_array(self) result(array)
+
+        class(vector), intent(in) :: self
+        real(real64), dimension(self%dim) :: array
+
+        array = self%v
+
+    end function
     
 !=============================================================================!
 !=                             Norm Functions                                =!
