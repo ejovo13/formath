@@ -26,8 +26,7 @@ type, public :: vector
 
     private
     integer :: dim = 1
-    real(real64), dimension(:), pointer :: v
-    logical :: v_allocated = .false.
+    real(real64), dimension(:), allocatable :: v
 
 contains 
 
@@ -47,7 +46,6 @@ contains
 
     procedure, public :: zero => vector_zero
     
-    procedure, public :: associated => vector_is_associated
     procedure, public :: allocated => vector_is_allocated
 
 
@@ -115,7 +113,7 @@ contains
 
     subroutine nd_test(nd) 
 
-        class(nd_vector), intent(in) :: nd
+        class(nd_vector(n=*)), intent(in) :: nd
 
         print *, "nd has n = ", nd%n
 
@@ -189,7 +187,7 @@ contains
 
         self%dim = 0
 
-        if (self%v_allocated) then
+        if (self%allocated()) then
 
             call self%dealloc_()
 
@@ -206,8 +204,6 @@ contains
 
         if (ierr /= 0) error stop "Error allocating vector"
 
-        self%v_allocated = .true.
-
     end subroutine
 
     elemental subroutine deallocate_vector_data(self) 
@@ -218,8 +214,6 @@ contains
         deallocate(self%v, STAT=ierr)
 
         if (ierr /= 0) error stop "Error allocating vector"
-
-        self%v_allocated = .false.
 
     end subroutine
 
@@ -317,27 +311,17 @@ contains
 
     end function
 
-    elemental function vector_is_associated(self) result(bool)
-
-        class(vector), intent(in) :: self
-        
-        logical :: bool
-
-        if (associated(self%v)) then
-            bool = .true.
-        else
-            bool = .false.
-        end if
-
-    end function
-
     elemental function vector_is_allocated(self) result(bool)
 
         class(vector), intent(in) :: self
 
         logical :: bool
 
-        bool = self%v_allocated
+        if (allocated(self%v)) then
+            bool = .true.
+        else
+            bool = .false.
+        end if
 
     end function
 
@@ -350,15 +334,12 @@ contains
         
         class(vector), intent(in) :: self
         
-        if (.not. self%associated()) then
-            write(*,*) "Vector not associated"
-        else if (.not. self%allocated()) then
+        if (.not. self%allocated()) then
             write(*,*) "Vector not allocated"
         else 
             write(*,*) "dimension: ", self%dim
             write(*,*) "data: ", self%v
             write(*,*) "allocated: ", self%allocated()
-            write(*,*) "associated: ", self%associated()
         end if
         
     end subroutine
@@ -390,7 +371,7 @@ contains
 
     subroutine vector_set_index_int(self, index, val)
         
-        class(vector), intent(in) :: self
+        class(vector), intent(inout) :: self
         integer, intent(in) :: index
         integer :: val
         
@@ -402,7 +383,7 @@ contains
 
     subroutine vector_set_index_r32(self, index, val)
         
-        class(vector), intent(in) :: self
+        class(vector), intent(inout) :: self
         integer, intent(in) :: index
         real(real32) :: val
         
@@ -414,7 +395,7 @@ contains
 
     subroutine vector_set_index_r64(self, index, val)
         
-        class(vector), intent(in) :: self
+        class(vector), intent(inout) :: self
         integer, intent(in) :: index
         real(real64) :: val
         
@@ -645,10 +626,9 @@ contains
     
         write(*,*) "vector_destructor called"
     
-        if(self%v_allocated) then
+        if(self%allocated()) then
             print *, "deallocating fields"
             deallocate(self%v)
-            nullify(self%v)
         end if
     
     end subroutine

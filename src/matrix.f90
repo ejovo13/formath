@@ -16,7 +16,7 @@ type, public :: matrix
 
     integer :: k = 1 !! The number of vectors
     integer :: n = 1 !! Dimension of vectors
-    type(vector), dimension(:), pointer :: m !! The vectors stored in a matrix
+    type(vector), dimension(:), allocatable :: m !! The vectors stored in a matrix
     logical :: m_allocated = .false.
 
 contains 
