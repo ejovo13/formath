@@ -31,15 +31,17 @@ implicit none
     ! print *, "step 1 post vector_from"
     ! print *, "step 2 post vector_from"
     ! print *, "step 3 post vector_from"
+    v1 = [1, 2]
     call v1%print_info()
 
     call v1%clear()
 
-    v1 = [1, 2]
-
+    
+    
     call v1%print_info()
     ! print *, "v1.at(1) = ", v1%at(1)
-
+    
+    v1 = vector(3)
     v1 = [1, 3, 4]
     call v1%print_info()
 
