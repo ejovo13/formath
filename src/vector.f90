@@ -32,6 +32,7 @@ contains
 
     private
     procedure, public :: new => new_vector
+    procedure, public :: new_ => new_constructor
     procedure, public :: clear => clear_vector
     !! Deallocate the data, set v_allocated to false, set dim to 0
     procedure, public :: print_info => vector_print_info
@@ -124,32 +125,42 @@ contains
 !=                               Constructors                                =!
 !=============================================================================!
 
-    function vector_constructor_int(array) result(this)
+    pure subroutine new_constructor(self, dim) 
+    ! allocate the proper space for our vector and set the dimension
+        class(vector), intent(inout) :: self
+        integer, intent(in) :: dim
+
+        self%dim = dim
+        allocate(self%v(dim))
+
+    end subroutine
+
+    pure function vector_constructor_int(array) result(this)
     
         integer, dimension(:), intent(in) :: array
         type(vector) :: this
 
-        call this%new(size(array))
+        call this%new_(size(array))
         this%v = real(array, real64)
 
     end function
 
-    function vector_constructor_r32(array) result(this)
+    pure function vector_constructor_r32(array) result(this)
     
         real(real32), dimension(:), intent(in) :: array
         type(vector) :: this
 
-        call this%new(size(array))
+        call this%new_(size(array))
         this%v = real(array, real64)
 
     end function
 
-    function vector_constructor_r64(array) result(this)
+    pure function vector_constructor_r64(array) result(this)
     
         real(real64), dimension(:), intent(in) :: array
         type(vector) :: this
 
-        call this%new(size(array))
+        call this%new_(size(array))
         this%v = array
 
     end function
@@ -159,7 +170,7 @@ contains
         integer, intent(in) :: dim
         type(vector) :: this
 
-        call this%new(dim)
+        call this%new_(dim)
         this%v = 0
 
     end function
@@ -225,29 +236,26 @@ contains
     pure subroutine vector_from_array_int(self, array) 
 
         class(vector), intent(inout) :: self
-        integer, dimension(:), intent(in) :: array
+        integer, dimension(self%dim), intent(in) :: array
 
-        call self%new(size(array))
-        self%v = real(array, real64) ! Copy the contents of array into self
+        self%v = array ! Copy the contents of array into self
 
     end subroutine
 
     pure subroutine vector_from_array_r32(self, array) 
 
         class(vector), intent(inout) :: self
-        real(real32), dimension(:), intent(in) :: array
+        real(real32), dimension(self%dim), intent(in) :: array
 
-        call self%new(size(array))
-        self%v = real(array, real64) ! Copy the contents of array into self
+        self%v = array! Copy the contents of array into self
 
     end subroutine
 
     pure subroutine vector_from_array_r64(self, array) 
 
         class(vector), intent(inout) :: self
-        real(real64), dimension(:), intent(in) :: array
+        real(real64), dimension(self%dim), intent(in) :: array
 
-        call self%new(size(array))
         self%v = array ! Copy the contents of array into self
 
     end subroutine
@@ -257,10 +265,8 @@ contains
         class(vector), intent(inout) :: self
         class(vector), intent(in) :: v1
 
-        call self%new(v1%dim) ! clear the contents of this array
-
+        self%dim = v1%dim
         self%v = v1%v ! Copy the array contents
-
 
     end subroutine
 
