@@ -18,92 +18,9 @@ use iso_fortran_env, only: real64, real32, int32, int64
 
 implicit none
 private
-public :: print_basis, gram_schmidt, is_orthonormal, deallocate_vector_data!, nd_test
+public :: print_basis, gram_schmidt, is_orthonormal, deallocate_vector_data
 
 real(real64), parameter :: vector_epsilon = 1d-14
-
-! type, abstract, public :: vector_t
-
-!     private
-!     integer:: dim = 1
-!     real(real64), dimension(:), allocatable :: v
-
-! contains 
-
-!     private
-!     procedure(new_vector_abs), public, deferred :: new
-!     procedure, public :: size => vector_dim
-!     procedure, public :: new_ => new_constructor
-!     procedure, public :: clear => clear_vector
-!     !! Deallocate the data, set v_allocated to false, set dim to 0
-!     procedure, public :: print_info => vector_print_info
-!     procedure, public :: print => vector_print_coordinates
-!     procedure, public :: at => vector_at_index
-!     generic, public :: set => set_int_, set_r32_, set_r64_
-!     procedure, public :: length => vector_euclidiean_norm
-!     procedure, public :: pnorm => vector_pnorm
-!     procedure, public :: normalize => vector_normalize
-!     procedure, public :: is_ortho => vector_is_orthogonal
-!     procedure, public :: is_normal => vector_is_normal
-!     procedure, public :: as_array => vector_as_array
-
-!     procedure, public :: zero => vector_zero
-    
-!     procedure, public :: allocated => vector_is_allocated
-
-
-!     procedure, public :: alloc_ => allocate_vector_data
-!     procedure, public :: dealloc_ => deallocate_vector_data
-!     procedure :: dot_ => vector_dot_vector
-!     procedure :: proj_ => vector_proj_vector
-!     procedure :: conform_ => vector_conform
-!     procedure :: scalar_mult_int_ => vector_times_scalar_int
-!     procedure :: scalar_mult_r32_ => vector_times_scalar_r32
-!     procedure :: scalar_mult_r64_ => vector_times_scalar_r64
-!     procedure :: scalar_div_int_ => vector_div_scalar_int
-!     procedure :: scalar_div_r32_ => vector_div_scalar_r32
-!     procedure :: scalar_div_r64_ => vector_div_scalar_r64
-!     procedure :: set_int_ => vector_set_index_int
-!     procedure :: set_r32_ => vector_set_index_r32
-!     procedure :: set_r64_ => vector_set_index_r64
-!     procedure :: minus_ => vector_minus_vector
-!     procedure :: plus_ => vector_plus_vector
-
-
-!     generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_vector_
-!     generic, public :: operator(.dot.) => dot_
-!     generic, public :: operator(.proj.) => proj_
-!     generic, public :: operator(*) => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_
-!     generic, public :: operator(/) => scalar_div_int_, scalar_div_r32_, scalar_div_r64_
-!     generic, public :: operator(+) => plus_
-!     generic, public :: operator(-) => minus_
-
-!     procedure :: from_array_int_ => vector_from_array_int
-!     procedure :: from_array_r32_ => vector_from_array_r32
-!     procedure :: from_array_r64_ => vector_from_array_r64
-!     procedure :: from_vector_ => vector_from_vector
-
-!     final :: vector_destructor    
-
-! end type
-
-! abstract interface    
-
-!     subroutine new_vector_abs(self, dim)
-
-!         import vector_t
-!         class(vector), intent(inout) :: self
-!         integer, intent(in) :: dim
-
-!     end subroutine
-
-
-! end interface
-
-
-
-
-
 
 type, public :: vector
 
@@ -169,48 +86,6 @@ contains
     final :: vector_destructor    
 
 end type
-
-! type, public, extends(vector_t) :: vector 
-! !! A vector object of fixed length. The advanatge of a fixed lenght is such that
-! !! arrays which don't have the same dimension as vector_fl cannot change the size of the vector.
-
-! contains
-
-! private
-
-!     procedure, public :: new => new_fixed_length_vector
-    
-
-
-
-! end type
-
-
-! type, public, extends(vector_t) :: vector_proto(n)
-
-!     integer, len :: n = 10
-!     integer, dimension(n) :: my_thing
-
-! contains 
-
-!     procedure, public :: new => new_prototype_vector
-
-! end type
-
-
-
-! type, public, extends(vector_t) :: nd_vector(n)
-
-!     integer, len :: n = 3
-!     real(real64), dimension(n) :: data
-
-! contains 
-
-    ! procedure :: test => nd_test
-! procedure :: new => new_nd_vector
-
-! end type
-
 interface vector
     
     procedure :: vector_constructor_int
@@ -220,10 +95,6 @@ interface vector
 
 end interface 
 
-! private :: vector_constructor_int, vector_constructor_r32, vector_constructor_r64, new_vector, allocate_vector_data, &
-!            deallocate_vector_data, vector_from_array_int, vector_from_array_r32, vector_from_array_r64, vector_dot_vector, &
-!            vector_conform, vector_is_associated, vector_destructor, vector_print_info, vector_print_coordinates, vector_at_index
-
 contains 
 
     pure subroutine new_fixed_length_vector(self, dim)
@@ -232,29 +103,6 @@ contains
         integer, intent(in) :: dim    
 
     end subroutine
-
-    ! subroutine new_prototype_vector(self, dim)
-
-    !     class(vector_proto(*)), intent(inout) :: self
-    !     integer, intent(in) :: dim
-
-    ! end subroutine 
-
-
-    ! subroutine nd_test(nd) 
-
-    !     class(nd_vector(n=*)), intent(in) :: nd
-
-    !     print *, "nd has n = ", nd%n
-
-    ! end subroutine
-
-    ! subroutine new_nd_vector(self, dim)
-
-    !     class(nd_vector(*)), intent(inout) :: self
-    !     integer, intent(in) :: dim
-
-    ! end subroutine
 
 !=============================================================================!
 !=                               Constructors                                =!
