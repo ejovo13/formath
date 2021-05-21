@@ -1,7 +1,26 @@
 module matrix_m
-
-!! A matrix can be used to mathematically represent many different structures. 
-!! A matrix is a rank 1 array of vectors
+!! A matrix is a wrapper class for a rank 1 array of vector objects. <br>
+!! Matrices can be used to represent a variety of mathematical structures. This class is primarily used
+!! to bind a selection of Linear Algebra algorithms to a matrix object. Matrices can be instantiated by assignment 
+!! of a rank2 array of any type, but the underlying data will be stored with double precision. <br>
+!!
+!!```fortran
+!!type(matrix) :: m, ortho_basis
+!!
+!!m = reshape([1, 2, 3, 4], [2, 2]) ! Create a 2x2 matrix
+!!print*, "M: "
+!!call m%print()
+!!
+!!ortho_basis = m%gram_schmidt() ! Compute an orthonormal basis using the Gram-Schmidt method
+!!
+!!print"(A)", "Ortho:"
+!!call ortho_basis%print()!!
+!!```
+!!
+!!output:
+!!
+!!![test](../media/matrix_m_output.png)
+!!
 
 use vector_m
 use iso_fortran_env, only: real64, real32
@@ -13,26 +32,26 @@ type, public :: matrix
 
     private
 
-    integer :: k = 1 !! The number of vectors
+    integer :: k = 1 !! Number of vectors
     integer :: n = 1 !! Dimension of vectors
     type(vector), dimension(:), pointer :: m !! The vectors stored in a matrix
-    logical :: m_allocated = .false.
+    logical :: m_allocated = .false. !! Allocation status of pointer
 
 contains 
 
     private
 
-    procedure, public :: new => new_matrix
-    procedure, public :: clear => clear_matrix
-    procedure, public :: print => print_matrix
+    procedure, public :: new => new_matrix !! Create a new matrix
+    procedure, public :: clear => clear_matrix !! Clear all of the elements of a matrix 
+    procedure, public :: print => print_matrix !! Print the contents of a matrix
     procedure, public :: vec => access_vector_matrix !! Get the kth vector in the matrix
-    procedure, public :: at => at_index_matrix
-    procedure, public :: gram_schmidt => gram_schmidt_matrix
-    procedure, public :: is_orthonormal => is_orthonormal_matrix
-    procedure, public :: as_array => matrix_as_array
+    procedure, public :: at => at_index_matrix !! Get the element at the index (i, j)
+    procedure, public :: gram_schmidt => gram_schmidt_matrix !! Compute an otrthonormal basis for the vector space spanned by the columns of a matrix
+    procedure, public :: is_orthonormal => is_orthonormal_matrix !! Check whether a matrix is orthonormal
+    procedure, public :: as_array => matrix_as_array !! Return a rank2 Fortran array
     
-    generic, public :: set => set_int_, set_r32_, set_r64_
-    generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_matrix
+    generic, public :: set => set_int_, set_r32_, set_r64_ !! Set the value of \(a_{i,j})
+    generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_matrix !! Assign the contents of a matrix from a rank2 Fortran array
 
     procedure :: from_array_int_ => matrix_from_rank2_array_int
     procedure :: from_array_r32_ => matrix_from_rank2_array_r32
@@ -43,11 +62,8 @@ contains
     procedure :: set_r32_ => set_index_matrix_r32
     procedure :: set_r64_ => set_index_matrix_r64
     
-    procedure :: alloc_ => allocate_matrix_data
-    procedure :: dealloc_ => deallocate_matrix_data
-
-    
-
+    procedure :: alloc_ => allocate_matrix_data !! Allocate the space for an array containing the matrix's elements
+    procedure :: dealloc_ => deallocate_matrix_data  !! Deallocate the underlying container for a matrix's elements
 
 end type
 
@@ -55,10 +71,10 @@ end type
 contains
 
     elemental subroutine new_matrix(self, n, k)
-
-        class(matrix), intent(inout) :: self
-        integer, intent(in) :: n !! The dimension of each constituent vector
-        integer, intent(in) :: k !! The number of vectors
+    !! Wipe the contents of a matrix and allocate the proper amount of space
+        class(matrix), intent(inout) :: self !! Matrix object to wipe
+        integer, intent(in) :: n !! Dimension of each constituent vector
+        integer, intent(in) :: k !! Number of vectors
 
         call self%clear()
  
@@ -72,7 +88,7 @@ contains
     end subroutine
 
     pure subroutine matrix_from_rank2_array_int(self, array) 
-
+    !! Assign a matrix from a rank2 integer array
         class(matrix), intent(inout) :: self
         integer, dimension(:,:), intent(in) :: array
 
@@ -92,7 +108,7 @@ contains
     end subroutine
 
     pure subroutine matrix_from_rank2_array_r32(self, array) 
-
+    !! Assign a matrix from a rank2 single precision real array
         class(matrix), intent(inout) :: self
         real(real32), dimension(:,:), intent(in) :: array
 
@@ -112,7 +128,7 @@ contains
     end subroutine
 
     pure subroutine matrix_from_rank2_array_r64(self, array) 
-
+    !! Assign a matrix from a rank2 double precision array
         class(matrix), intent(inout) :: self
         real(real64), dimension(:,:), intent(in) :: array
 
@@ -132,7 +148,7 @@ contains
     end subroutine
 
     elemental subroutine matrix_from_matrix(self, m) 
-
+    !! 
         class(matrix), intent(inout) :: self
         class(matrix), intent(in) :: m
 
@@ -320,13 +336,13 @@ contains
         class(matrix), intent(in) :: self
         logical :: bool
 
-        integer :: k, i, j
+        integer :: i, j
 
     
         if(all(self%m%is_normal())) then
 
-            do i = 1,k
-                do j = i+1,k
+            do i = 1,self%k
+                do j = i+1,self%k
                     if (.not. self%m(i)%is_ortho(self%m(j))) then
                         bool = .false.
                         return

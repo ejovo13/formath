@@ -4,10 +4,12 @@ enable_language(Fortran)
 
 project(Mathemathics)
 
-set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_SOURCE_DIR}/.././modules)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/.././bin)
+set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_SOURCE_DIR}/../modules)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../lib)
 
-add_executable(vec_test vector.f90 vec_test.f90 matrix.f90)
-add_executable(gs_test vector.f90 gram_schmidt_test.f90 matrix.f90)
+add_compile_options(-Wall)
 
-target_compile_options(gs_test PRIVATE -Ofast)
+add_library(formath vector.f90 matrix.f90)
+
+add_subdirectory(test)
