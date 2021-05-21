@@ -28,7 +28,7 @@ contains
         class(vector) :: self
         real(real64), dimension(:) :: array
 
-        if (size(array) /= self%n()) then
+        if (size(array) /= self%size()) then
             error stop "Please don't compile me"
         end if
 

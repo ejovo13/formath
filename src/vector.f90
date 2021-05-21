@@ -25,15 +25,14 @@ real(real64), parameter :: vector_epsilon = 1d-14
 type, public :: vector
 
     private
-    integer:: dim = 1
     real(real64), dimension(:), allocatable :: v
+    integer :: dim = 0
 
 contains 
 
     private
-    procedure, public :: new => new_vector
-    procedure, public :: n => vector_dim
-    procedure, public :: new_ => new_constructor
+    procedure, public :: size => vector_size
+    procedure, public :: new => new_constructor
     procedure, public :: clear => clear_vector
     !! Deallocate the data, set v_allocated to false, set dim to 0
     procedure, public :: print_info => vector_print_info
@@ -103,7 +102,7 @@ contains
 !=============================================================================!
 
     pure subroutine new_constructor(self, dim) 
-    ! allocate the proper space for our vector and set the dimension
+    !! allocate the proper space for our vector and set the dimension
         class(vector), intent(inout) :: self
         integer, intent(in) :: dim
 
@@ -117,8 +116,8 @@ contains
         integer, dimension(:), intent(in) :: array
         type(vector) :: this
 
-        call this%new_(size(array))
-        this%v = real(array, real64)
+        call this%new(size(array))
+        this%v = array
 
     end function
 
@@ -127,8 +126,8 @@ contains
         real(real32), dimension(:), intent(in) :: array
         type(vector) :: this
 
-        call this%new_(size(array))
-        this%v = real(array, real64)
+        call this%new(size(array))
+        this%v = array
 
     end function
 
@@ -137,7 +136,7 @@ contains
         real(real64), dimension(:), intent(in) :: array
         type(vector) :: this
 
-        call this%new_(size(array))
+        call this%new(size(array))
         this%v = array
 
     end function
@@ -147,34 +146,32 @@ contains
         integer, intent(in) :: dim
         type(vector) :: this
 
-        call this%new_(dim)
+        call this%new(dim)
         this%v = 0
 
     end function
 
-    elemental subroutine new_vector(self, dim)
+    ! elemental subroutine new_vector(self, dim)
 
-        class(vector), intent(inout) :: self
-        integer, optional, intent(in) :: dim
+    !     class(vector), intent(inout) :: self
+    !     integer, optional, intent(in) :: dim
 
-        call self%clear()
+    !     call self%clear()
 
-        if(.not. present(dim)) then
-            self%dim = 1
-        else
-            if(dim <= 0) error stop "Cannot instantiate vector with 0 or negative dimension"
-            self%dim = dim
-        end if
+    !     if(.not. present(dim)) then
+    !         self%dim = 1
+    !     else
+    !         if(dim <= 0) error stop "Cannot instantiate vector with 0 or negative dimension"
+    !         self%dim = dim
+    !     end if
 
-        call self%alloc_()        
+    !     call self%alloc_(self%dim)        
 
-    end subroutine
+    ! end subroutine
 
     elemental subroutine clear_vector(self)
 
         class(vector), intent(inout) :: self
-
-        self%dim = 0
 
         if (self%allocated()) then
 
@@ -184,12 +181,15 @@ contains
 
     end subroutine
 
-    elemental subroutine allocate_vector_data(self) 
+    elemental subroutine allocate_vector_data(self, dim) 
 
         class(vector), intent(inout) :: self
+        integer, intent(in) :: dim
+
         integer :: ierr
 
-        allocate(self%v(self%dim), STAT=ierr)
+        allocate(self%v(dim), STAT=ierr)
+        self%dim = dim
 
         if (ierr /= 0) error stop "Error allocating vector"
 
@@ -201,6 +201,7 @@ contains
         integer :: ierr
 
         deallocate(self%v, STAT=ierr)
+        self%dim = 0
 
         if (ierr /= 0) error stop "Error allocating vector"
 
@@ -215,6 +216,7 @@ contains
         class(vector), intent(inout) :: self
         integer, dimension(:), intent(in) :: array
 
+        self%dim = size(array)
         self%v = array ! Copy the contents of array into self
 
     end subroutine
@@ -222,8 +224,9 @@ contains
     pure subroutine vector_from_array_r32(self, array) 
 
         class(vector), intent(inout) :: self
-        real(real32), dimension(self%dim), intent(in) :: array
+        real(real32), dimension(:), intent(in) :: array
 
+        self%dim = size(array)
         self%v = array! Copy the contents of array into self
 
     end subroutine
@@ -231,8 +234,9 @@ contains
     pure subroutine vector_from_array_r64(self, array) 
 
         class(vector), intent(inout) :: self
-        real(real64), dimension(self%dim), intent(in) :: array
+        real(real64), dimension(:), intent(in) :: array
 
+        self%dim = size(array)
         self%v = array ! Copy the contents of array into self
 
     end subroutine
@@ -309,12 +313,12 @@ contains
 
     end function
 
-    elemental function vector_dim(self) result(n)
+    elemental function vector_size(self) result(n)
 
         class(vector), intent(in) :: self
         integer :: n
 
-        n = self%dim
+
 
     end function
 
@@ -609,7 +613,7 @@ contains
         if (present(dim)) then
             call self%new(dim)
         else
-            call self%new()
+            call self%new(1)
         end if
 
         self%v = 0

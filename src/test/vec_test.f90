@@ -10,8 +10,8 @@ implicit none
     integer, parameter :: sp = real32
 
     type(vector) :: v1, v2, origin, v3, v4, u1, u2, u3, proj, v1_norm, v2_norm
-    type(nd_vector(n = 10)) :: nd_10
-    type(nd_vector(n = 3)) :: nd_3
+    ! type(nd_vector(n = 10)) :: nd_10
+    ! type(nd_vector(n = 3)) :: nd_3
     type(vector), dimension(2) :: orthonormal_basis
     type(vector), dimension(3) :: basis, copy_basis, ortho_3
     type(vector), dimension(2) :: basis_2
