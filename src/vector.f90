@@ -97,12 +97,6 @@ end interface
 
 contains 
 
-    pure subroutine new_fixed_length_vector(self, dim)
-
-        class(vector), intent(inout) :: self
-        integer, intent(in) :: dim    
-
-    end subroutine
 
 !=============================================================================!
 !=                               Constructors                                =!
