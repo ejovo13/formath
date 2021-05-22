@@ -91,6 +91,9 @@ interface vector
     procedure :: vector_constructor_r32
     procedure :: vector_constructor_r64
     procedure :: vector_constructor_dim
+    procedure :: vector_constructor_dim_value_int
+    procedure :: vector_constructor_dim_value_r32
+    procedure :: vector_constructor_dim_value_r64
 
 end interface 
 
@@ -108,6 +111,7 @@ contains
 
         self%dim = dim
         allocate(self%v(dim))
+        
 
     end subroutine
 
@@ -151,32 +155,50 @@ contains
 
     end function
 
-    ! elemental subroutine new_vector(self, dim)
+    elemental function vector_constructor_dim_value_int(dim, val) result(this)
 
-    !     class(vector), intent(inout) :: self
-    !     integer, optional, intent(in) :: dim
+        integer, intent(in) :: dim
+        integer, intent(in) :: val
 
-    !     call self%clear()
+        type(vector) :: this
 
-    !     if(.not. present(dim)) then
-    !         self%dim = 1
-    !     else
-    !         if(dim <= 0) error stop "Cannot instantiate vector with 0 or negative dimension"
-    !         self%dim = dim
-    !     end if
+        call this%new(dim)
+        this%v = val
 
-    !     call self%alloc_(self%dim)        
+    end function
 
-    ! end subroutine
+    elemental function vector_constructor_dim_value_r32(dim, val) result(this)
+
+        integer, intent(in) :: dim
+        real(real32), intent(in) :: val
+
+        type(vector) :: this
+
+        call this%new(dim)
+        this%v = val
+
+    end function
+
+    elemental function vector_constructor_dim_value_r64(dim, val) result(this)
+
+        integer, intent(in) :: dim
+        real(real64), intent(in) :: val
+
+        type(vector) :: this
+
+        call this%new(dim)
+        this%v = val
+
+    end function
 
     elemental subroutine clear_vector(self)
 
         class(vector), intent(inout) :: self
 
         if (self%allocated()) then
-
             call self%dealloc_()
-
+        else
+            self%dim = 0
         end if
 
     end subroutine
