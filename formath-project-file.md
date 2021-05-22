@@ -14,3 +14,5 @@ exclude: vec_test.f90
     gram_schmidt_test.f90
 
 Hi, my name is ${USER}. This is for Formath
+
+@Note This Library is a work in process and is the process of me learning how to implement fundamental numerical algorithms from the ground up. This package is currently configured to my system, as it is intended principally as a learning experience.

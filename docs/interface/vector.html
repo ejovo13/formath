@@ -221,10 +221,10 @@
     
     <div class="col-md-9" id='text'>
       <h2>public interface vector</h2>
-   
+   <p>Construct a vector object</p>
      
      
-    
+    <br>
 
      <section class="visible-xs visible-sm hidden-md">
        
@@ -299,6 +299,10 @@ private pure function vector_constructor_int(array) result(this)
   <div class="panel-body">
        
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> from an array of integers</p>
     
     <h4>Arguments</h4>
     
@@ -324,7 +328,7 @@ private pure function vector_constructor_int(array) result(this)
   <td></td>
   
   <td>dimension(:)</td><td>::</td>
-  <td><strong>array</strong></td><td></td>
+  <td><strong>array</strong></td><td><p>input data</p></td>
   
 </tr>
 
@@ -341,7 +345,9 @@ private pure function vector_constructor_int(array) result(this)
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
   </div>
@@ -359,6 +365,10 @@ private pure function vector_constructor_r32(array) result(this)
   <div class="panel-body">
        
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> from an array of single precision reals    </p>
     
     <h4>Arguments</h4>
     
@@ -384,7 +394,7 @@ private pure function vector_constructor_r32(array) result(this)
   <td></td>
   
   <td>dimension(:)</td><td>::</td>
-  <td><strong>array</strong></td><td></td>
+  <td><strong>array</strong></td><td><p>input data</p></td>
   
 </tr>
 
@@ -401,7 +411,9 @@ private pure function vector_constructor_r32(array) result(this)
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
   </div>
@@ -419,6 +431,10 @@ private pure function vector_constructor_r64(array) result(this)
   <div class="panel-body">
        
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> from an array of double precision reals    </p>
     
     <h4>Arguments</h4>
     
@@ -444,7 +460,7 @@ private pure function vector_constructor_r64(array) result(this)
   <td></td>
   
   <td>dimension(:)</td><td>::</td>
-  <td><strong>array</strong></td><td></td>
+  <td><strong>array</strong></td><td><p>input data</p></td>
   
 </tr>
 
@@ -461,7 +477,9 @@ private pure function vector_constructor_r64(array) result(this)
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
   </div>
@@ -479,6 +497,11 @@ private elemental function vector_constructor_dim(dim) result(this)
   <div class="panel-body">
        
     
+
+
+
+<p>Construct a vector by declaring its size
+ Allocate an <script type="math/tex">n</script>-dimensional vector and fill its values with 0</p>
     
     <h4>Arguments</h4>
     
@@ -504,7 +527,9 @@ private elemental function vector_constructor_dim(dim) result(this)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>
+<script type="math/tex">n</script>
+</p></td>
   
 </tr>
 
@@ -521,7 +546,9 @@ private elemental function vector_constructor_dim(dim) result(this)
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
   </div>
@@ -539,6 +566,11 @@ private elemental function vector_constructor_dim_value_int(dim, val) result(thi
   <div class="panel-body">
        
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> of dimension <script type="math/tex">n</script> and fill its values with integer <script type="math/tex">val</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -564,7 +596,9 @@ private elemental function vector_constructor_dim_value_int(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>
+<script type="math/tex">n</script>
+</p></td>
   
 </tr>
 
@@ -579,7 +613,9 @@ private elemental function vector_constructor_dim_value_int(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>val</strong></td><td></td>
+  <td><strong>val</strong></td><td><p>
+<script type="math/tex">val</script>
+</p></td>
   
 </tr>
 
@@ -596,7 +632,9 @@ private elemental function vector_constructor_dim_value_int(dim, val) result(thi
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
   </div>
@@ -614,6 +652,11 @@ private elemental function vector_constructor_dim_value_r32(dim, val) result(thi
   <div class="panel-body">
        
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> of dimension <script type="math/tex">n</script> and fill its values with single precision real <script type="math/tex">val</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -639,7 +682,9 @@ private elemental function vector_constructor_dim_value_r32(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>
+<script type="math/tex">n</script>
+</p></td>
   
 </tr>
 
@@ -654,7 +699,9 @@ private elemental function vector_constructor_dim_value_r32(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>val</strong></td><td></td>
+  <td><strong>val</strong></td><td><p>
+<script type="math/tex">val</script>
+</p></td>
   
 </tr>
 
@@ -671,7 +718,9 @@ private elemental function vector_constructor_dim_value_r32(dim, val) result(thi
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
   </div>
@@ -689,6 +738,11 @@ private elemental function vector_constructor_dim_value_r64(dim, val) result(thi
   <div class="panel-body">
        
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> of dimension <script type="math/tex">n</script> and fill its values with double precision real <script type="math/tex">val</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -714,7 +768,9 @@ private elemental function vector_constructor_dim_value_r64(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>
+<script type="math/tex">n</script>
+</p></td>
   
 </tr>
 
@@ -729,7 +785,9 @@ private elemental function vector_constructor_dim_value_r64(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>val</strong></td><td></td>
+  <td><strong>val</strong></td><td><p>
+<script type="math/tex">val</script>
+</p></td>
   
 </tr>
 
@@ -746,7 +804,9 @@ private elemental function vector_constructor_dim_value_r64(dim, val) result(thi
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
   </div>
@@ -767,7 +827,8 @@ private elemental function vector_constructor_vector(v1) result(v2)
 
 
 
-<p>Not very efficient due do the multiple copies that occur (About three times slower than assigment)</p>
+<p>Construct a vector from another vector
+ </p><a href="../proc/vector_constructor_vector.html" class="pull-right"><emph>Read more&hellip;</emph></a>
     
     <h4>Arguments</h4>
     

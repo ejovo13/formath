@@ -1,7 +1,7 @@
 module vector_m
 !! Attempt to play around with a vector object 
 
-!! A vector has the following operations:
+!! A vector, \(v\) has the following operations:
 
 !!
 !! Addition with another vector
@@ -32,22 +32,40 @@ contains
 
     private
     procedure, public :: size => vector_size
+    !! Return the number of elements of the currently allocated vector
     procedure, public :: clear => clear_vector
-    !! Deallocate the data, set v_allocated to false, set dim to 0
+    !! Deallocate the data, set dim to 0
     procedure, public :: print_info => vector_print_info
+    !! Print diagnostic information about the vector
     procedure, public :: print => vector_print_coordinates
+    !! Print only the data stored in the vector object as a row vector
     procedure, public :: at => vector_at_index
+    !! Return the element \(x_i\) 
     generic, public :: set => set_int_, set_r32_, set_r64_
+    !! Set the value of the element \(x_i\) at index \(i\)
     procedure, public :: length => vector_euclidiean_norm
+    !! Calculate the euclidean norm of a vector \(v\)
     procedure, public :: pnorm => vector_pnorm
+    !! Calculate the pnorm of a vector \(v\)
     procedure, public :: normalize => vector_normalize
+    !! Normalize the elements of the passed vector \(v\)
+    !! Normaliz**e** is a **subroutine** such that it alters the elements of the passed vector \(v\) to avoid costs of copying involved with a function
     procedure, public :: normalized => vector_normalized
+    !! Return a normalized vector \(n\) pointing in the same direction as \(v\)
+    !!@Note
+    !! The function normaliz**ed** is a **function** such that it returns a normalized version of the passed vector \(v\)
     procedure, public :: orthogonalize => vector_orthogonalize
+    !! Orthogonalize a vector \(v\) against a passed **normalized** vector \(n\)
+    !!@Note
+    !!A future version may just check if the passed vector is normalized by testing a "normalized" logical type that will be stored in a vector.
     procedure, public :: orthogonalized => vector_orthogonalized
+    !! Return a vector \(v\) that is orthogonalized against a passed **normalized** vector \(n\)
     procedure, public :: orthonormalize => vector_orthonormalize
+    !! Orthogonalize and normalize a vector \(v\) against a passed **normalized** vector \(n\)
     procedure, public :: orthonormalized => vector_orthonormalized
+    !! Return an orthogonalized and normalized vector \(v\) against a passed **normalized** vector \(n\)
     procedure, public :: householder_transform => vector_householder_sub
-
+    !! Rotate a passed vector \(v\) about the hyper plane described by the passed **normalized** vector \(n\)
 
     procedure, public :: is_ortho => vector_is_orthogonal
     procedure, public :: is_normal => vector_is_normal
@@ -129,8 +147,9 @@ contains
 
 end type
 interface vector
-    
+!! Construct a vector object
     procedure :: vector_constructor_int
+    !! Construct a 
     procedure :: vector_constructor_r32
     procedure :: vector_constructor_r64
     procedure :: vector_constructor_dim
@@ -141,7 +160,7 @@ interface vector
 
 end interface 
 
-interface operator(*)
+interface operator(*)   
 
     procedure :: int_times_vector
     procedure :: r32_times_vector
@@ -165,9 +184,9 @@ contains
 !=============================================================================!
 
     pure subroutine new_constructor(self, dim) 
-    !! allocate the proper space for our vector and set the dimension
-        class(vector), intent(inout) :: self
-        integer, intent(in) :: dim
+    !! allocate the proper space for the elements of vector \(v\) and set the dimension to \(dim\)
+        class(vector), intent(inout) :: self !! \(v\)
+        integer, intent(in) :: dim !! \(n\)
 
         self%dim = dim
         allocate(self%v(dim))        
@@ -175,9 +194,9 @@ contains
     end subroutine
 
     pure function vector_constructor_int(array) result(this)
-    
-        integer, dimension(:), intent(in) :: array
-        type(vector) :: this
+    !! Construct a vector \(v\) from an array of integers
+        integer, dimension(:), intent(in) :: array !! input data
+        type(vector) :: this !! \(v\)
 
         call this%new_(size(array))
         this%v = array
@@ -185,9 +204,9 @@ contains
     end function
 
     pure function vector_constructor_r32(array) result(this)
-    
-        real(real32), dimension(:), intent(in) :: array
-        type(vector) :: this
+    !! Construct a vector \(v\) from an array of single precision reals    
+        real(real32), dimension(:), intent(in) :: array !! input data
+        type(vector) :: this !! \(v\)
 
         call this%new_(size(array))
         this%v = array
@@ -195,9 +214,9 @@ contains
     end function
 
     pure function vector_constructor_r64(array) result(this)
-    
-        real(real64), dimension(:), intent(in) :: array
-        type(vector) :: this
+    !! Construct a vector \(v\) from an array of double precision reals    
+        real(real64), dimension(:), intent(in) :: array !! input data
+        type(vector) :: this !! \(v\)
 
         call this%new_(size(array))
         this%v = array
@@ -205,9 +224,10 @@ contains
     end function
 
     elemental function vector_constructor_dim(dim) result(this)
-
-        integer, intent(in) :: dim
-        type(vector) :: this
+    !! Construct a vector by declaring its size
+    !! Allocate an \(n\)-dimensional vector and fill its values with 0
+        integer, intent(in) :: dim !! \(n\)
+        type(vector) :: this !! \(v\)
 
         call this%new_(dim)
         this%v = 0
@@ -215,11 +235,11 @@ contains
     end function
 
     elemental function vector_constructor_dim_value_int(dim, val) result(this)
+    !! Construct a vector \(v\) of dimension \(n\) and fill its values with integer \(val\)
+        integer, intent(in) :: dim !! \(n\)
+        integer, intent(in) :: val !! \(val\)
 
-        integer, intent(in) :: dim
-        integer, intent(in) :: val
-
-        type(vector) :: this
+        type(vector) :: this !! \(v\)
 
         call this%new_(dim)
         this%v = val
@@ -227,11 +247,11 @@ contains
     end function
 
     elemental function vector_constructor_dim_value_r32(dim, val) result(this)
+    !! Construct a vector \(v\) of dimension \(n\) and fill its values with single precision real \(val\)
+        integer, intent(in) :: dim !! \(n\)
+        real(real32), intent(in) :: val !! \(val\)
 
-        integer, intent(in) :: dim
-        real(real32), intent(in) :: val
-
-        type(vector) :: this
+        type(vector) :: this !! \(v\)
 
         call this%new_(dim)
         this%v = val
@@ -239,11 +259,11 @@ contains
     end function
 
     elemental function vector_constructor_dim_value_r64(dim, val) result(this)
+    !! Construct a vector \(v\) of dimension \(n\) and fill its values with double precision real \(val\)
+        integer, intent(in) :: dim !! \(n\)
+        real(real64), intent(in) :: val !! \(val\)
 
-        integer, intent(in) :: dim
-        real(real64), intent(in) :: val
-
-        type(vector) :: this
+        type(vector) :: this !! \(v\)
 
         call this%new_(dim)
         this%v = val
@@ -251,7 +271,9 @@ contains
     end function
 
     elemental function vector_constructor_vector(v1) result(v2)
-    !! Not very efficient due do the multiple copies that occur (About three times slower than assigment)
+    !! Construct a vector from another vector
+    !! @Note
+    !!Not very efficient due do the multiple copies that occur (About three times slower than assigment)
         class(vector), intent(in) :: v1
         type(vector) :: v2
 

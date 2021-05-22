@@ -249,7 +249,7 @@
     
     <div class="col-md-9" id='text'>
     <p>Attempt to play around with a vector object </p>
-<p>A vector has the following operations:</p>
+<p>A vector, <script type="math/tex">v</script> has the following operations:</p>
 <p>Addition with another vector
  Multiplication with a scalar 
  Inner product
@@ -386,6 +386,11 @@
     
   </h3></div>
   
+  <div class="panel-body">
+    
+    <p>Construct a vector object</p>
+  </div>
+  
   <ul class="list-group">
   
   
@@ -400,6 +405,10 @@ private pure function vector_constructor_int(array) result(this)
    
 </h3>
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> from an array of integers</p>
     
     <h4>Arguments</h4>
     
@@ -425,7 +434,7 @@ private pure function vector_constructor_int(array) result(this)
   <td></td>
   
   <td>dimension(:)</td><td>::</td>
-  <td><strong>array</strong></td><td></td>
+  <td><strong>array</strong></td><td><p>input data</p></td>
   
 </tr>
 
@@ -442,7 +451,9 @@ private pure function vector_constructor_int(array) result(this)
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
     </li>
@@ -457,6 +468,10 @@ private pure function vector_constructor_r32(array) result(this)
    
 </h3>
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> from an array of single precision reals    </p>
     
     <h4>Arguments</h4>
     
@@ -482,7 +497,7 @@ private pure function vector_constructor_r32(array) result(this)
   <td></td>
   
   <td>dimension(:)</td><td>::</td>
-  <td><strong>array</strong></td><td></td>
+  <td><strong>array</strong></td><td><p>input data</p></td>
   
 </tr>
 
@@ -499,7 +514,9 @@ private pure function vector_constructor_r32(array) result(this)
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
     </li>
@@ -514,6 +531,10 @@ private pure function vector_constructor_r64(array) result(this)
    
 </h3>
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> from an array of double precision reals    </p>
     
     <h4>Arguments</h4>
     
@@ -539,7 +560,7 @@ private pure function vector_constructor_r64(array) result(this)
   <td></td>
   
   <td>dimension(:)</td><td>::</td>
-  <td><strong>array</strong></td><td></td>
+  <td><strong>array</strong></td><td><p>input data</p></td>
   
 </tr>
 
@@ -556,7 +577,9 @@ private pure function vector_constructor_r64(array) result(this)
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
     </li>
@@ -571,6 +594,11 @@ private elemental function vector_constructor_dim(dim) result(this)
    
 </h3>
     
+
+
+
+<p>Construct a vector by declaring its size
+ Allocate an <script type="math/tex">n</script>-dimensional vector and fill its values with 0</p>
     
     <h4>Arguments</h4>
     
@@ -596,7 +624,9 @@ private elemental function vector_constructor_dim(dim) result(this)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>
+<script type="math/tex">n</script>
+</p></td>
   
 </tr>
 
@@ -613,7 +643,9 @@ private elemental function vector_constructor_dim(dim) result(this)
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
     </li>
@@ -628,6 +660,11 @@ private elemental function vector_constructor_dim_value_int(dim, val) result(thi
    
 </h3>
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> of dimension <script type="math/tex">n</script> and fill its values with integer <script type="math/tex">val</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -653,7 +690,9 @@ private elemental function vector_constructor_dim_value_int(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>
+<script type="math/tex">n</script>
+</p></td>
   
 </tr>
 
@@ -668,7 +707,9 @@ private elemental function vector_constructor_dim_value_int(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>val</strong></td><td></td>
+  <td><strong>val</strong></td><td><p>
+<script type="math/tex">val</script>
+</p></td>
   
 </tr>
 
@@ -685,7 +726,9 @@ private elemental function vector_constructor_dim_value_int(dim, val) result(thi
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
     </li>
@@ -700,6 +743,11 @@ private elemental function vector_constructor_dim_value_r32(dim, val) result(thi
    
 </h3>
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> of dimension <script type="math/tex">n</script> and fill its values with single precision real <script type="math/tex">val</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -725,7 +773,9 @@ private elemental function vector_constructor_dim_value_r32(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>
+<script type="math/tex">n</script>
+</p></td>
   
 </tr>
 
@@ -740,7 +790,9 @@ private elemental function vector_constructor_dim_value_r32(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>val</strong></td><td></td>
+  <td><strong>val</strong></td><td><p>
+<script type="math/tex">val</script>
+</p></td>
   
 </tr>
 
@@ -757,7 +809,9 @@ private elemental function vector_constructor_dim_value_r32(dim, val) result(thi
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
     </li>
@@ -772,6 +826,11 @@ private elemental function vector_constructor_dim_value_r64(dim, val) result(thi
    
 </h3>
     
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> of dimension <script type="math/tex">n</script> and fill its values with double precision real <script type="math/tex">val</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -797,7 +856,9 @@ private elemental function vector_constructor_dim_value_r64(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>
+<script type="math/tex">n</script>
+</p></td>
   
 </tr>
 
@@ -812,7 +873,9 @@ private elemental function vector_constructor_dim_value_r64(dim, val) result(thi
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>val</strong></td><td></td>
+  <td><strong>val</strong></td><td><p>
+<script type="math/tex">val</script>
+</p></td>
   
 </tr>
 
@@ -829,7 +892,9 @@ private elemental function vector_constructor_dim_value_r64(dim, val) result(thi
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">v</script>
+</p>
     
 
     </li>
@@ -847,7 +912,8 @@ private elemental function vector_constructor_vector(v1) result(v2)
 
 
 
-<p>Not very efficient due do the multiple copies that occur (About three times slower than assigment)</p>
+<p>Construct a vector from another vector
+ </p><a href="../proc/vector_constructor_vector.html" class="pull-right"><emph>Read more&hellip;</emph></a>
     
     <h4>Arguments</h4>
     
@@ -1383,7 +1449,7 @@ private elemental function r64_div_vector(scalar, vec) result(v2)
      
      <h4>Constructor</h4>
        
-         
+         <p>Construct a vector object</p>
        
        <table class="table table-striped varlist">
       <tbody>
@@ -1391,28 +1457,33 @@ private elemental function r64_div_vector(scalar, vec) result(v2)
              
              
              
-             <tr><td>private pure function <strong>vector_constructor_int</strong>(array)</td><td></td></tr>
+             <tr><td>private pure function <strong>vector_constructor_int</strong>(array)</td><td><p>Construct a vector <script type="math/tex">v</script> from an array of integers</p></td></tr>
              
              
-             <tr><td>private pure function <strong>vector_constructor_r32</strong>(array)</td><td></td></tr>
+             <tr><td>private pure function <strong>vector_constructor_r32</strong>(array)</td><td><p>Construct a vector <script type="math/tex">v</script> from an array of single precision reals    </p></td></tr>
              
              
-             <tr><td>private pure function <strong>vector_constructor_r64</strong>(array)</td><td></td></tr>
+             <tr><td>private pure function <strong>vector_constructor_r64</strong>(array)</td><td><p>Construct a vector <script type="math/tex">v</script> from an array of double precision reals    </p></td></tr>
              
              
-             <tr><td>private elemental function <strong>vector_constructor_dim</strong>(dim)</td><td></td></tr>
+             <tr><td>private elemental function <strong>vector_constructor_dim</strong>(dim)</td><td><p>Construct a vector by declaring its size
+ Allocate an <script type="math/tex">n</script>-dimensional vector and fill its values with 0</p></td></tr>
              
              
-             <tr><td>private elemental function <strong>vector_constructor_dim_value_int</strong>(dim, val)</td><td></td></tr>
+             <tr><td>private elemental function <strong>vector_constructor_dim_value_int</strong>(dim, val)</td><td><p>Construct a vector <script type="math/tex">v</script> of dimension <script type="math/tex">n</script> and fill its values with integer <script type="math/tex">val</script>
+</p></td></tr>
              
              
-             <tr><td>private elemental function <strong>vector_constructor_dim_value_r32</strong>(dim, val)</td><td></td></tr>
+             <tr><td>private elemental function <strong>vector_constructor_dim_value_r32</strong>(dim, val)</td><td><p>Construct a vector <script type="math/tex">v</script> of dimension <script type="math/tex">n</script> and fill its values with single precision real <script type="math/tex">val</script>
+</p></td></tr>
              
              
-             <tr><td>private elemental function <strong>vector_constructor_dim_value_r64</strong>(dim, val)</td><td></td></tr>
+             <tr><td>private elemental function <strong>vector_constructor_dim_value_r64</strong>(dim, val)</td><td><p>Construct a vector <script type="math/tex">v</script> of dimension <script type="math/tex">n</script> and fill its values with double precision real <script type="math/tex">val</script>
+</p></td></tr>
              
              
-             <tr><td>private elemental function <strong>vector_constructor_vector</strong>(v1)</td><td><p>Not very efficient due do the multiple copies that occur (About three times slower than assigment)</p></td></tr>
+             <tr><td>private elemental function <strong>vector_constructor_vector</strong>(v1)</td><td><p>Construct a vector from another vector
+ </p><a href="../proc/vector_constructor_vector.html" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
              
         
        </tbody>
@@ -1434,49 +1505,60 @@ private elemental function r64_div_vector(scalar, vec) result(v2)
       <tbody>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-size'>size</a></strong>  => vector_size </td>
-       <td></td></tr>
+       <td><p>Return the number of elements of the currently allocated vector</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-clear'>clear</a></strong>  => clear_vector </td>
-       <td><p>Deallocate the data, set v_allocated to false, set dim to 0</p></td></tr>
+       <td><p>Deallocate the data, set dim to 0</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-print_info'>print_info</a></strong>  => vector_print_info </td>
-       <td></td></tr>
+       <td><p>Print diagnostic information about the vector</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-print'>print</a></strong>  => vector_print_coordinates </td>
-       <td></td></tr>
+       <td><p>Print only the data stored in the vector object as a row vector</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-at'>at</a></strong>  => vector_at_index </td>
-       <td></td></tr>
+       <td><p>Return the element <script type="math/tex">x_i</script>
+</p></td></tr>
       
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-set'>set</a></strong>  => set_int_, set_r32_, set_r64_ </td>
-       <td></td></tr>
+       <td><p>Set the value of the element <script type="math/tex">x_i</script> at index <script type="math/tex">i</script>
+</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-length'>length</a></strong>  => vector_euclidiean_norm </td>
-       <td></td></tr>
+       <td><p>Calculate the euclidean norm of a vector <script type="math/tex">v</script>
+</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-pnorm'>pnorm</a></strong>  => vector_pnorm </td>
-       <td></td></tr>
+       <td><p>Calculate the pnorm of a vector <script type="math/tex">v</script>
+</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-normalize'>normalize</a></strong>  => vector_normalize </td>
-       <td></td></tr>
+       <td><p>Normalize the elements of the passed vector <script type="math/tex">v</script>
+ Normaliz<strong>e</strong> is a <strong>subroutine</strong> such that it alters the elements of the passed vector <script type="math/tex">v</script> to avoid costs of copying involved with a function</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-normalized'>normalized</a></strong>  => vector_normalized </td>
-       <td></td></tr>
+       <td><p>Return a normalized vector <script type="math/tex">n</script> pointing in the same direction as <script type="math/tex">v</script>
+</p><a href="../type/vector.html#boundprocedure-normalized" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-orthogonalize'>orthogonalize</a></strong>  => vector_orthogonalize </td>
-       <td></td></tr>
+       <td><p>Orthogonalize a vector <script type="math/tex">v</script> against a passed <strong>normalized</strong> vector <script type="math/tex">n</script>
+</p><a href="../type/vector.html#boundprocedure-orthogonalize" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-orthogonalized'>orthogonalized</a></strong>  => vector_orthogonalized </td>
-       <td></td></tr>
+       <td><p>Return a vector <script type="math/tex">v</script> that is orthogonalized against a passed <strong>normalized</strong> vector <script type="math/tex">n</script>
+</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-orthonormalize'>orthonormalize</a></strong>  => vector_orthonormalize </td>
-       <td></td></tr>
+       <td><p>Orthogonalize and normalize a vector <script type="math/tex">v</script> against a passed <strong>normalized</strong> vector <script type="math/tex">n</script>
+</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-orthonormalized'>orthonormalized</a></strong>  => vector_orthonormalized </td>
-       <td></td></tr>
+       <td><p>Return an orthogonalized and normalized vector <script type="math/tex">v</script> against a passed <strong>normalized</strong> vector <script type="math/tex">n</script>
+</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-householder_transform'>householder_transform</a></strong>  => vector_householder_sub </td>
-       <td></td></tr>
+       <td><p>Rotate a passed vector <script type="math/tex">v</script> about the hyper plane described by the passed <strong>normalized</strong> vector <script type="math/tex">n</script>
+</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-is_ortho'>is_ortho</a></strong>  => vector_is_orthogonal </td>
        <td></td></tr>
