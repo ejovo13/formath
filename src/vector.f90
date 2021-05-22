@@ -99,6 +99,7 @@ interface vector
     procedure :: vector_constructor_dim_value_int
     procedure :: vector_constructor_dim_value_r32
     procedure :: vector_constructor_dim_value_r64
+    procedure :: vector_constructor_vector
 
 
 end interface 
@@ -197,6 +198,15 @@ contains
 
     end function
 
+    elemental function vector_constructor_vector(v1) result(v2)
+    !! Not very efficient due do the multiple copies that occur (About three times slower than assigment)
+        class(vector), intent(in) :: v1
+        type(vector) :: v2
+
+        v2 = v1
+
+    end function
+
     elemental subroutine clear_vector(self)
 
         class(vector), intent(inout) :: self
@@ -238,30 +248,42 @@ contains
 !=============================================================================!
 !=                         Assigment Functions                               =!
 !=============================================================================!
-    pure subroutine vector_from_int(self, array) 
+    pure subroutine vector_from_int(self, val) 
 
         class(vector), intent(inout) :: self
-        integer, intent(in) :: array
+        integer, intent(in) :: val
 
-        self%v = array ! Copy the contents of array into self
+        if(self%allocated()) then
+            self%v = val ! Copy the contents of array into self
+        else
+            self = vector(1, val)
+        end if
 
     end subroutine
 
-    pure subroutine vector_from_r32(self, array) 
+    pure subroutine vector_from_r32(self, val) 
 
         class(vector), intent(inout) :: self
-        real(real32), intent(in) :: array
+        real(real32), intent(in) :: val
 
-        self%v = array! Copy the contents of array into self
+        if(self%allocated()) then
+            self%v = val ! Copy the contents of array into self
+        else
+            self = vector(1, val)
+        end if
 
     end subroutine
 
-    pure subroutine vector_from_r64(self, array) 
+    pure subroutine vector_from_r64(self, val) 
 
         class(vector), intent(inout) :: self
-        real(real64), intent(in) :: array
+        real(real64), intent(in) :: val
 
-        self%v = array ! Copy the contents of array into self
+        if(self%allocated()) then
+            self%v = val ! Copy the contents of array into self
+        else
+            self = vector(1, val)
+        end if
 
     end subroutine
 
