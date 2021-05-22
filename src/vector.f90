@@ -18,7 +18,7 @@ use iso_fortran_env, only: real64, real32, int32, int64
 
 implicit none
 private
-public :: print_basis, gram_schmidt, is_orthonormal, deallocate_vector_data
+public :: print_basis, gram_schmidt, is_orthonormal, deallocate_vector_data, operator(*), operator(/)
 
 real(real64), parameter :: vector_epsilon = 1d-14
 
@@ -67,17 +67,35 @@ contains
     procedure :: set_r32_ => vector_set_index_r32
     procedure :: set_r64_ => vector_set_index_r64
     procedure :: minus_ => vector_minus_vector
+    procedure :: unary_minus_ => vector_unary_minus
     procedure :: plus_ => vector_plus_vector
 
-
+    !===============Operators Functions==================!
     generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_vector_, from_int_, &
                                         from_r32_, from_r64_
     generic, public :: operator(.dot.) => dot_
     generic, public :: operator(.proj.) => proj_
-    generic, public :: operator(*) => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_
-    generic, public :: operator(/) => scalar_div_int_, scalar_div_r32_, scalar_div_r64_
+    generic, public :: operator(*) => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_, times_vec_
+    generic, public :: operator(/) => scalar_div_int_, scalar_div_r32_, scalar_div_r64_, div_vec_
     generic, public :: operator(+) => plus_
-    generic, public :: operator(-) => minus_
+    generic, public :: operator(-) => minus_, unary_minus_
+
+    !===============Operator Subroutines==================!
+    ! The point of an operator subroutine is to alter the passed object. This cuts down on copying
+    ! the data between functions
+    generic, public :: times => times_int_sub_, times_r32_sub_, times_r64_sub_, times_vec_sub_
+    generic, public :: div => div_int_sub_, div_r32_sub_, div_r64_sub_, div_vec_sub_
+
+    procedure :: times_int_sub_ => vector_times_scalar_int_sub
+    procedure :: times_r32_sub_ => vector_times_scalar_r32_sub
+    procedure :: times_r64_sub_ => vector_times_scalar_r64_sub
+    procedure :: times_vec_sub_ => vector_times_vector_sub
+
+    procedure :: div_int_sub_ => vector_div_scalar_int_sub
+    procedure :: div_r32_sub_ => vector_div_scalar_r32_sub
+    procedure :: div_r64_sub_ => vector_div_scalar_r64_sub
+    procedure :: div_vec_sub_ => vector_div_vector_sub
+
 
 
     procedure :: from_int_ => vector_from_int
@@ -87,6 +105,8 @@ contains
     procedure :: from_array_r32_ => vector_from_array_r32
     procedure :: from_array_r64_ => vector_from_array_r64
     procedure :: from_vector_ => vector_from_vector
+    procedure :: times_vec_ => vector_times_vector
+    procedure :: div_vec_ => vector_div_vector
 
     final :: vector_destructor    
 
@@ -591,7 +611,7 @@ contains
         real(real64) :: scalar
 
         scalar = (self .dot. v2) / (v2 .dot. v2)
-        
+                
         v3 = v2 * scalar
         ! Allocate the space for a new vector
         
@@ -606,7 +626,7 @@ contains
 
         if (self%conform_(v2)) then
             call v3%new(self%dim)
-            v3%v = self%v! + v2%v
+            v3%v = self%v + v2%v
         else 
             error stop "Cannot add nonconforming vectors"
         end if
@@ -666,6 +686,32 @@ contains
 
         v2%v = self%v * scalar
     
+    end function
+
+    elemental function vector_times_vector(self, v2) result(v3)
+
+        class(vector), intent(in) :: self
+        class(vector), intent(in) :: v2
+
+        type(vector) :: v3
+
+        if (.not. self%conform_(v2)) error stop "Cannot multiply non_conforming vectors"
+
+        v3 = self%v * v2%v
+
+    end function
+
+    elemental function vector_div_vector(self, v2) result(v3)
+
+        class(vector), intent(in) :: self
+        class(vector), intent(in) :: v2
+
+        type(vector) :: v3
+
+        if (.not. self%conform_(v2)) error stop "Cannot multiply non_conforming vectors"
+
+        v3 = self%v / v2%v
+
     end function
 
     elemental function vector_div_scalar_int(self, scalar) result(v2)
@@ -773,6 +819,16 @@ contains
 
     end function
 
+    elemental function vector_unary_minus(self) result(v2)
+
+        class(vector), intent(in) :: self
+
+        type(vector) ::  v2
+
+        v2 = self * (-1)
+
+    end function
+
 !=============================================================================!
 !=                         Operator Subroutines                              =!
 !=============================================================================!
@@ -801,7 +857,7 @@ contains
 
 
         if (self%conform_(v2)) then
-            self%v = self%v! + v2%v
+            self%v = self%v + v2%v
         else 
             error stop "Cannot add nonconforming vectors"
         end if
@@ -822,7 +878,7 @@ contains
 
     end subroutine
 
-    elemental subroutine vector_times_scalar_intsub(self, scalar) 
+    elemental subroutine vector_times_scalar_int_sub(self, scalar) 
     !! Multiply a vector times an integer scalar
 
         class(vector), intent(inout) :: self
@@ -880,6 +936,36 @@ contains
 
         self%v = self%v / scalar
     
+    end subroutine
+
+    elemental subroutine vector_unary_minus_sub(self) 
+
+        class(vector), intent(inout) :: self
+
+       self%v = -self%v
+
+    end subroutine
+
+    elemental subroutine vector_times_vector_sub(self, v2)
+
+        class(vector), intent(inout) :: self
+        class(vector), intent(in) :: v2
+
+        if (.not. self%conform_(v2)) error stop "Cannot multiply non_conforming vectors"
+
+        self%v = self%v * v2%v
+
+    end subroutine
+
+    elemental subroutine vector_div_vector_sub(self, v2)
+
+        class(vector), intent(inout) :: self
+        class(vector), intent(in) :: v2
+
+        if (.not. self%conform_(v2)) error stop "Cannot multiply non_conforming vectors"
+
+        self%v = self%v / v2%v
+
     end subroutine
 
 !=============================================================================!
