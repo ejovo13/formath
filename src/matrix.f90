@@ -312,7 +312,7 @@ contains
         ! print *, "number of basis vectors = ", self%k
         ! print *, "orthonormal_basis set to 0"
 
-        ortho%m(1) = self%m(1)%normalize()
+        ortho%m(1) = self%m(1)%normalized()
 
         do i = 2,k
 
@@ -325,7 +325,7 @@ contains
 
             end do
 
-            ortho%m(i) = ortho%m(i)%normalize()
+            call ortho%m(i)%normalize()
 
         end do
         
