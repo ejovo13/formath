@@ -42,6 +42,12 @@ contains
     procedure, public :: pnorm => vector_pnorm
     procedure, public :: normalize => vector_normalize
     procedure, public :: normalized => vector_normalized
+    procedure, public :: orthogonalize => vector_orthogonalize
+    procedure, public :: orthogonalized => vector_orthogonalized
+    procedure, public :: orthonormalize => vector_orthonormalize
+    procedure, public :: orthonormalized => vector_orthonormalized
+
+
     procedure, public :: is_ortho => vector_is_orthogonal
     procedure, public :: is_normal => vector_is_normal
     procedure, public :: data => vector_as_array
@@ -568,6 +574,32 @@ contains
 
     end subroutine
 
+    elemental subroutine vector_orthogonalize(self, v2)
+    !! Orthogonalize a vector with respect to another
+    
+        class(vector), intent(inout) :: self
+        class(vector), intent(in) :: v2
+
+        type(vector) :: self_copy
+
+        self_copy = self
+
+        call self%proj(v2)
+        call self%minus(self_copy)    
+
+    end subroutine
+
+    elemental subroutine vector_orthonormalize(self, v2)
+    !! Orthogonalize a vector with respect to another
+    
+        class(vector), intent(inout) :: self
+        class(vector), intent(in) :: v2
+
+        call self%orthogonalize(v2)
+        call self%normalize()  
+
+    end subroutine
+
     elemental function vector_normalized(self) result(normalized_vector)
     !! Normalize a vector such that its euclidian norm is 1
 
@@ -579,6 +611,32 @@ contains
         norm = self%length()
 
         normalized_vector = (self/norm)
+
+    end function
+
+    elemental function vector_orthogonalized(self, v2) result(v3)
+    !! Orthogonalize a vector with respect to another
+    
+        class(vector), intent(in) :: self
+        class(vector), intent(in) :: v2
+
+        type(vector) :: v3
+
+        v3 = self .proj. v2
+        call v3%minus(self)
+
+    end function
+
+    elemental function vector_orthonormalized(self, v2) result(v3)
+    !! Orthogonalize a vector with respect to another
+    
+        class(vector), intent(in) :: self
+        class(vector), intent(in) :: v2
+
+        type(vector) :: v3
+
+        v3 = self%orthogonalized(v2)
+        call v3%normalize()
 
     end function
 
