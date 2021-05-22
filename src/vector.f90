@@ -318,7 +318,7 @@ contains
         class(vector), intent(in) :: self
         integer :: n
 
-
+        n = self%dim
 
     end function
 

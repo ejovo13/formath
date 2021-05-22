@@ -26,6 +26,10 @@ implicit none
 
     A = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], [4, 4])
 
+    u1 = vector(3)
+    u2 = vector(4)
+    u3 = vector(5)
+
     v1 = vector(2)
 
     ! print *, "step 1 post vector_from"
