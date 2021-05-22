@@ -67,6 +67,14 @@ implicit none
     res = v1%orthonormalized(vector([0, 0, 1]))
     print *, "v1%orthogonormalized([0, 0, 1]) = ", res%data()
 
+
+    99 format(80("="))
+    print 99
+    print 99
+    print *, "House holder transformation tests"
+    print 99
+    print 99
+
     res = v1 .householder. z
     print *, "v1 .householder. z = ", res%data()
 

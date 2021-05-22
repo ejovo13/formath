@@ -24,6 +24,5 @@ message("Updated CMAKE")
 # execute_process(COMMAND ford formath-project-file.md COMMENT "Running Ford" WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/../")
 execute_process(COMMAND ford formath-project-file.md WORKING_DIRECTORY ../)
 
-
 # add_custom_command(OUTPUT ${FORD_CONFIG} COMMAND ${CMAKE_COMMAND} -E ford formath-project-file.md
 # WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/../" COMMENT "Running Ford Documentation")
