@@ -5,12 +5,14 @@ use iso_fortran_env
 
 implicit none
 
-    type(vector) :: v1, v2, v3, res, z
+    type(vector) :: v1, v2, v3, res, z, x, y
     real(real64) :: scal_res
 
     v1 = [1, 2, 4]
     v2 = [6, 5, 10]
     z = [0, 0, 1]
+    x = [1, 0, 0]
+    y = [0, 1, 0]
 
     scal_res = v1 .dot. v2
     print *, "Dot product of ", v1%data(), " and ", v2%data(), " = ", scal_res
@@ -64,5 +66,14 @@ implicit none
 
     res = v1%orthonormalized(vector([0, 0, 1]))
     print *, "v1%orthogonormalized([0, 0, 1]) = ", res%data()
+
+    res = v1 .householder. z
+    print *, "v1 .householder. z = ", res%data()
+
+    res = v1 .householder. y
+    print *, "v1 .householder. y = ", res%data()
+
+    res = v1 .householder. x
+    print *, "v1 .householder. x = ", res%data()
     
 end program

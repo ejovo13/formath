@@ -46,6 +46,7 @@ contains
     procedure, public :: orthogonalized => vector_orthogonalized
     procedure, public :: orthonormalize => vector_orthonormalize
     procedure, public :: orthonormalized => vector_orthonormalized
+    procedure, public :: householder_transform => vector_householder_sub
 
 
     procedure, public :: is_ortho => vector_is_orthogonal
@@ -62,6 +63,8 @@ contains
     procedure :: new_ => new_constructor
     procedure :: dot_ => vector_dot_vector
     procedure :: proj_ => vector_proj_vector
+    procedure :: outer_ => vector_outer_vector
+    procedure :: householder_ => vector_householder
     procedure :: conform_ => vector_conform
     procedure :: scalar_mult_int_ => vector_times_scalar_int
     procedure :: scalar_mult_r32_ => vector_times_scalar_r32
@@ -80,7 +83,10 @@ contains
     generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_vector_, from_int_, &
                                         from_r32_, from_r64_
     generic, public :: operator(.dot.) => dot_
+    generic, public :: operator(.inner.) => dot_
+    generic, public :: operator(.outer.) => outer_
     generic, public :: operator(.proj.) => proj_
+    generic, public :: operator(.householder.) => householder_
     generic, public :: operator(*) => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_, times_vec_
     generic, public :: operator(/) => scalar_div_int_, scalar_div_r32_, scalar_div_r64_, div_vec_
     generic, public :: operator(+) => plus_
@@ -680,6 +686,26 @@ contains
         
     end function
 
+    pure function vector_outer_vector(self, v2) result(array)
+
+        class(vector), intent(in) :: self
+        class(vector), intent(in) :: v2        
+
+        real(real64), dimension(self%dim, v2%dim) :: array
+
+    end function
+
+    elemental function vector_householder(self, normal) result(rotated)
+
+        class(vector), intent(in) :: self
+        class(vector), intent(in) :: normal !! MUST BE A UNIT VECTOR
+
+        type(vector) :: rotated
+
+        rotated = self - (2 * (self .inner. normal) * normal)
+
+    end function
+
     elemental function vector_plus_vector(self, v2) result(v3)
 
         class(vector), intent(in) :: self
@@ -924,6 +950,15 @@ contains
         else 
             error stop "Cannot add nonconforming vectors"
         end if
+
+    end subroutine
+
+    elemental subroutine vector_householder_sub(self, normal) 
+
+        class(vector), intent(inout) :: self
+        class(vector), intent(in) :: normal !! MUST BE A UNIT VECTOR
+
+        call self%minus(2 * (self .proj. normal))
 
     end subroutine
 
