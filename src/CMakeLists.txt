@@ -12,7 +12,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../lib)
 set(CMAKE_INSTALL_PREFIX ~/lib)
 
-add_compile_options(-Wall -Werror)
+add_compile_options(-Wall) #-Werror)
 
 add_library(formath vector.f90 matrix.f90)
 
