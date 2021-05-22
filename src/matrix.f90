@@ -369,7 +369,7 @@ contains
 
         forall(i = 1:self%k) 
 
-            array(i,:) = self%m(i)%as_array()
+            array(i,:) = self%m(i)%data()
 
         end forall
 
