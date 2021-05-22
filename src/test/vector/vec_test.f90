@@ -202,7 +202,7 @@ implicit none
 
     call test_matrix%print()
 
-    test_a = v2%as_array()
+    test_a = v2%data()
 
     ortho_m = test_matrix%gram_schmidt()
     print *, "Gram-schmidt solution: "
