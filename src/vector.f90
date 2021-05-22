@@ -85,16 +85,21 @@ contains
     ! the data between functions
     generic, public :: times => times_int_sub_, times_r32_sub_, times_r64_sub_, times_vec_sub_
     generic, public :: div => div_int_sub_, div_r32_sub_, div_r64_sub_, div_vec_sub_
+    generic, public :: proj => project_onto_sub_
+    generic, public :: plus => plus_vector_sub_
+    generic, public :: minus => minus_vector_sub_
 
     procedure :: times_int_sub_ => vector_times_scalar_int_sub
     procedure :: times_r32_sub_ => vector_times_scalar_r32_sub
     procedure :: times_r64_sub_ => vector_times_scalar_r64_sub
     procedure :: times_vec_sub_ => vector_times_vector_sub
-
     procedure :: div_int_sub_ => vector_div_scalar_int_sub
     procedure :: div_r32_sub_ => vector_div_scalar_r32_sub
     procedure :: div_r64_sub_ => vector_div_scalar_r64_sub
     procedure :: div_vec_sub_ => vector_div_vector_sub
+    procedure :: project_onto_sub_ => vector_proj_vector_sub
+    procedure :: plus_vector_sub_ => vector_plus_vector_sub
+    procedure :: minus_vector_sub_ => vector_minus_vector_sub
 
 
 
