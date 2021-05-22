@@ -69,7 +69,8 @@ contains
     procedure :: plus_ => vector_plus_vector
 
 
-    generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_vector_
+    generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_vector_, from_int_, &
+                                        from_r32_, from_r64_
     generic, public :: operator(.dot.) => dot_
     generic, public :: operator(.proj.) => proj_
     generic, public :: operator(*) => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_
@@ -77,6 +78,10 @@ contains
     generic, public :: operator(+) => plus_
     generic, public :: operator(-) => minus_
 
+
+    procedure :: from_int_ => vector_from_int
+    procedure :: from_r32_ => vector_from_r32
+    procedure :: from_r64_ => vector_from_r64
     procedure :: from_array_int_ => vector_from_array_int
     procedure :: from_array_r32_ => vector_from_array_r32
     procedure :: from_array_r64_ => vector_from_array_r64
@@ -94,6 +99,7 @@ interface vector
     procedure :: vector_constructor_dim_value_int
     procedure :: vector_constructor_dim_value_r32
     procedure :: vector_constructor_dim_value_r64
+
 
 end interface 
 
@@ -232,6 +238,32 @@ contains
 !=============================================================================!
 !=                         Assigment Functions                               =!
 !=============================================================================!
+    pure subroutine vector_from_int(self, array) 
+
+        class(vector), intent(inout) :: self
+        integer, intent(in) :: array
+
+        self%v = array ! Copy the contents of array into self
+
+    end subroutine
+
+    pure subroutine vector_from_r32(self, array) 
+
+        class(vector), intent(inout) :: self
+        real(real32), intent(in) :: array
+
+        self%v = array! Copy the contents of array into self
+
+    end subroutine
+
+    pure subroutine vector_from_r64(self, array) 
+
+        class(vector), intent(inout) :: self
+        real(real64), intent(in) :: array
+
+        self%v = array ! Copy the contents of array into self
+
+    end subroutine
 
     pure subroutine vector_from_array_int(self, array) 
 
