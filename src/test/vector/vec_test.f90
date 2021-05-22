@@ -116,8 +116,8 @@ implicit none
 
     print *, v2 .dot. v1
 
-    v2_norm = v2%normalize()
-    v1_norm = v1%normalize()
+    v2_norm = v2%normalized()
+    v1_norm = v1%normalized()
 
     call v2_norm%print()
     call v1_norm%print()
