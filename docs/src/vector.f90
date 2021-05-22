@@ -60,13 +60,25 @@ contains
     !!A future version may just check if the passed vector is normalized by testing a "normalized" logical type that will be stored in a vector.
     procedure, public :: orthogonalized => vector_orthogonalized
     !! Return a vector \(v\) that is orthogonalized against a passed **normalized** vector \(n\)
+    !!@Note
+    !! This is a function that returns a new vector \(v\)
     procedure, public :: orthonormalize => vector_orthonormalize
     !! Orthogonalize and normalize a vector \(v\) against a passed **normalized** vector \(n\)
+    !!@Note
+    !! This is a subroutine that modifies the passed vector \(v\)
     procedure, public :: orthonormalized => vector_orthonormalized
     !! Return an orthogonalized and normalized vector \(v\) against a passed **normalized** vector \(n\)
+    !!@Note
+    !! This is a function that returns a new vector \(v\)
     procedure, public :: householder_transform => vector_householder_sub
     !! Rotate a passed vector \(v\) about the hyper plane described by the passed **normalized** vector \(n\)
-
+    !!@Note
+    !! This is a subroutine that modifies the passed vector
+    
+    
+    
+    
+    procedure, public :: eye => vector_constructor_eye
     procedure, public :: is_ortho => vector_is_orthogonal
     procedure, public :: is_normal => vector_is_normal
     procedure, public :: data => vector_as_array
@@ -281,8 +293,30 @@ contains
 
     end function
 
-    elemental subroutine clear_vector(self)
+    elemental function vector_constructor_eye(self, dim) result(v2)
+    !! Construct a vector \(v\) that is equal to the \(dim\)th column of the Identity matrix \(I_{dim}\)
 
+        class(vector), intent(in) :: self !! \(v\)
+        integer, intent(in), optional :: dim
+
+        type(vector) :: v2
+
+        if(present(dim)) then
+
+            v2 = vector(dim, 0)
+            call v2%set(dim, 1)           
+
+        else
+
+            v2 = vector(self%dim, 0)
+            call v2%set(self%dim, 1)
+
+        end if
+
+    end function
+
+    elemental subroutine clear_vector(self)
+    !! 
         class(vector), intent(inout) :: self
 
         if (self%allocated()) then

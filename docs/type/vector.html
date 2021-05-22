@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>76.9% of total for derived types.</p>Including implementation: 767 statements, 74.7% of total for derived types.">83 statements</a>
+    title="<p>77.0% of total for derived types.</p>Including implementation: 780 statements, 75.0% of total for derived types.">84 statements</a>
      </li> 
      
      
@@ -242,6 +242,8 @@
       <a class="list-group-item" href="../type/vector.html#boundprocedure-orthonormalized">orthonormalized</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-householder_transform">householder_transform</a>
+      
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-eye">eye</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-is_ortho">is_ortho</a>
       
@@ -386,6 +388,8 @@
       <a class="list-group-item" href="../type/vector.html#boundprocedure-orthonormalized">orthonormalized</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-householder_transform">householder_transform</a>
+      
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-eye">eye</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-is_ortho">is_ortho</a>
       
@@ -2207,7 +2211,7 @@ private elemental subroutine vector_orthogonalize(self, v2)
 
 
     <p>Return a vector <script type="math/tex">v</script> that is orthogonalized against a passed <strong>normalized</strong> vector <script type="math/tex">n</script>
-</p>
+</p><div class="alert alert-info" role="alert"><h4>Note</h4><p>This is a function that returns a new vector <script type="math/tex">v</script></p></div>
   </div>
   
   <ul class="list-group">
@@ -2307,7 +2311,7 @@ private elemental function vector_orthogonalized(self, v2) result(v3)
 
 
     <p>Orthogonalize and normalize a vector <script type="math/tex">v</script> against a passed <strong>normalized</strong> vector <script type="math/tex">n</script>
-</p>
+</p><div class="alert alert-info" role="alert"><h4>Note</h4><p>This is a subroutine that modifies the passed vector <script type="math/tex">v</script></p></div>
   </div>
   
   <ul class="list-group">
@@ -2398,7 +2402,7 @@ private elemental subroutine vector_orthonormalize(self, v2)
 
 
     <p>Return an orthogonalized and normalized vector <script type="math/tex">v</script> against a passed <strong>normalized</strong> vector <script type="math/tex">n</script>
-</p>
+</p><div class="alert alert-info" role="alert"><h4>Note</h4><p>This is a function that returns a new vector <script type="math/tex">v</script></p></div>
   </div>
   
   <ul class="list-group">
@@ -2498,7 +2502,7 @@ private elemental function vector_orthonormalized(self, v2) result(v3)
 
 
     <p>Rotate a passed vector <script type="math/tex">v</script> about the hyper plane described by the passed <strong>normalized</strong> vector <script type="math/tex">n</script>
-</p>
+</p><div class="alert alert-info" role="alert"><h4>Note</h4><p>This is a subroutine that modifies the passed vector</p></div>
   </div>
   
   <ul class="list-group">
@@ -2564,6 +2568,101 @@ private elemental subroutine vector_householder_sub(self, normal)
 
       
     
+    
+
+        
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-eye"></span><h3>procedure, public :: <strong>eye</strong>  => vector_constructor_eye 
+    
+  </h3></div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+        
+          
+    
+    <h3>
+private elemental function vector_constructor_eye(self, dim) result(v2)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Construct a vector <script type="math/tex">v</script> that is equal to the <script type="math/tex">dim</script>th column of the Identity matrix <script type="math/tex">I_{dim}</script>
+</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>dim</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
     
 
         
