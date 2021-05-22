@@ -623,7 +623,7 @@ contains
         type(vector) :: v3
 
         v3 = self .proj. v2
-        call v3%minus(self)
+        v3 = self - v3
 
     end function
 
