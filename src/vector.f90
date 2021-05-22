@@ -42,9 +42,10 @@ contains
     procedure, public :: length => vector_euclidiean_norm
     procedure, public :: pnorm => vector_pnorm
     procedure, public :: normalize => vector_normalize
+    procedure, public :: normalized => vector_normalized
     procedure, public :: is_ortho => vector_is_orthogonal
     procedure, public :: is_normal => vector_is_normal
-    procedure, public :: as_array => vector_as_array
+    procedure, public :: data => vector_as_array
 
     procedure, public :: zero => vector_zero
     
@@ -101,8 +102,23 @@ interface vector
     procedure :: vector_constructor_dim_value_r64
     procedure :: vector_constructor_vector
 
-
 end interface 
+
+interface operator(*)
+
+    procedure :: int_times_vector
+    procedure :: r32_times_vector
+    procedure :: r64_times_vector
+
+end interface
+
+interface operator(/)
+
+    procedure :: int_div_vector
+    procedure :: r32_div_vector
+    procedure :: r64_div_vector
+
+end interface
 
 contains 
 
@@ -117,8 +133,7 @@ contains
         integer, intent(in) :: dim
 
         self%dim = dim
-        allocate(self%v(dim))
-        
+        allocate(self%v(dim))        
 
     end subroutine
 
@@ -486,6 +501,7 @@ contains
         array = self%v
 
     end function
+
     
 !=============================================================================!
 !=                             Norm Functions                                =!
@@ -514,7 +530,20 @@ contains
         
     end function
     
-    elemental function vector_normalize(self) result(normalized_vector)
+    elemental subroutine vector_normalize(self)
+    !! Normalize a vector such that its euclidian norm is 1
+
+        class(vector), intent(inout) :: self     
+
+        real(real64) :: norm
+
+        norm = self%length()
+
+        self%v = self%v / norm
+
+    end subroutine
+
+    elemental function vector_normalized(self) result(normalized_vector)
     !! Normalize a vector such that its euclidian norm is 1
 
         class(vector), intent(in) :: self        
@@ -527,6 +556,7 @@ contains
         normalized_vector = (self/norm)
 
     end function
+
 
 !=============================================================================!
 !=                            Operator Functions                             =!
@@ -677,6 +707,181 @@ contains
     
     end function
 
+    elemental function int_times_vector(scalar, vec) result(v2)
+
+        integer, intent(in) :: scalar
+        class(vector), intent(in) :: vec
+
+        type(vector) :: v2
+
+        v2 = vec * scalar
+
+    end function
+
+    elemental function r32_times_vector(scalar, vec) result(v2)
+
+        real(real32), intent(in) :: scalar
+        class(vector), intent(in) :: vec
+
+        type(vector) :: v2
+
+        v2 = vec * scalar
+
+    end function
+
+    elemental function r64_times_vector(scalar, vec) result(v2)
+
+        real(real64), intent(in) :: scalar
+        class(vector), intent(in) :: vec
+
+        type(vector) :: v2
+
+        v2 = vec * scalar
+
+    end function
+
+    elemental function int_div_vector(scalar, vec) result(v2)
+
+        integer, intent(in) :: scalar
+        class(vector), intent(in) :: vec
+
+        type(vector) :: v2
+
+        v2 = vec * (1._real64/scalar) 
+
+    end function
+
+    elemental function r32_div_vector(scalar, vec) result(v2)
+
+        real(real32), intent(in) :: scalar
+        class(vector), intent(in) :: vec
+
+        type(vector) :: v2
+
+        v2 = vec * (1._real64/scalar) 
+
+    end function
+
+    elemental function r64_div_vector(scalar, vec) result(v2)
+
+        real(real64), intent(in) :: scalar
+        class(vector), intent(in) :: vec
+
+        type(vector) :: v2
+
+        v2 = vec * (1._real64/scalar) 
+
+    end function
+
+!=============================================================================!
+!=                         Operator Subroutines                              =!
+!=============================================================================!
+
+
+
+    elemental subroutine vector_proj_vector_sub(self, v2) 
+    !! Project vector self ONTO v2 \(proj_v2(self)\)
+        
+        class(vector), intent(inout) :: self
+        class(vector), intent(in) :: v2
+
+        real(real64) :: scalar
+
+        scalar = (self .dot. v2) / (v2 .dot. v2)       
+
+        self = v2 * scalar
+        ! Allocate the space for a new vector
+        
+    end subroutine
+
+    elemental subroutine vector_plus_vector_sub(self, v2) 
+
+        class(vector), intent(inout) :: self
+        class(vector), intent(in) :: v2
+
+
+        if (self%conform_(v2)) then
+            self%v = self%v! + v2%v
+        else 
+            error stop "Cannot add nonconforming vectors"
+        end if
+
+    end subroutine
+
+    elemental subroutine vector_minus_vector_sub(self, v2) 
+
+        class(vector), intent(inout) :: self
+        class(vector), intent(in) :: v2
+
+
+        if (self%conform_(v2)) then
+            self%v = self%v - v2%v
+        else 
+            error stop "Cannot add nonconforming vectors"
+        end if
+
+    end subroutine
+
+    elemental subroutine vector_times_scalar_intsub(self, scalar) 
+    !! Multiply a vector times an integer scalar
+
+        class(vector), intent(inout) :: self
+        integer, intent(in) :: scalar 
+
+        self%v = self%v * scalar
+
+    end subroutine
+
+    elemental subroutine vector_times_scalar_r32_sub(self, scalar) 
+    !! Multiply a vector times an integer scalar
+
+        class(vector), intent(inout) :: self
+        real(real32), intent(in) :: scalar 
+
+        self%v = self%v * scalar
+    
+    end subroutine
+
+    elemental subroutine vector_times_scalar_r64_sub(self, scalar) 
+    !! Multiply a vector times an integer scalar
+
+        class(vector), intent(inout) :: self
+        real(real64), intent(in) :: scalar 
+
+        self%v = self%v * scalar
+    
+    end subroutine
+
+    elemental subroutine vector_div_scalar_int_sub(self, scalar) 
+    !! Multiply a vector times an integer scalar
+
+        class(vector), intent(inout) :: self
+        integer, intent(in) :: scalar 
+
+        self%v = self%v / scalar
+
+    end subroutine
+
+    elemental subroutine vector_div_scalar_r32_sub(self, scalar) 
+    !! Multiply a vector times an integer scalar
+
+        class(vector), intent(inout) :: self
+        real(real32), intent(in) :: scalar 
+
+        self%v = self%v / scalar
+    
+    end subroutine
+
+    elemental subroutine vector_div_scalar_r64_sub(self, scalar) 
+    !! Multiply a vector times an integer scalar
+
+        class(vector), intent(inout) :: self
+        real(real64), intent(in) :: scalar 
+
+        self%v = self%v / scalar
+    
+    end subroutine
+
 !=============================================================================!
 !=                           Static Functions                                =!
 !=============================================================================!
@@ -736,7 +941,7 @@ contains
         print *, "number of basis vectors = ", size(vector_array)
         print *, "orthonormal_basis set to 0"
 
-        ortho(1) = vector_array(1)%normalize()
+        ortho(1) = vector_array(1)%normalized()
 
         do i = 2,k
 
@@ -748,7 +953,7 @@ contains
 
             end do
 
-            ortho(i) = ortho(i)%normalize()
+            call ortho(i)%normalize()
 
         end do
 
