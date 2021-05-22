@@ -71,8 +71,8 @@
             <li><a href="../lists/types.html">Derived Types</a></li>
         
         
-            <li><a href="../program/gs_test_2.html">Program</a></li>
-      
+            <li><a href="../lists/programs.html">Programs</a></li>
+        
             </ul>
             </li>
 
@@ -91,7 +91,7 @@
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
 
 
-<li class="visible-xs hidden-sm visible-lg"><a href="../program/gs_test_2.html">Program</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
 
           </ul>
         
@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>31.5% of total for derived types.</p>Including implementation: 260 statements, 37.2% of total for derived types.">28 statements</a>
+    title="<p>23.1% of total for derived types.</p>Including implementation: 260 statements, 25.3% of total for derived types.">28 statements</a>
      </li> 
      
      
@@ -191,7 +191,7 @@
   <div id="boundprocs-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../type/matrix.html#boundprocedure-new~2">new</a>
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-new">new</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-clear~2">clear</a>
       
@@ -205,7 +205,7 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-is_orthonormal">is_orthonormal</a>
       
-      <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array~2">as_array</a>
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array">as_array</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-set~2">set</a>
       
@@ -259,7 +259,7 @@
   <div id="boundprocs-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../type/matrix.html#boundprocedure-new~2">new</a>
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-new">new</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-clear~2">clear</a>
       
@@ -273,7 +273,7 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-is_orthonormal">is_orthonormal</a>
       
-      <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array~2">as_array</a>
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array">as_array</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-set~2">set</a>
       
@@ -302,9 +302,16 @@
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-new~2"></span><h3>procedure, public :: <strong>new</strong>  => new_matrix 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-new"></span><h3>procedure, public :: <strong>new</strong>  => new_matrix 
     
   </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Create a new matrix</p>
+  </div>
   
   <ul class="list-group">
     
@@ -320,6 +327,10 @@ private elemental subroutine new_matrix(self, n, k)
    
 </h3>
     
+
+
+
+<p>Wipe the contents of a matrix and allocate the proper amount of space</p>
     
     <h4>Arguments</h4>
     
@@ -345,7 +356,7 @@ private elemental subroutine new_matrix(self, n, k)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>Matrix object to wipe</p></td>
   
 </tr>
 
@@ -360,7 +371,7 @@ private elemental subroutine new_matrix(self, n, k)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>n</strong></td><td><p>The dimension of each constituent vector</p></td>
+  <td><strong>n</strong></td><td><p>Dimension of each constituent vector</p></td>
   
 </tr>
 
@@ -375,7 +386,7 @@ private elemental subroutine new_matrix(self, n, k)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>k</strong></td><td><p>The number of vectors</p></td>
+  <td><strong>k</strong></td><td><p>Number of vectors</p></td>
   
 </tr>
 
@@ -399,6 +410,13 @@ private elemental subroutine new_matrix(self, n, k)
   <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-clear~2"></span><h3>procedure, public :: <strong>clear</strong>  => clear_matrix 
     
   </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Clear all of the elements of a matrix </p>
+  </div>
   
   <ul class="list-group">
     
@@ -463,6 +481,13 @@ private elemental subroutine clear_matrix(self)
   <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-print~2"></span><h3>procedure, public :: <strong>print</strong>  => print_matrix 
     
   </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Print the contents of a matrix</p>
+  </div>
   
   <ul class="list-group">
     
@@ -627,6 +652,13 @@ private elemental function access_vector_matrix(self, v) result(vec)
     
   </h3></div>
   
+  <div class="panel-body">
+    
+
+
+    <p>Get the element at the index (i, j)</p>
+  </div>
+  
   <ul class="list-group">
     
       <li class="list-group-item">
@@ -730,6 +762,13 @@ private elemental function at_index_matrix(self, i, j) result(element)
     
   </h3></div>
   
+  <div class="panel-body">
+    
+
+
+    <p>Compute an otrthonormal basis for the vector space spanned by the columns of a matrix</p>
+  </div>
+  
   <ul class="list-group">
     
       <li class="list-group-item">
@@ -807,6 +846,13 @@ private elemental function gram_schmidt_matrix(self) result(ortho)
     
   </h3></div>
   
+  <div class="panel-body">
+    
+
+
+    <p>Check whether a matrix is orthonormal</p>
+  </div>
+  
   <ul class="list-group">
     
       <li class="list-group-item">
@@ -876,9 +922,16 @@ private elemental function is_orthonormal_matrix(self) result(bool)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-as_array~2"></span><h3>procedure, public :: <strong>as_array</strong>  => matrix_as_array 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-as_array"></span><h3>procedure, public :: <strong>as_array</strong>  => matrix_as_array 
     
   </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return a rank2 Fortran array</p>
+  </div>
   
   <ul class="list-group">
     
@@ -952,6 +1005,13 @@ private pure function matrix_as_array(self) result(array)
   <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-set~2"></span><h3>generic, public :: <strong>set</strong>  => set_int_, set_r32_, set_r64_ 
     
   </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Set the value of (a_{i,j})</p>
+  </div>
   
   <ul class="list-group">
     
@@ -1256,6 +1316,13 @@ private subroutine set_index_matrix_r64(self, i, j, x)
     
   </h3></div>
   
+  <div class="panel-body">
+    
+
+
+    <p>Assign the contents of a matrix from a rank2 Fortran array</p>
+  </div>
+  
   <ul class="list-group">
     
       <li class="list-group-item">
@@ -1270,6 +1337,10 @@ private pure subroutine matrix_from_rank2_array_int(self, array)
    
 </h3>
     
+
+
+
+<p>Assign a matrix from a rank2 integer array</p>
     
     <h4>Arguments</h4>
     
@@ -1337,6 +1408,10 @@ private pure subroutine matrix_from_rank2_array_r32(self, array)
    
 </h3>
     
+
+
+
+<p>Assign a matrix from a rank2 single precision real array</p>
     
     <h4>Arguments</h4>
     
@@ -1404,6 +1479,10 @@ private pure subroutine matrix_from_rank2_array_r64(self, array)
    
 </h3>
     
+
+
+
+<p>Assign a matrix from a rank2 double precision array</p>
     
     <h4>Arguments</h4>
     

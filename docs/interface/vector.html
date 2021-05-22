@@ -71,8 +71,8 @@
             <li><a href="../lists/types.html">Derived Types</a></li>
         
         
-            <li><a href="../program/gs_test_2.html">Program</a></li>
-      
+            <li><a href="../lists/programs.html">Programs</a></li>
+        
             </ul>
             </li>
 
@@ -91,7 +91,7 @@
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
 
 
-<li class="visible-xs hidden-sm visible-lg"><a href="../program/gs_test_2.html">Program</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
 
           </ul>
         
@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p> 9.5% of total for procedures.</p>Including implementation: 30 statements, 47.6% of total for procedures.">6 statements</a>
+    title="<p>12.2% of total for procedures.</p>Including implementation: 60 statements, 73.2% of total for procedures.">10 statements</a>
      </li> 
      
      
@@ -200,6 +200,14 @@
       
       <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_dim">vector_constructor_dim</a>
       
+      <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_dim_value_int">vector_constructor_dim_value_int</a>
+      
+      <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_dim_value_r32">vector_constructor_dim_value_r32</a>
+      
+      <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_dim_value_r64">vector_constructor_dim_value_r64</a>
+      
+      <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_vector">vector_constructor_vector</a>
+      
     </div>
   </div>
 </div>
@@ -254,6 +262,14 @@
       <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_r64">vector_constructor_r64</a>
       
       <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_dim">vector_constructor_dim</a>
+      
+      <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_dim_value_int">vector_constructor_dim_value_int</a>
+      
+      <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_dim_value_r32">vector_constructor_dim_value_r32</a>
+      
+      <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_dim_value_r64">vector_constructor_dim_value_r64</a>
+      
+      <a class="list-group-item" href="../interface/vector.html#moduleprocedure-vector_constructor_vector">vector_constructor_vector</a>
       
     </div>
   </div>
@@ -489,6 +505,295 @@ private elemental function vector_constructor_dim(dim) result(this)
   
   <td></td><td>::</td>
   <td><strong>dim</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-vector_constructor_dim_value_int"></span><h3>
+private elemental function vector_constructor_dim_value_int(dim, val) result(this)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>dim</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-vector_constructor_dim_value_r32"></span><h3>
+private elemental function vector_constructor_dim_value_r32(dim, val) result(this)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>dim</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-vector_constructor_dim_value_r64"></span><h3>
+private elemental function vector_constructor_dim_value_r64(dim, val) result(this)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>dim</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-vector_constructor_vector"></span><h3>
+private elemental function vector_constructor_vector(v1) result(v2)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Not very efficient due do the multiple copies that occur (About three times slower than assigment)</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>v1</strong></td><td></td>
   
 </tr>
 

@@ -10,7 +10,7 @@
     <meta name="author" content="Evan Voyles" >
     <link rel="icon" href="../favicon.png">
 
-    <title>print_basis &ndash; Fortran Program</title>
+    <title>test_sub &ndash; Fortran Program</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -112,7 +112,7 @@
     
   
   <div class="row">
-    <h1>print_basis
+    <h1>test_sub
       <small>Subroutine</small>
     
     </h1>
@@ -135,19 +135,19 @@
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/vector.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/vec_test_2.f90"> Source File</a></li>
      
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
     
-     <li><a href='../sourcefile/vector.f90.html'>vector.f90</a></li>
+     <li><a href='../sourcefile/vec_test_2.f90.html'>vec_test_2.f90</a></li>
     
-     <li><a href='../module/vector_m.html'>vector_m</a></li>
+     <li><a href='../program/vec_test_2.html'>vec_test_2</a></li>
     
   
-     <li class="active">print_basis</li>
+     <li class="active">test_sub</li>
   </ol>
 </div>
 </div>
@@ -197,7 +197,7 @@
     
     <div class="col-md-9" id='text'>
     <h2>
-public subroutine print_basis(basis)
+subroutine test_sub(self, array)
     
     
    
@@ -226,12 +226,27 @@ public subroutine print_basis(basis)
   
 <tr>
   
-  <td><span class="anchor" id="variable-basis~2"></span>class(<a href='../type/vector.html'>vector</a>),</td>
-  <td>intent(in),</td>
+  <td><span class="anchor" id="variable-self~2"></span>class(<a href='../type/vector.html'>vector</a>)</td>
+  <td></td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-array"></span>real(kind=real64),</td>
+  <td></td>
   <td></td>
   
   <td>dimension(:)</td><td>::</td>
-  <td><strong>basis</strong></td><td></td>
+  <td><strong>array</strong></td><td></td>
   
 </tr>
 

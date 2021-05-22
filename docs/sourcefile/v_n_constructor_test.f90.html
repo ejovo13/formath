@@ -10,7 +10,7 @@
     <meta name="author" content="Evan Voyles" >
     <link rel="icon" href="../favicon.png">
 
-    <title>print_basis &ndash; Fortran Program</title>
+    <title>v_n_constructor_test.f90 &ndash; Fortran Program</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -112,8 +112,8 @@
     
   
   <div class="row">
-    <h1>print_basis
-      <small>Subroutine</small>
+    <h1>v_n_constructor_test.f90
+    <small>Source File</small>
     
     </h1>
     
@@ -130,24 +130,20 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 9.8% of total for procedures.">8 statements</a>
+    title=" 1.0% of total for source files.">11 statements</a>
      </li> 
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/vector.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/v_n_constructor_test.f90"> Source File</a></li>
      
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
     
-     <li><a href='../sourcefile/vector.f90.html'>vector.f90</a></li>
-    
-     <li><a href='../module/vector_m.html'>vector_m</a></li>
-    
   
-     <li class="active">print_basis</li>
+     <li class="active">v_n_constructor_test.f90</li>
   </ol>
 </div>
 </div>
@@ -159,7 +155,6 @@
 </script>
 
   </div>
-  
   <div class="row">
     <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
     
@@ -173,6 +168,16 @@
 
 
 
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#progs-0">Programs</a></h3></div>
+  <div id="progs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/v_n_constructor_test.html">v_n_constructor_test</a>
+      
+    </div>
+  </div>
+</div>
 
 
 
@@ -188,62 +193,26 @@
 
 
 
-<em>None</em>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../sourcefile/v_n_constructor_test.f90.html#src">v_n_constructor_test.f90</a>
+  </div>
+</div>
+
 
 
 </div>
 
     </div>
-    
     <div class="col-md-9" id='text'>
-    <h2>
-public subroutine print_basis(basis)
-    
-    
-   
-</h2>
-    
-  
-
-
-    
-
-    <h3>Arguments</h3>
+      
+      <br>
     
       
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" id="variable-basis~2"></span>class(<a href='../type/vector.html'>vector</a>),</td>
-  <td>intent(in),</td>
-  <td></td>
-  
-  <td>dimension(:)</td><td>::</td>
-  <td><strong>basis</strong></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-    
-    
-    
-    
-     
-    <br>
+      
 
     <section class="visible-xs visible-sm hidden-md">
       
@@ -255,6 +224,16 @@ public subroutine print_basis(basis)
 
 
 
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#progs-1">Programs</a></h3></div>
+  <div id="progs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/v_n_constructor_test.html">v_n_constructor_test</a>
+      
+    </div>
+  </div>
+</div>
 
 
 
@@ -270,35 +249,49 @@ public subroutine print_basis(basis)
 
 
 
-<em>None</em>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../sourcefile/v_n_constructor_test.f90.html#src">v_n_constructor_test.f90</a>
+  </div>
+</div>
+
 
 
     </section>
     <br class="visible-xs visible-sm hidden-md">
 
-    
+    <section>
+      <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl"><pre><span></span><a name="ln-1"></a><span class="k">program </span><span class="n">v_n_constructor_test</span>
+<a name="ln-2"></a>    <span class="c">!! Test whether assigment or construction is faster</span>
+<a name="ln-3"></a>    <span class="k">use </span><span class="n">vector_m</span>
+<a name="ln-4"></a>    
+<a name="ln-5"></a>    <span class="k">implicit none</span>
+<a name="ln-6"></a><span class="k">    </span>
+<a name="ln-7"></a><span class="k">        type</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="kd">::</span> <span class="n">v1</span>
+<a name="ln-8"></a>    
+<a name="ln-9"></a>        <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>
+<a name="ln-10"></a>        <span class="kt">integer</span><span class="p">,</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">N_LOOPS</span> <span class="o">=</span> <span class="mf">1E7</span>
+<a name="ln-11"></a>    
+<a name="ln-12"></a>        <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N_LOOPS</span>
+<a name="ln-13"></a>    
+<a name="ln-14"></a>            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<a name="ln-15"></a>    
+<a name="ln-16"></a>        <span class="k">end do</span>
+<a name="ln-17"></a><span class="k">    </span>
+<a name="ln-18"></a><span class="k">        call </span><span class="n">v1</span><span class="p">%</span><span class="n">print_info</span><span class="p">()</span>
+<a name="ln-19"></a>    
+<a name="ln-20"></a>    <span class="k">end program</span>
+</pre></div>
 
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-
-
-    
-    
-    
-    
+    </section>
     </div>
   </div>
 
-
+  
     <hr>    
     </div> <!-- /container -->
     <footer>

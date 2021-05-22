@@ -71,8 +71,8 @@
             <li><a href="../lists/types.html">Derived Types</a></li>
         
         
-            <li><a href="../program/gs_test_2.html">Program</a></li>
-      
+            <li><a href="../lists/programs.html">Programs</a></li>
+        
             </ul>
             </li>
 
@@ -91,7 +91,7 @@
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
 
 
-<li class="visible-xs hidden-sm visible-lg"><a href="../program/gs_test_2.html">Program</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
 
           </ul>
         
@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="66.7% of total for modules and submodules.">404 statements</a>
+    title="76.9% of total for modules and submodules.">671 statements</a>
      </li> 
      
      
@@ -182,6 +182,10 @@
       
       <a class="list-group-item" href="../module/vector_m.html#interface-vector">vector</a>
       
+      <a class="list-group-item" href="../module/vector_m.html#interface-operator%28%2A%29">operator(*)</a>
+      
+      <a class="list-group-item" href="../module/vector_m.html#interface-operator%28SLASH%29">operator(/)</a>
+      
     </div>
   </div>
 </div>
@@ -195,8 +199,6 @@
     <div class="list-group">
       
       <a class="list-group-item" href="../module/vector_m.html#type-vector">vector</a>
-      
-      <a class="list-group-item" href="../module/vector_m.html#type-nd_vector">nd_vector</a>
       
     </div>
   </div>
@@ -223,8 +225,6 @@
   <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-0">Subroutines</a></h3></div>
   <div class="list-group">
     <div id="subs-0" class="panel-collapse collapse">
-      
-      <a class="list-group-item" href="../module/vector_m.html#proc-nd_test">nd_test</a>
       
       <a class="list-group-item" href="../module/vector_m.html#proc-deallocate_vector_data">deallocate_vector_data</a>
       
@@ -306,6 +306,10 @@
       
       <a class="list-group-item" href="../module/vector_m.html#interface-vector">vector</a>
       
+      <a class="list-group-item" href="../module/vector_m.html#interface-operator%28%2A%29">operator(*)</a>
+      
+      <a class="list-group-item" href="../module/vector_m.html#interface-operator%28SLASH%29">operator(/)</a>
+      
     </div>
   </div>
 </div>
@@ -319,8 +323,6 @@
     <div class="list-group">
       
       <a class="list-group-item" href="../module/vector_m.html#type-vector">vector</a>
-      
-      <a class="list-group-item" href="../module/vector_m.html#type-nd_vector">nd_vector</a>
       
     </div>
   </div>
@@ -347,8 +349,6 @@
   <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-1">Subroutines</a></h3></div>
   <div class="list-group">
     <div id="subs-1" class="panel-collapse collapse">
-      
-      <a class="list-group-item" href="../module/vector_m.html#proc-nd_test">nd_test</a>
       
       <a class="list-group-item" href="../module/vector_m.html#proc-deallocate_vector_data">deallocate_vector_data</a>
       
@@ -618,6 +618,745 @@ private elemental function vector_constructor_dim(dim) result(this)
 
     </li>
   
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function vector_constructor_dim_value_int(dim, val) result(this)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>dim</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function vector_constructor_dim_value_r32(dim, val) result(this)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>dim</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function vector_constructor_dim_value_r64(dim, val) result(this)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>dim</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function vector_constructor_vector(v1) result(v2)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Not very efficient due do the multiple copies that occur (About three times slower than assigment)</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>v1</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+  
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="interface-operator%28%2A%29"></span><h3>public interface <a href='../interface/operator%28%2A%29.html'>operator(*)</a>
+    
+  </h3></div>
+  
+  <ul class="list-group">
+  
+  
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function int_times_vector(scalar, vec) result(v2)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>scalar</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>vec</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function r32_times_vector(scalar, vec) result(v2)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>scalar</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>vec</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function r64_times_vector(scalar, vec) result(v2)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>scalar</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>vec</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+  
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="interface-operator%28SLASH%29"></span><h3>public interface <a href='../interface/operator%28SLASH%29.html'>operator(/)</a>
+    
+  </h3></div>
+  
+  <ul class="list-group">
+  
+  
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function int_div_vector(scalar, vec) result(v2)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>scalar</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>vec</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function r32_div_vector(scalar, vec) result(v2)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>scalar</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>vec</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function r64_div_vector(scalar, vec) result(v2)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>scalar</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>vec</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
   
   </ul>
 </div>
@@ -663,6 +1402,18 @@ private elemental function vector_constructor_dim(dim) result(this)
              
              <tr><td>private elemental function <strong>vector_constructor_dim</strong>(dim)</td><td></td></tr>
              
+             
+             <tr><td>private elemental function <strong>vector_constructor_dim_value_int</strong>(dim, val)</td><td></td></tr>
+             
+             
+             <tr><td>private elemental function <strong>vector_constructor_dim_value_r32</strong>(dim, val)</td><td></td></tr>
+             
+             
+             <tr><td>private elemental function <strong>vector_constructor_dim_value_r64</strong>(dim, val)</td><td></td></tr>
+             
+             
+             <tr><td>private elemental function <strong>vector_constructor_vector</strong>(v1)</td><td><p>Not very efficient due do the multiple copies that occur (About three times slower than assigment)</p></td></tr>
+             
         
        </tbody>
        </table>
@@ -682,10 +1433,7 @@ private elemental function vector_constructor_dim(dim) result(this)
       <table class="table table-striped varlist">
       <tbody>
       
-       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-new'>new</a></strong>  => new_vector </td>
-       <td></td></tr>
-      
-       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-new_'>new_</a></strong>  => new_constructor </td>
+       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-size'>size</a></strong>  => vector_size </td>
        <td></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-clear'>clear</a></strong>  => clear_vector </td>
@@ -712,13 +1460,31 @@ private elemental function vector_constructor_dim(dim) result(this)
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-normalize'>normalize</a></strong>  => vector_normalize </td>
        <td></td></tr>
       
+       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-normalized'>normalized</a></strong>  => vector_normalized </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-orthogonalize'>orthogonalize</a></strong>  => vector_orthogonalize </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-orthogonalized'>orthogonalized</a></strong>  => vector_orthogonalized </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-orthonormalize'>orthonormalize</a></strong>  => vector_orthonormalize </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-orthonormalized'>orthonormalized</a></strong>  => vector_orthonormalized </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-householder_transform'>householder_transform</a></strong>  => vector_householder_sub </td>
+       <td></td></tr>
+      
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-is_ortho'>is_ortho</a></strong>  => vector_is_orthogonal </td>
        <td></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-is_normal'>is_normal</a></strong>  => vector_is_normal </td>
        <td></td></tr>
       
-       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-as_array'>as_array</a></strong>  => vector_as_array </td>
+       <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-data'>data</a></strong>  => vector_as_array </td>
        <td></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-zero'>zero</a></strong>  => vector_zero </td>
@@ -733,87 +1499,53 @@ private elemental function vector_constructor_dim(dim) result(this)
        <tr><td>procedure, public :: <strong><a href='../type/vector.html#boundprocedure-dealloc_'>dealloc_</a></strong>  => deallocate_vector_data </td>
        <td></td></tr>
       
-       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-assignment%28%3D%29'>assignment(=)</a></strong>  => from_array_int_, from_array_r32_, from_array_r64_, from_vector_ </td>
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-assignment%28%3D%29'>assignment(=)</a></strong>  => from_array_int_, from_array_r32_, from_array_r64_, from_vector_, from_int_, from_r32_, from_r64_ </td>
        <td></td></tr>
       
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28.dot.%29'>operator(.dot.)</a></strong>  => dot_ </td>
        <td></td></tr>
       
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28.inner.%29'>operator(.inner.)</a></strong>  => dot_ </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28.outer.%29'>operator(.outer.)</a></strong>  => outer_ </td>
+       <td></td></tr>
+      
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28.proj.%29'>operator(.proj.)</a></strong>  => proj_ </td>
        <td></td></tr>
       
-       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28%2A%29'>operator(*)</a></strong>  => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_ </td>
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28.householder.%29'>operator(.householder.)</a></strong>  => householder_ </td>
        <td></td></tr>
       
-       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28SLASH%29'>operator(/)</a></strong>  => scalar_div_int_, scalar_div_r32_, scalar_div_r64_ </td>
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28%2A%29'>operator(*)</a></strong>  => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_, times_vec_ </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28SLASH%29'>operator(/)</a></strong>  => scalar_div_int_, scalar_div_r32_, scalar_div_r64_, div_vec_ </td>
        <td></td></tr>
       
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28%2B%29'>operator(+)</a></strong>  => plus_ </td>
        <td></td></tr>
       
-       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28-%29'>operator(-)</a></strong>  => minus_ </td>
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28-%29'>operator(-)</a></strong>  => minus_, unary_minus_ </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-times'>times</a></strong>  => times_int_sub_, times_r32_sub_, times_r64_sub_, times_vec_sub_ </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-div'>div</a></strong>  => div_int_sub_, div_r32_sub_, div_r64_sub_, div_vec_sub_ </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-proj'>proj</a></strong>  => project_onto_sub_ </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-plus'>plus</a></strong>  => plus_vector_sub_ </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-minus'>minus</a></strong>  => minus_vector_sub_ </td>
        <td></td></tr>
       
        </tbody>
        </table>
-     
-  </div>
-</div>
-
-     
-     
-<div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="type-nd_vector"></span><h3>type, public :: <a href='../type/nd_vector.html'>nd_vector</a>
-    
-  </h3></div>
-  <div class="panel-body">
-    
-     
-     <h4>Components</h4>
-    
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th><th>Visibility</th>
-
-<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" id="variable-n"></span>integer,</td>
-  
-  <td>public,</td>
-  <td>len</td><td>::</td>
-  <td><strong>n</strong></td><td> =</td><td>3</td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" id="variable-data"></span>real(kind=real64),</td>
-  
-  <td>public,</td>
-  <td>dimension(n)</td><td>::</td>
-  <td><strong>data</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-     
-     
-          
      
   </div>
 </div>
@@ -954,57 +1686,6 @@ public function <a href='../proc/is_orthonormal.html'>is_orthonormal</a>(basis) 
     
     <section>
     <h2>Subroutines</h2>
-    
-    
-  <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="proc-nd_test"></span><h3>
-public subroutine <a href='../proc/nd_test.html'>nd_test</a>(nd)
-    
-    
-   
-</h3></div>
-  <div class="panel-body">
-       
-    
-    
-    <h4>Arguments</h4>
-    
-      
-      
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>class(<a href='../type/nd_vector.html'>nd_vector</a>n=*),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>nd</strong></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-      
-    
-    
-
-  </div>
-  </div>
-
     
     
   <div class="panel panel-default">
