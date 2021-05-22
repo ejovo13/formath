@@ -32,7 +32,6 @@ contains
 
     private
     procedure, public :: size => vector_size
-    procedure, public :: new => new_constructor
     procedure, public :: clear => clear_vector
     !! Deallocate the data, set v_allocated to false, set dim to 0
     procedure, public :: print_info => vector_print_info
@@ -46,14 +45,15 @@ contains
     procedure, public :: is_ortho => vector_is_orthogonal
     procedure, public :: is_normal => vector_is_normal
     procedure, public :: data => vector_as_array
-
+    
     procedure, public :: zero => vector_zero
     
     procedure, public :: allocated => vector_is_allocated
-
-
+    
+    
     procedure, public :: alloc_ => allocate_vector_data
     procedure, public :: dealloc_ => deallocate_vector_data
+    procedure :: new_ => new_constructor
     procedure :: dot_ => vector_dot_vector
     procedure :: proj_ => vector_proj_vector
     procedure :: conform_ => vector_conform
@@ -167,7 +167,7 @@ contains
         integer, dimension(:), intent(in) :: array
         type(vector) :: this
 
-        call this%new(size(array))
+        call this%new_(size(array))
         this%v = array
 
     end function
@@ -177,7 +177,7 @@ contains
         real(real32), dimension(:), intent(in) :: array
         type(vector) :: this
 
-        call this%new(size(array))
+        call this%new_(size(array))
         this%v = array
 
     end function
@@ -187,7 +187,7 @@ contains
         real(real64), dimension(:), intent(in) :: array
         type(vector) :: this
 
-        call this%new(size(array))
+        call this%new_(size(array))
         this%v = array
 
     end function
@@ -197,7 +197,7 @@ contains
         integer, intent(in) :: dim
         type(vector) :: this
 
-        call this%new(dim)
+        call this%new_(dim)
         this%v = 0
 
     end function
@@ -209,7 +209,7 @@ contains
 
         type(vector) :: this
 
-        call this%new(dim)
+        call this%new_(dim)
         this%v = val
 
     end function
@@ -221,7 +221,7 @@ contains
 
         type(vector) :: this
 
-        call this%new(dim)
+        call this%new_(dim)
         this%v = val
 
     end function
@@ -233,7 +233,7 @@ contains
 
         type(vector) :: this
 
-        call this%new(dim)
+        call this%new_(dim)
         this%v = val
 
     end function
@@ -630,7 +630,7 @@ contains
         type(vector) :: v3
 
         if (self%conform_(v2)) then
-            call v3%new(self%dim)
+            call v3%new_(self%dim)
             v3%v = self%v + v2%v
         else 
             error stop "Cannot add nonconforming vectors"
@@ -646,7 +646,7 @@ contains
         type(vector) :: v3
 
         if (self%conform_(v2)) then
-            call v3%new(self%dim)
+            call v3%new_(self%dim)
             v3%v = self%v - v2%v
         else 
             error stop "Cannot add nonconforming vectors"
@@ -661,7 +661,7 @@ contains
         integer, intent(in) :: scalar 
         type(vector) :: v2
 
-        call v2%new(self%dim)
+        call v2%new_(self%dim)
 
         v2%v = self%v * scalar
 
@@ -674,7 +674,7 @@ contains
         real(real32), intent(in) :: scalar 
         type(vector) :: v2
 
-        call v2%new(self%dim)
+        call v2%new_(self%dim)
 
         v2%v = self%v * scalar
     
@@ -687,7 +687,7 @@ contains
         real(real64), intent(in) :: scalar 
         type(vector) :: v2
 
-        call v2%new(self%dim)
+        call v2%new_(self%dim)
 
         v2%v = self%v * scalar
     
@@ -726,7 +726,7 @@ contains
         integer, intent(in) :: scalar 
         type(vector) :: v2
 
-        call v2%new(self%dim)
+        call v2%new_(self%dim)
 
         v2%v = self%v / scalar
 
@@ -739,7 +739,7 @@ contains
         real(real32), intent(in) :: scalar 
         type(vector) :: v2
 
-        call v2%new(self%dim)
+        call v2%new_(self%dim)
 
         v2%v = self%v / scalar
     
@@ -752,7 +752,7 @@ contains
         real(real64), intent(in) :: scalar 
         type(vector) :: v2
 
-        call v2%new(self%dim)
+        call v2%new_(self%dim)
 
         v2%v = self%v / scalar
     
@@ -983,9 +983,9 @@ contains
         integer, intent(in), optional :: dim
 
         if (present(dim)) then
-            call self%new(dim)
+            call self%new_(dim)
         else
-            call self%new(1)
+            call self%new_(1)
         end if
 
         self%v = 0
