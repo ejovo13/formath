@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="77.2% of total for modules and submodules.">684 statements</a>
+    title="72.7% of total for modules and submodules.">702 statements</a>
      </li> 
      
      
@@ -226,8 +226,6 @@
   <div class="list-group">
     <div id="subs-0" class="panel-collapse collapse">
       
-      <a class="list-group-item" href="../module/vector_m.html#proc-deallocate_vector_data">deallocate_vector_data</a>
-      
       <a class="list-group-item" href="../module/vector_m.html#proc-print_basis">print_basis</a>
       
     </div>
@@ -255,7 +253,7 @@
  Inner product
  Norm (which norm?)
  Projection of a onto b </p>
-<p>The internal representaion of a vector is an array of fixed size, pointed to by a pointer.
+<p>The internal representaion of a vector is an allocatable array.
  This way we can use the fundamental data of an array within our specific class</p>
       <br>
     
@@ -350,8 +348,6 @@
   <div class="list-group">
     <div id="subs-1" class="panel-collapse collapse">
       
-      <a class="list-group-item" href="../module/vector_m.html#proc-deallocate_vector_data">deallocate_vector_data</a>
-      
       <a class="list-group-item" href="../module/vector_m.html#proc-print_basis">print_basis</a>
       
     </div>
@@ -388,7 +384,8 @@
   
   <div class="panel-body">
     
-    <p>Construct a vector object</p>
+    <p>Construct a vector object <br>
+</p><a href="../interface/vector.html" class="pull-right"><emph>Read more&hellip;</emph></a>
   </div>
   
   <ul class="list-group">
@@ -972,6 +969,11 @@ private elemental function vector_constructor_vector(v1) result(v2)
     
   </h3></div>
   
+  <div class="panel-body">
+    
+    <p>Extend multiplication operator to allow a scalar <script type="math/tex">\alpha</script> times a vector such that </p>
+  </div>
+  
   <ul class="list-group">
   
   
@@ -1202,6 +1204,11 @@ private elemental function r64_times_vector(scalar, vec) result(v2)
   <div class="panel-heading codesum"><span class="anchor" id="interface-operator%28SLASH%29"></span><h3>public interface <a href='../interface/operator%28SLASH%29.html'>operator(/)</a>
     
   </h3></div>
+  
+  <div class="panel-body">
+    
+    <p>Extend division operator to allow a scalar divided by a vector</p>
+  </div>
   
   <ul class="list-group">
   
@@ -1449,7 +1456,8 @@ private elemental function r64_div_vector(scalar, vec) result(v2)
      
      <h4>Constructor</h4>
        
-         <p>Construct a vector object</p>
+         <p>Construct a vector object <br>
+</p><a href="../interface/vector.html" class="pull-right"><emph>Read more&hellip;</emph></a>
        
        <table class="table table-striped varlist">
       <tbody>
@@ -1599,7 +1607,10 @@ private elemental function r64_div_vector(scalar, vec) result(v2)
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28.proj.%29'>operator(.proj.)</a></strong>  => proj_ </td>
        <td></td></tr>
       
-       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28.householder.%29'>operator(.householder.)</a></strong>  => householder_ </td>
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28.hh.%29'>operator(.hh.)</a></strong>  => householder_ </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28.hhnorm.%29'>operator(.hhnorm.)</a></strong>  => householder_normal_ </td>
        <td></td></tr>
       
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28%2A%29'>operator(*)</a></strong>  => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_, times_vec_ </td>
@@ -1608,7 +1619,7 @@ private elemental function r64_div_vector(scalar, vec) result(v2)
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28SLASH%29'>operator(/)</a></strong>  => scalar_div_int_, scalar_div_r32_, scalar_div_r64_, div_vec_ </td>
        <td></td></tr>
       
-       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28%2B%29'>operator(+)</a></strong>  => plus_ </td>
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28%2B%29~2'>operator(+)</a></strong>  => plus_ </td>
        <td></td></tr>
       
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-operator%28-%29'>operator(-)</a></strong>  => minus_, unary_minus_ </td>
@@ -1623,7 +1634,7 @@ private elemental function r64_div_vector(scalar, vec) result(v2)
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-proj'>proj</a></strong>  => project_onto_sub_ </td>
        <td></td></tr>
       
-       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-plus'>plus</a></strong>  => plus_vector_sub_ </td>
+       <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-plus~2'>plus</a></strong>  => plus_vector_sub_ </td>
        <td></td></tr>
       
        <tr><td>generic, public :: <strong><a href='../type/vector.html#boundprocedure-minus'>minus</a></strong>  => minus_vector_sub_ </td>
@@ -1771,57 +1782,6 @@ public function <a href='../proc/is_orthonormal.html'>is_orthonormal</a>(basis) 
     
     <section>
     <h2>Subroutines</h2>
-    
-    
-  <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="proc-deallocate_vector_data"></span><h3>
-public elemental subroutine <a href='../proc/deallocate_vector_data.html'>deallocate_vector_data</a>(self)
-    
-    
-   
-</h3></div>
-  <div class="panel-body">
-       
-    
-    
-    <h4>Arguments</h4>
-    
-      
-      
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
-  <td>intent(inout)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-      
-    
-    
-
-  </div>
-  </div>
-
     
     
   <div class="panel panel-default">

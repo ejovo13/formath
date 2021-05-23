@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 5.5% of total for source files.">60 statements</a>
+    title=" 5.4% of total for source files.">64 statements</a>
      </li> 
      
      
@@ -342,16 +342,25 @@
 <a name="ln-75"></a>    <span class="k">print </span><span class="mi">99</span>
 <a name="ln-76"></a>    <span class="k">print </span><span class="mi">99</span>
 <a name="ln-77"></a>
-<a name="ln-78"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">v1</span> <span class="p">.</span><span class="n">householder</span><span class="p">.</span> <span class="n">z</span>
-<a name="ln-79"></a>    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;v1 .householder. z = &quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">%</span><span class="k">data</span><span class="p">()</span>
+<a name="ln-78"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">v1</span> <span class="p">.</span><span class="n">hh</span><span class="p">.</span> <span class="n">z</span>
+<a name="ln-79"></a>    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;v1 .hh. z = &quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">%</span><span class="k">data</span><span class="p">()</span>
 <a name="ln-80"></a>
-<a name="ln-81"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">v1</span> <span class="p">.</span><span class="n">householder</span><span class="p">.</span> <span class="n">y</span>
-<a name="ln-82"></a>    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;v1 .householder. y = &quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">%</span><span class="k">data</span><span class="p">()</span>
+<a name="ln-81"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">v1</span> <span class="p">.</span><span class="n">hh</span><span class="p">.</span> <span class="n">y</span>
+<a name="ln-82"></a>    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;v1 .hh. y = &quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">%</span><span class="k">data</span><span class="p">()</span>
 <a name="ln-83"></a>
-<a name="ln-84"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">v1</span> <span class="p">.</span><span class="n">householder</span><span class="p">.</span> <span class="n">x</span>
-<a name="ln-85"></a>    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;v1 .householder. x = &quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">%</span><span class="k">data</span><span class="p">()</span>
-<a name="ln-86"></a>    
-<a name="ln-87"></a><span class="k">end program</span>
+<a name="ln-84"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">v1</span> <span class="p">.</span><span class="n">hh</span><span class="p">.</span> <span class="n">x</span>
+<a name="ln-85"></a>    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;v1 .hh. x = &quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">%</span><span class="k">data</span><span class="p">()</span>
+<a name="ln-86"></a>
+<a name="ln-87"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">v1</span> <span class="p">.</span><span class="n">hhnorm</span><span class="p">.</span> <span class="n">x</span>
+<a name="ln-88"></a>    <span class="c">! res = res * -1/(res%at(1))</span>
+<a name="ln-89"></a>    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;v1 .hhnorm. x = &quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">%</span><span class="k">data</span><span class="p">()</span>
+<a name="ln-90"></a>
+<a name="ln-91"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">v1</span> <span class="p">.</span><span class="n">hh</span><span class="p">.</span> <span class="n">res</span>
+<a name="ln-92"></a>    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;v1 .hh. res = &quot;</span><span class="p">,</span> <span class="n">res</span><span class="p">%</span><span class="k">data</span><span class="p">()</span>
+<a name="ln-93"></a>
+<a name="ln-94"></a>
+<a name="ln-95"></a>    
+<a name="ln-96"></a><span class="k">end program</span>
 </pre></div>
 
     </section>

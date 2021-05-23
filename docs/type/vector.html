@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>77.0% of total for derived types.</p>Including implementation: 780 statements, 75.0% of total for derived types.">84 statements</a>
+    title="<p>73.3% of total for derived types.</p>Including implementation: 806 statements, 70.4% of total for derived types.">86 statements</a>
      </li> 
      
      
@@ -269,13 +269,15 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.proj.%29">operator(.proj.)</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.householder.%29">operator(.householder.)</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.hh.%29">operator(.hh.)</a>
+      
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.hhnorm.%29">operator(.hhnorm.)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2A%29">operator(*)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28SLASH%29">operator(/)</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2B%29">operator(+)</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2B%29~2">operator(+)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28-%29">operator(-)</a>
       
@@ -285,7 +287,7 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-proj">proj</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-plus">plus</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-plus~2">plus</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-minus">minus</a>
       
@@ -415,13 +417,15 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.proj.%29">operator(.proj.)</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.householder.%29">operator(.householder.)</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.hh.%29">operator(.hh.)</a>
+      
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.hhnorm.%29">operator(.hhnorm.)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2A%29">operator(*)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28SLASH%29">operator(/)</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2B%29">operator(+)</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2B%29~2">operator(+)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28-%29">operator(-)</a>
       
@@ -431,7 +435,7 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-proj">proj</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-plus">plus</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-plus~2">plus</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-minus">minus</a>
       
@@ -460,7 +464,8 @@
   
   <div class="panel-body">
     
-    <p>Construct a vector object</p>
+    <p>Construct a vector object <br>
+</p><a href="../interface/vector.html" class="pull-right"><emph>Read more&hellip;</emph></a>
   </div>
   
   <ul class="list-group">
@@ -1143,6 +1148,11 @@ private elemental function vector_size(self) result(n)
    
 </h3>
     
+
+
+
+<p>Return the number of elements allocated for <script type="math/tex">v</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -1168,7 +1178,9 @@ private elemental function vector_size(self) result(n)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -1223,6 +1235,10 @@ private elemental subroutine clear_vector(self)
    
 </h3>
     
+
+
+
+<p>Deallocate a vector <script type="math/tex">v</script> if it is allocated, set the dimension equal to 0</p>
     
     <h4>Arguments</h4>
     
@@ -1248,7 +1264,9 @@ private elemental subroutine clear_vector(self)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -2592,7 +2610,7 @@ private elemental subroutine vector_householder_sub(self, normal)
           
     
     <h3>
-private elemental function vector_constructor_eye(self, dim) result(v2)
+private elemental function vector_constructor_eye(self, dim, col) result(v2)
     
     
    
@@ -2601,8 +2619,10 @@ private elemental function vector_constructor_eye(self, dim) result(v2)
 
 
 
-<p>Construct a vector <script type="math/tex">v</script> that is equal to the <script type="math/tex">dim</script>th column of the Identity matrix <script type="math/tex">I_{dim}</script>
-</p>
+<p>Construct a vector <script type="math/tex">v</script> that is equal to the <script type="math/tex">col</script>th column of the Identity matrix <script type="math/tex">I_{dim}</script>
+ The <script type="math/tex">dim</script> and <script type="math/tex">col</script> parameters are both optional. If the <script type="math/tex">dim</script> parameter is absent, then take the <script type="math/tex">col</script>th
+ column from the identity matrix whose dimension is <script type="math/tex">v_{dim}</script>. If the <script type="math/tex">col</script> parameter is missing, set its default
+ value to the dimension.</p><a href="../proc/vector_constructor_eye.html" class="pull-right"><emph>Read more&hellip;</emph></a>
     
     <h4>Arguments</h4>
     
@@ -2645,7 +2665,22 @@ private elemental function vector_constructor_eye(self, dim) result(v2)
   <td>optional</td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>Dimension of the Identity matrix</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>col</strong></td><td><p>Column to extract</p></td>
   
 </tr>
 
@@ -2662,7 +2697,9 @@ private elemental function vector_constructor_eye(self, dim) result(v2)
   
      <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
   </small></h4>
-  
+  <p>
+<script type="math/tex">col</script>th column of the Identity matrix <script type="math/tex">I_{dim}</script>
+</p>
     
 
         
@@ -2693,6 +2730,10 @@ private elemental function vector_is_orthogonal(self, v2, eps) result(bool)
    
 </h3>
     
+
+
+
+<p>Check if two vectors are orthogonal within a certain tolerance.</p>
     
     <h4>Arguments</h4>
     
@@ -2718,7 +2759,9 @@ private elemental function vector_is_orthogonal(self, v2, eps) result(bool)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -2733,7 +2776,9 @@ private elemental function vector_is_orthogonal(self, v2, eps) result(bool)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>v2</strong></td><td></td>
+  <td><strong>v2</strong></td><td><p>
+<script type="math/tex">v_2</script>
+</p></td>
   
 </tr>
 
@@ -2748,7 +2793,9 @@ private elemental function vector_is_orthogonal(self, v2, eps) result(bool)
   <td>optional</td>
   
   <td></td><td>::</td>
-  <td><strong>eps</strong></td><td></td>
+  <td><strong>eps</strong></td><td><p>
+<script type="math/tex">\epsilon</script>
+</p></td>
   
 </tr>
 
@@ -2765,7 +2812,8 @@ private elemental function vector_is_orthogonal(self, v2, eps) result(bool)
   
      <h4>Return Value <small>logical
   </small></h4>
-  
+  <p>True when <script type="math/tex">\abs{\langle v, v2 \rangle} < \epsilon </script>
+</p>
     
 
         
@@ -2796,6 +2844,10 @@ private elemental function vector_is_normal(self) result(bool)
    
 </h3>
     
+
+
+
+<p>Check if a vector is normal. A vector is normal if it's length is equal to 1 (within a tolerance)</p>
     
     <h4>Arguments</h4>
     
@@ -3021,6 +3073,10 @@ private elemental function vector_is_allocated(self) result(bool)
    
 </h3>
     
+
+
+
+<p>Check if a vector is allocated</p>
     
     <h4>Arguments</h4>
     
@@ -3094,6 +3150,11 @@ private elemental subroutine allocate_vector_data(self, dim)
    
 </h3>
     
+
+
+
+<p>Allocate the underlying array containing <script type="math/tex">v</script>'s data and set <script type="math/tex">v</script>'s dimension to <script type="math/tex">dim</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -3119,7 +3180,9 @@ private elemental subroutine allocate_vector_data(self, dim)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -3134,7 +3197,9 @@ private elemental subroutine allocate_vector_data(self, dim)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>dim</strong></td><td></td>
+  <td><strong>dim</strong></td><td><p>
+<script type="math/tex">n</script>
+</p></td>
   
 </tr>
 
@@ -3155,7 +3220,7 @@ private elemental subroutine allocate_vector_data(self, dim)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-dealloc_"></span><h3>procedure, public :: <strong>dealloc_</strong>  => <a href='../proc/deallocate_vector_data.html'>deallocate_vector_data</a> 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-dealloc_"></span><h3>procedure, public :: <strong>dealloc_</strong>  => deallocate_vector_data 
     
   </h3></div>
   
@@ -3167,12 +3232,16 @@ private elemental subroutine allocate_vector_data(self, dim)
           
     
     <h3>
-public elemental subroutine <a href='../proc/deallocate_vector_data.html'>deallocate_vector_data</a>(self)
+private elemental subroutine deallocate_vector_data(self)
     
     
    
 </h3>
     
+
+
+
+<p>Deallocate the underlying array containing <script type="math/tex">v</script>'s elements</p>
     
     <h4>Arguments</h4>
     
@@ -3198,7 +3267,9 @@ public elemental subroutine <a href='../proc/deallocate_vector_data.html'>deallo
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -3237,6 +3308,11 @@ private pure subroutine vector_from_array_int(self, array)
    
 </h3>
     
+
+
+
+<p>Assign a vector <script type="math/tex">v</script> to an array of integers. 
+ </p><a href="../proc/vector_from_array_int.html" class="pull-right"><emph>Read more&hellip;</emph></a>
     
     <h4>Arguments</h4>
     
@@ -3304,6 +3380,10 @@ private pure subroutine vector_from_array_r32(self, array)
    
 </h3>
     
+
+
+
+<p>Assign a vector <script type="math/tex">v</script> to an array of integers. </p>
     
     <h4>Arguments</h4>
     
@@ -3371,6 +3451,10 @@ private pure subroutine vector_from_array_r64(self, array)
    
 </h3>
     
+
+
+
+<p>Assign a vector <script type="math/tex">v</script> to an array of integers. </p>
     
     <h4>Arguments</h4>
     
@@ -3438,6 +3522,11 @@ private elemental subroutine vector_from_vector(self, v1)
    
 </h3>
     
+
+
+
+<p>Copy the elements of a vector <script type="math/tex">v_1</script> into <script type="math/tex">v</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -3463,7 +3552,9 @@ private elemental subroutine vector_from_vector(self, v1)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -3478,7 +3569,9 @@ private elemental subroutine vector_from_vector(self, v1)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>v1</strong></td><td></td>
+  <td><strong>v1</strong></td><td><p>
+<script type="math/tex">v_1</script>
+</p></td>
   
 </tr>
 
@@ -3505,6 +3598,12 @@ private pure subroutine vector_from_int(self, val)
    
 </h3>
     
+
+
+
+<p>Assign a vector <script type="math/tex">v</script> to an int value. If <script type="math/tex">v</script> is already allocated, fill the elements with <script type="math/tex">val</script>. If <script type="math/tex">v</script>
+ is not already allocated, create a new vector of dimension 1 and set the element equal to <script type="math/tex">val</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -3530,7 +3629,9 @@ private pure subroutine vector_from_int(self, val)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -3545,7 +3646,8 @@ private pure subroutine vector_from_int(self, val)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>val</strong></td><td></td>
+  <td><strong>val</strong></td><td><p>Value used to fill <script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -3572,6 +3674,12 @@ private pure subroutine vector_from_r32(self, val)
    
 </h3>
     
+
+
+
+<p>Assign a vector <script type="math/tex">v</script> to single precision value. If <script type="math/tex">v</script> is already allocated, fill the elements with <script type="math/tex">val</script>. If <script type="math/tex">v</script>
+ is not already allocated, create a new vector of dimension 1 and set the element equal to <script type="math/tex">val</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -3597,7 +3705,9 @@ private pure subroutine vector_from_r32(self, val)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -3612,7 +3722,8 @@ private pure subroutine vector_from_r32(self, val)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>val</strong></td><td></td>
+  <td><strong>val</strong></td><td><p>Value used to fill <script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -3639,6 +3750,12 @@ private pure subroutine vector_from_r64(self, val)
    
 </h3>
     
+
+
+
+<p>Assign a vector <script type="math/tex">v</script> to a double precision value. If <script type="math/tex">v</script> is already allocated, fill the elements with <script type="math/tex">val</script>. If <script type="math/tex">v</script>
+ is not already allocated, create a new vector of dimension 1 and set the element equal to <script type="math/tex">val</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -3664,7 +3781,9 @@ private pure subroutine vector_from_r64(self, val)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>self</strong></td><td></td>
+  <td><strong>self</strong></td><td><p>
+<script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -3679,7 +3798,8 @@ private pure subroutine vector_from_r64(self, val)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>val</strong></td><td></td>
+  <td><strong>val</strong></td><td><p>Value used to fill <script type="math/tex">v</script>
+</p></td>
   
 </tr>
 
@@ -4065,7 +4185,7 @@ private elemental function vector_proj_vector(self, v2) result(v3)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28.householder.%29"></span><h3>generic, public :: <strong>operator(.householder.)</strong>  => householder_ 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28.hh.%29"></span><h3>generic, public :: <strong>operator(.hh.)</strong>  => householder_ 
     
   </h3></div>
   
@@ -4124,6 +4244,94 @@ private elemental function vector_householder(self, normal) result(rotated)
   
   <td></td><td>::</td>
   <td><strong>normal</strong></td><td><p>MUST BE A UNIT VECTOR</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28.hhnorm.%29"></span><h3>generic, public :: <strong>operator(.hhnorm.)</strong>  => householder_normal_ 
+    
+  </h3></div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function vector_find_householder_normal(self, destination) result(normal)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>destination</strong></td><td></td>
   
 </tr>
 
@@ -4809,7 +5017,7 @@ private elemental function vector_div_vector(self, v2) result(v3)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2B%29"></span><h3>generic, public :: <strong>operator(+)</strong>  => plus_ 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2B%29~2"></span><h3>generic, public :: <strong>operator(+)</strong>  => plus_ 
     
   </h3></div>
   
@@ -5714,7 +5922,7 @@ private elemental subroutine vector_proj_vector_sub(self, v2)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-plus"></span><h3>generic, public :: <strong>plus</strong>  => plus_vector_sub_ 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-plus~2"></span><h3>generic, public :: <strong>plus</strong>  => plus_vector_sub_ 
     
   </h3></div>
   

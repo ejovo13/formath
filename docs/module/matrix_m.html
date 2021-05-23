@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="22.8% of total for modules and submodules.">202 statements</a>
+    title="27.3% of total for modules and submodules.">263 statements</a>
      </li> 
      
      
@@ -208,6 +208,8 @@
  Matrices can be used to represent a variety of mathematical structures. This class is primarily used
  to bind a selection of Linear Algebra algorithms to a matrix object. Matrices can be instantiated by assignment 
  of a rank2 array of any type, but the underlying data will be stored with double precision. <br></p>
+<p>Matrix multiplication will be consistent with the mathematical operation (matmul), and element wise multiplication
+ shall be represented by the hadamard product (OPERATOR .o.)</p>
 <div class="codehilite"><pre><span></span><span class="k">type</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span> <span class="kd">::</span> <span class="n">m</span><span class="p">,</span> <span class="n">ortho_basis</span>
 
 <span class="n">m</span> <span class="o">=</span> <span class="nb">reshape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="c">! Create a 2x2 matrix</span>
@@ -323,7 +325,7 @@
       <table class="table table-striped varlist">
       <tbody>
       
-       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-new'>new</a></strong>  => new_matrix </td>
+       <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-new'>new</a></strong>  => new_, new_matrix_ </td>
        <td><p>Create a new matrix</p></td></tr>
       
        <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-clear~2'>clear</a></strong>  => clear_matrix </td>
@@ -352,6 +354,14 @@
       
        <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-assignment%28%3D%29~2'>assignment(=)</a></strong>  => from_array_int_, from_array_r32_, from_array_r64_, from_matrix </td>
        <td><p>Assign the contents of a matrix from a rank2 Fortran array</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-operator%28%2B%29'>operator(+)</a></strong>  => add_matrix_ </td>
+       <td><p>Operator interface to add two matrices
+</p><a href="../type/matrix.html#boundprocedure-operator%28%2B%29" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-plus'>plus</a></strong>  => add_matrix_sub_ </td>
+       <td><p>Subroutine interface to add two matrices
+</p><a href="../type/matrix.html#boundprocedure-plus" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
       
        </tbody>
        </table>

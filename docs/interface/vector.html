@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>12.2% of total for procedures.</p>Including implementation: 60 statements, 73.2% of total for procedures.">10 statements</a>
+    title="<p>13.3% of total for procedures.</p>Including implementation: 60 statements, 80.0% of total for procedures.">10 statements</a>
      </li> 
      
      
@@ -221,7 +221,21 @@
     
     <div class="col-md-9" id='text'>
       <h2>public interface vector</h2>
-   <p>Construct a vector object</p>
+   <p>Construct a vector object <br>
+</p><div class="alert alert-info" role="alert"><h4>Note</h4><p>A vector can be instantiated from integer and real data types but the underlying data will always
+be stored using double precision.</p></div>
+<p>The following code snippet shows all of the valid ways to construct a new vector</p>
+<div class="codehilite"><pre><span></span><span class="k">type</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="kd">::</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">,</span> <span class="n">v4</span><span class="p">,</span> <span class="n">v5</span><span class="p">,</span> <span class="n">v6</span><span class="p">,</span> <span class="n">v7</span><span class="p">,</span> <span class="n">v8</span>
+
+<span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="n">v3</span> <span class="o">=</span> <span class="n">vector</span><span class="p">([</span><span class="mf">1.0d0</span><span class="p">,</span> <span class="mf">2.0d0</span><span class="p">,</span> <span class="mf">3.0d0</span><span class="p">])</span>
+<span class="n">v4</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c">! [0, 0, 0, 0]</span>
+<span class="n">v5</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c">! [3, 3, 3, 3, 3]</span>
+<span class="n">v6</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="c">! [2, 2]</span>
+<span class="n">v7</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">val</span><span class="o">=</span><span class="mf">4.7d0</span><span class="p">,</span> <span class="nb">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c">! [4.7, 4.7, 4.7]</span>
+<span class="n">v8</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">v7</span><span class="p">)</span>
+</pre></div>
      
      
     <br>

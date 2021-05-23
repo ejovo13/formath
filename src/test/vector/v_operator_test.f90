@@ -75,13 +75,22 @@ implicit none
     print 99
     print 99
 
-    res = v1 .householder. z
-    print *, "v1 .householder. z = ", res%data()
+    res = v1 .hh. z
+    print *, "v1 .hh. z = ", res%data()
 
-    res = v1 .householder. y
-    print *, "v1 .householder. y = ", res%data()
+    res = v1 .hh. y
+    print *, "v1 .hh. y = ", res%data()
 
-    res = v1 .householder. x
-    print *, "v1 .householder. x = ", res%data()
+    res = v1 .hh. x
+    print *, "v1 .hh. x = ", res%data()
+
+    res = v1 .hhnorm. x
+    ! res = res * -1/(res%at(1))
+    print *, "v1 .hhnorm. x = ", res%data()
+
+    res = v1 .hh. res
+    print *, "v1 .hh. res = ", res%data()
+
+
     
 end program

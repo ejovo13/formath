@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>23.0% of total for derived types.</p>Including implementation: 260 statements, 25.0% of total for derived types.">28 statements</a>
+    title="<p>26.7% of total for derived types.</p>Including implementation: 339 statements, 29.6% of total for derived types.">35 statements</a>
      </li> 
      
      
@@ -211,6 +211,10 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-assignment%28%3D%29~2">assignment(=)</a>
       
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2B%29">operator(+)</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-plus">plus</a>
+      
     </div>
   </div>
 </div>
@@ -279,6 +283,10 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-assignment%28%3D%29~2">assignment(=)</a>
       
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2B%29">operator(+)</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-plus">plus</a>
+      
     </div>
   </div>
 </div>
@@ -302,7 +310,7 @@
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-new"></span><h3>procedure, public :: <strong>new</strong>  => new_matrix 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-new"></span><h3>generic, public :: <strong>new</strong>  => new_, new_matrix_ 
     
   </h3></div>
   
@@ -317,8 +325,8 @@
     
       <li class="list-group-item">
       
-        
-          
+         
+            
     
     <h3>
 private elemental subroutine new_matrix(self, n, k)
@@ -397,7 +405,78 @@ private elemental subroutine new_matrix(self, n, k)
     
     
 
-        
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental subroutine new_matrix_from_matrix(self, m2)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Wipe the contents of a matrix and allocate the proper amount of space</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>Matrix object to wipe</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>m2</strong></td><td><p>Matrix object to wipe</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
       
       </li>
     
@@ -1591,6 +1670,195 @@ private elemental subroutine matrix_from_matrix(self, m)
   
   <td></td><td>::</td>
   <td><strong>m</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2B%29"></span><h3>generic, public :: <strong>operator(+)</strong>  => add_matrix_ 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Operator interface to add two matrices
+</p><div class="alert alert-info" role="alert"><h4>Note</h4><p>As an operator, this procedure is a <strong>function</strong> which return a new matrix. 
+ use the functional operator equivalent, use [[]]</p></div>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental function matrix_add_matrix(self, m2) result(m3)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>m2</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-plus"></span><h3>generic, public :: <strong>plus</strong>  => add_matrix_sub_ 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Subroutine interface to add two matrices
+</p><div class="alert alert-info" role="alert"><h4>Note</h4><p>This subroutine will alter the passed matrix. To use the functional operator equivalent, use <script type="math/tex">+</script></p></div>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental subroutine matrix_add_matrix_sub(self, m2)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Subroutine interface to add two matrices
+</p><a href="../proc/matrix_add_matrix_sub.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>m2</strong></td><td></td>
   
 </tr>
 

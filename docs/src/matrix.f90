@@ -4,6 +4,9 @@ module matrix_m
 !! to bind a selection of Linear Algebra algorithms to a matrix object. Matrices can be instantiated by assignment 
 !! of a rank2 array of any type, but the underlying data will be stored with double precision. <br>
 !!
+!!  Matrix multiplication will be consistent with the mathematical operation (matmul), and element wise multiplication
+!! shall be represented by the hadamard product (OPERATOR .o.)
+!!
 !!```fortran
 !!type(matrix) :: m, ortho_basis
 !!
@@ -41,7 +44,7 @@ contains
 
     private
 
-    procedure, public :: new => new_matrix !! Create a new matrix
+    generic, public :: new => new_, new_matrix_ !! Create a new matrix
     procedure, public :: clear => clear_matrix !! Clear all of the elements of a matrix 
     procedure, public :: print => print_matrix !! Print the contents of a matrix
     procedure, public :: vec => access_vector_matrix !! Get the kth vector in the matrix
@@ -49,9 +52,31 @@ contains
     procedure, public :: gram_schmidt => gram_schmidt_matrix !! Compute an otrthonormal basis for the vector space spanned by the columns of a matrix
     procedure, public :: is_orthonormal => is_orthonormal_matrix !! Check whether a matrix is orthonormal
     procedure, public :: as_array => matrix_as_array !! Return a rank2 Fortran array
+
+    procedure :: conform_ => matrix_conform
     
     generic, public :: set => set_int_, set_r32_, set_r64_ !! Set the value of \(a_{i,j})
     generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_matrix !! Assign the contents of a matrix from a rank2 Fortran array
+
+    procedure :: new_ => new_matrix
+    procedure :: new_matrix_ => new_matrix_from_matrix
+
+    !=================Operator Functions===============!
+    generic, public :: operator(+) => add_matrix_
+    !! Operator interface to add two matrices
+    !!@Note
+    !! As an operator, this procedure is a **function** which return a new matrix. 
+    !! use the functional operator equivalent, use [[]]
+
+
+    !=================Operator Subroutines===============!
+    generic, public :: plus => add_matrix_sub_
+    !! Subroutine interface to add two matrices
+    !!@Note
+    !! This subroutine will alter the passed matrix. To use the functional operator equivalent, use \(+\)
+
+    procedure :: add_matrix_ => matrix_add_matrix
+    procedure :: add_matrix_sub_ => matrix_add_matrix_sub
 
     procedure :: from_array_int_ => matrix_from_rank2_array_int
     procedure :: from_array_r32_ => matrix_from_rank2_array_r32
@@ -82,6 +107,20 @@ contains
 
         self%k = k
         self%n = n 
+
+        call self%alloc_()  
+
+    end subroutine
+
+    elemental subroutine new_matrix_from_matrix(self, m2)
+    !! Wipe the contents of a matrix and allocate the proper amount of space
+        class(matrix), intent(inout) :: self !! Matrix object to wipe
+        class(matrix), intent(in) :: m2 !! Matrix object to wipe
+        
+        call self%clear()
+ 
+        self%k = m2%k
+        self%n = m2%n
 
         call self%alloc_()  
 
@@ -375,5 +414,101 @@ contains
 
     end function
 
+    elemental function matrix_conform(self, m2) result(bool)
+    !! Check if two matrices are conforming (have the same dimensions)
+        class(matrix), intent(in) :: self
+        class(matrix), intent(in) :: m2
+
+        logical :: bool !! True when self%dim == v2%dim
+
+        bool = (self%k == m2%k .and. self%n == m2%n)
+
+    end function
+
+!=============================================================================!
+!=                           Function Operators                              =!
+!=============================================================================!
+
+    elemental function matrix_add_matrix(self, m2) result(m3)
+
+        class(matrix), intent(in) :: self
+        class(matrix), intent(in) :: m2    
+
+        type(matrix) :: m3
+
+        integer :: i
+
+        if(.not. self%conform_(m2)) error stop "Cannot add nonconforming matrices"
+
+        m3 = self
+
+        do i = 1, m3%k
+
+            call m3%m(i)%plus(m2%m(i))
+
+        end do
+
+    end function
+
+    elemental function matrix_minus_matrix(self, m2) result(m3)
+
+        class(matrix), intent(in) :: self
+        class(matrix), intent(in) :: m2    
+
+        type(matrix) :: m3
+
+        integer :: i
+
+        if(.not. self%conform_(m2)) error stop "Cannot add nonconforming matrices"
+
+        m3 = self
+
+        do i = 1, m3%k
+
+            call m3%m(i)%minus(m2%m(i))
+
+        end do
+
+    end function
+
+!=============================================================================!
+!=                          Subroutine Operators                             =!
+!=============================================================================!
+
+    elemental subroutine matrix_add_matrix_sub(self, m2) 
+    !! Subroutine interface to add two matrices
+    !!@Note
+    !! This subroutine will alter the passed matrix. To use the functional operator equivalent, use \(+\)
+        class(matrix), intent(inout) :: self
+        class(matrix), intent(in) :: m2    
+
+        integer :: i
+
+        if(.not. self%conform_(m2)) error stop "Cannot add nonconforming matrices"
+
+        do i = 1, self%k
+
+            call self%m(i)%plus(m2%m(i))
+
+        end do
+
+    end subroutine
+
+    elemental subroutine matrix_minus_matrix_sub(self, m2) 
+
+        class(matrix), intent(inout) :: self
+        class(matrix), intent(in) :: m2    
+
+        integer :: i
+
+        if(.not. self%conform_(m2)) error stop "Cannot add nonconforming matrices"
+
+        do i = 1, self%k
+
+            call self%m(i)%minus(m2%m(i))
+
+        end do
+
+    end subroutine
 
 end module
