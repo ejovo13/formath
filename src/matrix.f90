@@ -52,6 +52,11 @@ contains
     procedure, public :: gram_schmidt => gram_schmidt_matrix !! Compute an otrthonormal basis for the vector space spanned by the columns of a matrix
     procedure, public :: is_orthonormal => is_orthonormal_matrix !! Check whether a matrix is orthonormal
     procedure, public :: as_array => matrix_as_array !! Return a rank2 Fortran array
+    procedure, public :: id => identity_matrix
+
+
+    generic, public :: create_hh => create_hh_vec_
+    procedure, nopass :: create_hh_vec_ => matrix_create_householder_vec
 
     procedure :: conform_ => matrix_conform
     procedure :: mult_conform => matrix_mult_conform
@@ -104,13 +109,23 @@ contains
     !! This subroutine will alter the passed matrix. To use the functional operator equivalent, use \(+\)
 
     ! generic, public :: times => times_matrix_sub_
+    generic, public :: minus => minus_matrix_sub_
+    !! Subroutine interface to add two matrices
+    !!@Note
+    !! This subroutine will alter the passed matrix. To use the functional operator equivalent, use \(+\)
+
+    generic, public :: times => times_int_sub_, times_r32_sub_, times_r64_sub_
 
 
     procedure :: hadamard_ => matrix_hadamard_matrix
     procedure :: add_matrix_ => matrix_add_matrix
     procedure :: add_matrix_sub_ => matrix_add_matrix_sub
     procedure :: minus_matrix_ => matrix_minus_matrix
+    procedure :: minus_matrix_sub_ => matrix_minus_matrix_sub
     procedure :: times_matrix_ => matrix_times_matrix
+    procedure :: times_int_sub_ => matrix_times_int_sub
+    procedure :: times_r32_sub_ => matrix_times_r32_sub
+    procedure :: times_r64_sub_ => matrix_times_r64_sub
     procedure :: times_vector_ => matrix_times_vector
 
     procedure :: from_array_int_ => matrix_from_rank2_array_int
@@ -351,9 +366,9 @@ contains
 
     end function
 
-    subroutine set_index_matrix_int(self, i, j, x) 
+    elemental subroutine set_index_matrix_int(self, i, j, x) 
 
-        class(matrix), intent(in) :: self
+        class(matrix), intent(inout) :: self
         integer, intent(in) :: i !! ith element
         integer, intent(in) :: j !! jth vector        
         integer, intent(in) :: x
@@ -362,23 +377,23 @@ contains
 
     end subroutine
 
-    subroutine set_index_matrix_r32(self, i, j, x) 
+    elemental subroutine set_index_matrix_r32(self, i, j, x) 
 
-        class(matrix), intent(in) :: self
+        class(matrix), intent(inout) :: self
         integer, intent(in) :: i !! ith element
         integer, intent(in) :: j !! jth vector        
-        real(real32) :: x
+        real(real32), intent(in) :: x
         
         call self%m(j)%set(i, x)
 
     end subroutine
 
-    subroutine set_index_matrix_r64(self, i, j, x) 
+    elemental subroutine set_index_matrix_r64(self, i, j, x) 
 
-        class(matrix), intent(in) :: self
+        class(matrix), intent(inout) :: self
         integer, intent(in) :: i !! ith element
         integer, intent(in) :: j !! jth vector        
-        real(real64) :: x
+        real(real64), intent(in) :: x
         
         call self%m(j)%set(i, x)
 
@@ -428,7 +443,7 @@ contains
 
     end function
 
-    subroutine matrix_set_col_vec(self, j, vec) 
+    elemental subroutine matrix_set_col_vec(self, j, vec) 
 
         class(matrix), intent(inout) :: self
         integer, intent(in) :: j !! Column number
@@ -438,7 +453,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_set_col_array_int(self, j, array) 
+    pure subroutine matrix_set_col_array_int(self, j, array) 
 
         class(matrix), intent(inout) :: self
         integer, intent(in) :: j !! Column number
@@ -450,7 +465,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_set_col_array_r32(self, j, array) 
+    pure subroutine matrix_set_col_array_r32(self, j, array) 
 
         class(matrix), intent(inout) :: self
         integer, intent(in) :: j !! Column number
@@ -462,7 +477,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_set_col_array_r64(self, j, array) 
+    pure subroutine matrix_set_col_array_r64(self, j, array) 
 
         class(matrix), intent(inout) :: self
         integer, intent(in) :: j !! Column number
@@ -474,7 +489,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_set_row_vec(self, i, vec) 
+    elemental subroutine matrix_set_row_vec(self, i, vec) 
 
         class(matrix), intent(inout) :: self
         integer, intent(in) :: i !! Row number
@@ -492,7 +507,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_set_row_array_int(self, i, array) 
+    pure subroutine matrix_set_row_array_int(self, i, array) 
 
         class(matrix), intent(inout) :: self
         integer, intent(in) :: i !! Row number
@@ -511,7 +526,7 @@ contains
 
     end subroutine
 
-    subroutine matrix_set_row_array_r32(self, i, array) 
+    pure subroutine matrix_set_row_array_r32(self, i, array) 
 
         class(matrix), intent(inout) :: self
         integer, intent(in) :: i !! Row number
@@ -528,7 +543,7 @@ contains
         end do
     end subroutine
 
-    subroutine matrix_set_row_array_r64(self, i, array) 
+    pure subroutine matrix_set_row_array_r64(self, i, array) 
 
         class(matrix), intent(inout) :: self
         integer, intent(in) :: i !! Row number
@@ -661,17 +676,10 @@ contains
 
         type(matrix) :: m3
 
-        integer :: i
-
         if(.not. self%conform_(m2)) error stop "Cannot add nonconforming matrices"
 
         m3 = self
-
-        do i = 1, m3%k
-
-            call m3%m(i)%plus(m2%m(i))
-
-        end do
+        call m3%m%plus(m2%m)
 
     end function
 
@@ -682,17 +690,10 @@ contains
 
         type(matrix) :: m3
 
-        integer :: i
-
         if(.not. self%conform_(m2)) error stop "Cannot add nonconforming matrices"
 
         m3 = self
-
-        do i = 1, m3%k
-
-            call m3%m(i)%minus(m2%m(i))
-
-        end do
+        call m3%m%minus(m2%m)
 
     end function
 
@@ -752,10 +753,10 @@ contains
         if(.not. self%conform_(m2)) error stop "Cannot multiply two nonconforming matrices"
 
         m3 = self
-
         call m3%m%times(m2%m) ! Use elemental function call to multiply all the columns by eachother!!!
 
     end function
+
 
 !=============================================================================!
 !=                          Subroutine Operators                             =!
@@ -768,15 +769,9 @@ contains
         class(matrix), intent(inout) :: self
         class(matrix), intent(in) :: m2    
 
-        integer :: i
-
         if(.not. self%conform_(m2)) error stop "Cannot add nonconforming matrices"
 
-        do i = 1, self%k
-
-            call self%m(i)%plus(m2%m(i))
-
-        end do
+        call self%m%plus(m2%m)
 
     end subroutine
 
@@ -785,18 +780,80 @@ contains
         class(matrix), intent(inout) :: self
         class(matrix), intent(in) :: m2    
 
-        integer :: i
-
         if(.not. self%conform_(m2)) error stop "Cannot add nonconforming matrices"
 
-        do i = 1, self%k
-
-            call self%m(i)%minus(m2%m(i))
-
-        end do
+        call self%m%minus(m2%m)
 
     end subroutine
 
+    elemental subroutine matrix_times_int_sub(self, val) 
+
+        class(matrix), intent(inout) :: self
+
+        integer, intent(in) :: val  
+
+        call self%m%times(val)    
+
+    end subroutine
+
+    elemental subroutine matrix_times_r32_sub(self, val) 
+
+        class(matrix), intent(inout) :: self
+
+        real(real32), intent(in) :: val  
+
+        call self%m%times(val)    
+
+    end subroutine
+
+    elemental subroutine matrix_times_r64_sub(self, val) 
+
+        class(matrix), intent(inout) :: self
+
+        real(real64), intent(in) :: val  
+
+        call self%m%times(val)    
+
+    end subroutine
+
+    elemental function identity_matrix(self, n) result(I_n)
+    !! Return \(I_n\)
+
+        class(matrix), intent(in) :: self
+        integer, optional, value :: n
+
+        type(matrix) :: I_n
+
+        integer :: n_, i
+
+
+        if(present(n)) then
+            n_ = n
+        else 
+            n_ = self%n
+        end if
+
+        I_n = matrix(n_, n_)
+
+        do i = 1, n_
+            call I_n%set(i,i,1)
+        end do
+
+    end function
+
+    pure function matrix_create_householder_vec(normal) result(m)
+
+        class(vector), intent(in) :: normal !! A UNIT vector that is normal to a plane of rotation
+
+        type(matrix) :: m, op
+
+        m = m%id(normal%size())
+        op = normal .outer. normal   
+        call op%times(2)     
+
+        call m%minus(op)
+
+    end function
 
 
 end module
