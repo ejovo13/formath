@@ -58,6 +58,12 @@ contains
     generic, public :: create_hh => create_hh_vec_
     procedure, nopass :: create_hh_vec_ => matrix_create_householder_vec
 
+    generic, public :: fill => fill_int_, fill_r32_, fill_r64_
+
+    procedure :: fill_int_ => matrix_fill_int
+    procedure :: fill_r32_ => matrix_fill_r32
+    procedure :: fill_r64_ => matrix_fill_r64
+
     procedure :: conform_ => matrix_conform
     procedure :: mult_conform => matrix_mult_conform
     !! Check if two matrices are conforming for matrix multiplication (The number of cols of A should match the number of rows of B)
@@ -145,7 +151,14 @@ end type
 interface matrix
 !! Construct a matrix
     procedure :: matrix_ctr_nk
+    procedure :: matrix_ctr_nk_int
+    procedure :: matrix_ctr_nk_r32
+    procedure :: matrix_ctr_nk_r64
     !! Construct a matrix by specifying its number of rows \(n\) and number of cols \(k\)
+    procedure :: matrix_ctr_matrix
+    procedure :: matrix_ctr_int
+    procedure :: matrix_ctr_r32
+    procedure :: matrix_ctr_r64
 
 
 end interface
@@ -174,19 +187,107 @@ contains
 
     end subroutine
 
-    elemental function matrix_ctr_nk(n, k) result(m)
-    !! Create a new matrix \(m_{i, j}\) by passing the number of rows (\n\) and the number of columns \(k\)
+    elemental function matrix_ctr_nk(n, k) result(A)
+    !! Create a new \(n\)-by-\(k\) matrix \(A\) by passing the number of rows \(n\) and the number of columns \(k\)
 
         integer, intent(in) :: n !! The number of rows in \(m\)
         integer, intent(in) :: k !! The number of cols in \(m\)
 
-        type(matrix) :: m 
 
-        call m%new_(n, k)
+        type(matrix) :: A
 
-
+        call A%new_(n, k)
+        call A%fill(0)
 
     end function
+
+    elemental function matrix_ctr_nk_int(n, k, val) result(A)
+    !! Create a new \(n\)-by-\(k\) matrix \(A\) by passing the number of rows \(n\) and the number of columns \(k\)
+
+        integer, intent(in) :: n !! The number of rows in \(m\)
+        integer, intent(in) :: k !! The number of cols in \(m\)
+        integer, intent(in) :: val
+
+        type(matrix) :: A
+
+        call A%new_(n, k)
+        call A%fill(val)
+
+    end function
+
+    elemental function matrix_ctr_nk_r32(n, k, val) result(A)
+    !! Create a new \(n\)-by-\(k\) matrix \(A\) by passing the number of rows \(n\) and the number of columns \(k\)
+
+        integer, intent(in) :: n !! The number of rows in \(m\)
+        integer, intent(in) :: k !! The number of cols in \(m\)
+        real(real32), intent(in) :: val
+
+        type(matrix) :: A
+
+        call A%new_(n, k)
+        call A%fill(val)
+
+    end function
+
+    elemental function matrix_ctr_nk_r64(n, k, val) result(A)
+    !! Create a new \(n\)-by-\(k\) matrix \(A\) by passing the number of rows \(n\) and the number of columns \(k\)
+
+        integer, intent(in) :: n !! The number of rows in \(m\)
+        integer, intent(in) :: k !! The number of cols in \(m\)
+        real(real64), intent(in) :: val
+
+        type(matrix) :: A
+
+        call A%new_(n, k)
+        call A%fill(val)
+
+    end function
+
+    pure function matrix_ctr_int(array) result(A)
+    !! Create a new \(n\)-by-\(k\) matrix \(A\) by passing a rank2 integer array
+
+        integer, dimension(:,:), intent(in) :: array
+
+        type(matrix) :: A
+
+        A = array
+
+    end function
+
+    pure function matrix_ctr_r32(array) result(A)
+    !! Create a new \(n\)-by-\(k\) matrix \(A\) by passing a rank2 integer array
+
+        real(real32), dimension(:,:), intent(in) :: array
+
+        type(matrix) :: A
+
+        A = array
+
+    end function
+    
+    pure function matrix_ctr_r64(array) result(A)
+    !! Create a new \(n\)-by-\(k\) matrix \(A\) by passing a rank2 integer array
+
+        real(real64), dimension(:,:), intent(in) :: array
+
+        type(matrix) :: A
+
+        A = array
+
+    end function
+
+    pure function matrix_ctr_matrix(m2) result(A)
+    !! Create a new \(n\)-by-\(k\) matrix \(A\) by passing a rank2 integer array
+
+        class(matrix), intent(in) :: m2
+
+        type(matrix) :: A
+
+        A = m2
+
+    end function  
+    
+
 
     elemental subroutine new_matrix_from_matrix(self, m2)
     !! Wipe the contents of a matrix and allocate the proper amount of space
@@ -278,6 +379,84 @@ contains
 
             self%m(i) = m%vec(i)
 
+        end do
+
+    end subroutine
+
+    elemental subroutine matrix_from_val_int(self, val)
+
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: val
+
+        if(self%m_allocated) then
+            call self%fill(val)
+        else
+            self = matrix(1,1,val)
+        end if
+
+    end subroutine
+
+    elemental subroutine matrix_from_val_r32(self, val)
+
+        class(matrix), intent(inout) :: self
+        real(real32), intent(in) :: val
+
+        if(self%m_allocated) then
+            call self%fill(val)
+        else
+            self = matrix(1,1,val)
+        end if
+
+    end subroutine
+
+    elemental subroutine matrix_from_val_r64(self, val)
+
+        class(matrix), intent(inout) :: self
+        real(real64), intent(in) :: val
+
+        if(self%m_allocated) then
+            call self%fill(val)
+        else
+            self = matrix(1,1,val)
+        end if
+
+    end subroutine
+
+    elemental subroutine matrix_fill_int(self, val)
+    ! Fill the matrix, don't ask any questions
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: val
+
+        integer :: i
+
+        do i = 1, self%k
+            self%m(i) = val
+        end do
+
+    end subroutine
+
+    elemental subroutine matrix_fill_r32(self, val)
+    ! Fill the matrix, don't ask any questions
+        class(matrix), intent(inout) :: self
+        real(real32), intent(in) :: val
+
+        integer :: i
+
+        do i = 1, self%k
+            self%m(i) = val
+        end do
+
+    end subroutine
+
+    elemental subroutine matrix_fill_r64(self, val)
+    ! Fill the matrix, don't ask any questions
+        class(matrix), intent(inout) :: self
+        real(real64), intent(in) :: val
+
+        integer :: i
+
+        do i = 1, self%k
+            self%m(i) = val
         end do
 
     end subroutine
