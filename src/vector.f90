@@ -12,13 +12,15 @@ module vector_m
 !!
 !!
 
-!! The internal representaion of a vector is an array of fixed size, pointed to by a pointer.
+! // TODO Add support for array operations
+
+!! The internal representaion of a vector is an allocatable array.
 !! This way we can use the fundamental data of an array within our specific class
 use iso_fortran_env, only: real64, real32, int32, int64
 
 implicit none
 private
-public :: print_basis, gram_schmidt, is_orthonormal, deallocate_vector_data, operator(*), operator(/)
+public :: print_basis, gram_schmidt, is_orthonormal, operator(*), operator(/)!, deallocate_vector_data
 
 real(real64), parameter :: vector_epsilon = 1d-14
 
@@ -73,10 +75,7 @@ contains
     procedure, public :: householder_transform => vector_householder_sub
     !! Rotate a passed vector \(v\) about the hyper plane described by the passed **normalized** vector \(n\)
     !!@Note
-    !! This is a subroutine that modifies the passed vector
-    
-    
-    
+    !! This is a subroutine that modifies the passed vector  
     
     procedure, public :: eye => vector_constructor_eye
     procedure, public :: is_ortho => vector_is_orthogonal
@@ -95,6 +94,7 @@ contains
     procedure :: proj_ => vector_proj_vector
     procedure :: outer_ => vector_outer_vector
     procedure :: householder_ => vector_householder
+    procedure :: householder_normal_ => vector_find_householder_normal
     procedure :: conform_ => vector_conform
     procedure :: scalar_mult_int_ => vector_times_scalar_int
     procedure :: scalar_mult_r32_ => vector_times_scalar_r32
@@ -116,7 +116,8 @@ contains
     generic, public :: operator(.inner.) => dot_
     generic, public :: operator(.outer.) => outer_
     generic, public :: operator(.proj.) => proj_
-    generic, public :: operator(.householder.) => householder_
+    generic, public :: operator(.hh.) => householder_
+    generic, public :: operator(.hhnorm.) => householder_normal_
     generic, public :: operator(*) => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_, times_vec_
     generic, public :: operator(/) => scalar_div_int_, scalar_div_r32_, scalar_div_r64_, div_vec_
     generic, public :: operator(+) => plus_
@@ -159,9 +160,26 @@ contains
 
 end type
 interface vector
-!! Construct a vector object
+!! Construct a vector object <br>
+!!@Note
+!!A vector can be instantiated from integer and real data types but the underlying data will always
+!!be stored using double precision.
+!!
+!! The following code snippet shows all of the valid ways to construct a new vector
+!!```fortran
+!!
+!!type(vector) :: v1, v2, v3, v4, v5, v6, v7, v8
+!!
+!!v1 = vector([1, 2, 3])
+!!v2 = vector([1.0, 2.0, 3.0])
+!!v3 = vector([1.0d0, 2.0d0, 3.0d0])
+!!v4 = vector(4) ! [0, 0, 0, 0]
+!!v5 = vector(5, 3) ! [3, 3, 3, 3, 3]
+!!v6 = vector(2, 2.0) ! [2, 2]
+!!v7 = vector(val=4.7d0, dim=3) ! [4.7, 4.7, 4.7]
+!!v8 = vector(v7)
+!!```
     procedure :: vector_constructor_int
-    !! Construct a 
     procedure :: vector_constructor_r32
     procedure :: vector_constructor_r64
     procedure :: vector_constructor_dim
@@ -173,19 +191,17 @@ interface vector
 end interface 
 
 interface operator(*)   
-
+!! Extend multiplication operator to allow a scalar \(\alpha\) times a vector such that 
     procedure :: int_times_vector
     procedure :: r32_times_vector
     procedure :: r64_times_vector
-
 end interface
 
 interface operator(/)
-
+!! Extend division operator to allow a scalar divided by a vector
     procedure :: int_div_vector
     procedure :: r32_div_vector
     procedure :: r64_div_vector
-
 end interface
 
 contains 
@@ -294,16 +310,27 @@ contains
     end function
 
     elemental function vector_constructor_eye(self, dim, col) result(v2)
-    !! Construct a vector \(v\) that is equal to the \(dim\)th column of the Identity matrix \(I_{dim}\)
-
+    !! Construct a vector \(v\) that is equal to the \(col\)th column of the Identity matrix \(I_{dim}\)
+    !! The \(dim\) and \(col\) parameters are both optional. If the \(dim\) parameter is absent, then take the \(col\)th
+    !! column from the identity matrix whose dimension is \(v_{dim}\). If the \(col\) parameter is missing, set its default
+    !! value to the dimension.
+    !!```fortran
+    !!type(vector) :: v1, i1, i2, i3
+    !!
+    !!v1 = vector(4, 0) ! Initialize a vector with dimension 4 and all 0 elements
+    !!
+    !!i1 = v1%eye() ! Return [0, 0, 0, 1]
+    !!i2 = v1%eye(col = 3) ! Return [0, 0, 1, 0]
+    !!i3 = v1%eye(dim=5, col=2) ! Return [0, 1, 0, 0, 0]
+    !!```
         class(vector), intent(in) :: self !! \(v\)
-        integer, intent(in), optional :: dim
-        integer, intent(in), optional :: col
+        integer, intent(in), optional :: dim !! Dimension of the Identity matrix
+        integer, intent(in), optional :: col !! Column to extract
 
         integer :: dim_
         integer :: col_
 
-        type(vector) :: v2
+        type(vector) :: v2 !! \(col\)th column of the Identity matrix \(I_{dim}\)
 
         if(present(dim)) then
             dim_ = dim
@@ -325,8 +352,8 @@ contains
     end function
 
     elemental subroutine clear_vector(self)
-    !! 
-        class(vector), intent(inout) :: self
+    !! Deallocate a vector \(v\) if it is allocated, set the dimension equal to 0
+        class(vector), intent(inout) :: self !! \(v\)
 
         if (self%allocated()) then
             call self%dealloc_()
@@ -337,9 +364,9 @@ contains
     end subroutine
 
     elemental subroutine allocate_vector_data(self, dim) 
-
-        class(vector), intent(inout) :: self
-        integer, intent(in) :: dim
+    !! Allocate the underlying array containing \(v\)'s data and set \(v\)'s dimension to \(dim\)
+        class(vector), intent(inout) :: self !! \(v\)
+        integer, intent(in) :: dim !! \(n\)
 
         integer :: ierr
 
@@ -351,8 +378,8 @@ contains
     end subroutine
 
     elemental subroutine deallocate_vector_data(self) 
-
-        class(vector), intent(inout) :: self
+    !! Deallocate the underlying array containing \(v\)'s elements
+        class(vector), intent(inout) :: self !! \(v\)
         integer :: ierr
 
         deallocate(self%v, STAT=ierr)
@@ -366,9 +393,10 @@ contains
 !=                         Assigment Functions                               =!
 !=============================================================================!
     pure subroutine vector_from_int(self, val) 
-
-        class(vector), intent(inout) :: self
-        integer, intent(in) :: val
+    !! Assign a vector \(v\) to an int value. If \(v\) is already allocated, fill the elements with \(val\). If \(v\)
+    !! is not already allocated, create a new vector of dimension 1 and set the element equal to \(val\)
+        class(vector), intent(inout) :: self !! \(v\)
+        integer, intent(in) :: val !! Value used to fill \(v\)
 
         if(self%allocated()) then
             self%v = val ! Copy the contents of array into self
@@ -379,9 +407,10 @@ contains
     end subroutine
 
     pure subroutine vector_from_r32(self, val) 
-
-        class(vector), intent(inout) :: self
-        real(real32), intent(in) :: val
+    !! Assign a vector \(v\) to single precision value. If \(v\) is already allocated, fill the elements with \(val\). If \(v\)
+    !! is not already allocated, create a new vector of dimension 1 and set the element equal to \(val\)
+        class(vector), intent(inout) :: self !! \(v\)
+        real(real32), intent(in) :: val !! Value used to fill \(v\)
 
         if(self%allocated()) then
             self%v = val ! Copy the contents of array into self
@@ -392,9 +421,10 @@ contains
     end subroutine
 
     pure subroutine vector_from_r64(self, val) 
-
-        class(vector), intent(inout) :: self
-        real(real64), intent(in) :: val
+    !! Assign a vector \(v\) to a double precision value. If \(v\) is already allocated, fill the elements with \(val\). If \(v\)
+    !! is not already allocated, create a new vector of dimension 1 and set the element equal to \(val\)
+        class(vector), intent(inout) :: self !! \(v\)
+        real(real64), intent(in) :: val !! Value used to fill \(v\)
 
         if(self%allocated()) then
             self%v = val ! Copy the contents of array into self
@@ -405,7 +435,10 @@ contains
     end subroutine
 
     pure subroutine vector_from_array_int(self, array) 
-
+    !! Assign a vector \(v\) to an array of integers. 
+    !! @Note
+    !! The underlying data is stored with double precision floating values, but a vector can be created from 
+    !! any numeric type
         class(vector), intent(inout) :: self
         integer, dimension(:), intent(in) :: array
 
@@ -415,7 +448,7 @@ contains
     end subroutine
 
     pure subroutine vector_from_array_r32(self, array) 
-
+    !! Assign a vector \(v\) to an array of integers. 
         class(vector), intent(inout) :: self
         real(real32), dimension(:), intent(in) :: array
 
@@ -425,7 +458,7 @@ contains
     end subroutine
 
     pure subroutine vector_from_array_r64(self, array) 
-
+    !! Assign a vector \(v\) to an array of integers. 
         class(vector), intent(inout) :: self
         real(real64), dimension(:), intent(in) :: array
 
@@ -435,9 +468,9 @@ contains
     end subroutine
 
     elemental subroutine vector_from_vector(self, v1)
-
-        class(vector), intent(inout) :: self
-        class(vector), intent(in) :: v1
+    !! Copy the elements of a vector \(v_1\) into \(v\)
+        class(vector), intent(inout) :: self !! \(v\)
+        class(vector), intent(in) :: v1 !! \(v_1\)
 
         self%dim = v1%dim
         self%v = v1%v ! Copy the array contents
@@ -449,23 +482,23 @@ contains
 !=============================================================================!
 
     elemental function vector_conform(self, v2) result(bool)
-
+    !! Check if two vectors are conforming (have the same dimension)
         class(vector), intent(in) :: self
         class(vector), intent(in) :: v2
 
-        logical :: bool
+        logical :: bool !! True when self%dim == v2%dim
 
         bool = (self%dim == v2%dim)
 
     end function
 
     elemental function vector_is_orthogonal(self, v2, eps) result(bool)
+    !! Check if two vectors are orthogonal within a certain tolerance.
+        class(vector), intent(in) :: self !! \(v\)
+        class(vector), intent(in) :: v2 !! \(v_2\)
+        real(real64), intent(in), optional :: eps !! \(\epsilon\)
 
-        class(vector), intent(in) :: self
-        class(vector), intent(in) :: v2
-        real(real64), intent(in), optional :: eps
-
-        logical :: bool
+        logical :: bool !! True when \(\abs{\langle v, v2 \rangle} < \epsilon \)
 
         if(present(eps)) then
 
@@ -480,7 +513,7 @@ contains
     end function
 
     elemental function vector_is_normal(self) result(bool)
-
+    !! Check if a vector is normal. A vector is normal if it's length is equal to 1 (within a tolerance)
         class(vector), intent(in) :: self
         logical :: bool
 
@@ -493,7 +526,7 @@ contains
     end function
 
     elemental function vector_is_allocated(self) result(bool)
-
+    !! Check if a vector is allocated
         class(vector), intent(in) :: self
 
         logical :: bool
@@ -507,8 +540,8 @@ contains
     end function
 
     elemental function vector_size(self) result(n)
-
-        class(vector), intent(in) :: self
+    !! Return the number of elements allocated for \(v\)
+        class(vector), intent(in) :: self !! \(v\)
         integer :: n
 
         n = self%dim
@@ -768,6 +801,20 @@ contains
         type(vector) :: rotated
 
         rotated = self - (2 * (self .inner. normal) * normal)
+
+    end function
+
+    function vector_find_householder_normal(self, destination) result(normal)
+
+        class(vector), intent(in) :: self
+        class(vector), intent(in) :: destination
+
+        type(vector) :: normal
+
+        print *, "Destination set as: ", destination%data()
+
+        normal = self - destination
+        call normal%normalize()
 
     end function
 
