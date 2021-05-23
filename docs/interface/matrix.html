@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p> 3.8% of total for procedures.</p>Including implementation: 9 statements, 11.5% of total for procedures.">3 statements</a>
+    title="<p>26.3% of total for procedures.</p>Including implementation: 61 statements, 160.5% of total for procedures.">10 statements</a>
      </li> 
      
      
@@ -194,6 +194,20 @@
       
       <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk">matrix_ctr_nk</a>
       
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk_int">matrix_ctr_nk_int</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk_r32">matrix_ctr_nk_r32</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk_r64">matrix_ctr_nk_r64</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_matrix">matrix_ctr_matrix</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_int">matrix_ctr_int</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_r32">matrix_ctr_r32</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_r64">matrix_ctr_r64</a>
+      
     </div>
   </div>
 </div>
@@ -243,6 +257,20 @@
       
       <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk">matrix_ctr_nk</a>
       
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk_int">matrix_ctr_nk_int</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk_r32">matrix_ctr_nk_r32</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk_r64">matrix_ctr_nk_r64</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_matrix">matrix_ctr_matrix</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_int">matrix_ctr_int</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_r32">matrix_ctr_r32</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_r64">matrix_ctr_r64</a>
+      
     </div>
   </div>
 </div>
@@ -263,7 +291,7 @@
     
   <div class="panel panel-default">
   <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_nk"></span><h3>
-private elemental function matrix_ctr_nk(n, k) result(m)
+private elemental function matrix_ctr_nk(n, k) result(A)
     
     
    
@@ -274,7 +302,7 @@ private elemental function matrix_ctr_nk(n, k) result(m)
 
 
 
-<p>Create a new matrix <script type="math/tex">m_{i, j}</script> by passing the number of rows (\n) and the number of columns <script type="math/tex">k</script>
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing the number of rows <script type="math/tex">n</script> and the number of columns <script type="math/tex">k</script>
 </p>
     
     <h4>Arguments</h4>
@@ -319,6 +347,553 @@ private elemental function matrix_ctr_nk(n, k) result(m)
   <td></td><td>::</td>
   <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
 </p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_nk_int"></span><h3>
+private elemental function matrix_ctr_nk_int(n, k, val) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing the number of rows <script type="math/tex">n</script> and the number of columns <script type="math/tex">k</script>
+</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td><p>The number of rows in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_nk_r32"></span><h3>
+private elemental function matrix_ctr_nk_r32(n, k, val) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing the number of rows <script type="math/tex">n</script> and the number of columns <script type="math/tex">k</script>
+</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td><p>The number of rows in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_nk_r64"></span><h3>
+private elemental function matrix_ctr_nk_r64(n, k, val) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing the number of rows <script type="math/tex">n</script> and the number of columns <script type="math/tex">k</script>
+</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td><p>The number of rows in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_matrix"></span><h3>
+private pure function matrix_ctr_matrix(m2) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing a rank2 integer array</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>m2</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_int"></span><h3>
+private pure function matrix_ctr_int(array) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing a rank2 integer array</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:,:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_r32"></span><h3>
+private pure function matrix_ctr_r32(array) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing a rank2 integer array</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:,:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_r64"></span><h3>
+private pure function matrix_ctr_r64(array) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing a rank2 integer array</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:,:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
   
 </tr>
 

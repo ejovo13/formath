@@ -42,7 +42,7 @@ implicit none
     res = v2 / 10
     print*, "v2: ", v2%data(), " /10 = ", res%data()
 
-    res = v1 * v2
+    res = v1 .o. v2
     print*, "v1: ", v1%data(), " * ", v2%data(), " = ", res%data()
 
     res = v1 / v2

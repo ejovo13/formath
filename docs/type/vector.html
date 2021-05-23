@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>63.2% of total for derived types.</p>Including implementation: 806 statements, 58.3% of total for derived types.">86 statements</a>
+    title="<p>55.4% of total for derived types.</p>Including implementation: 815 statements, 53.2% of total for derived types.">87 statements</a>
      </li> 
      
      
@@ -275,11 +275,13 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2A%29~2">operator(*)</a>
       
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.o.%29">operator(.o.)</a>
+      
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28SLASH%29">operator(/)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2B%29~2">operator(+)</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28-%29">operator(-)</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28-%29~2">operator(-)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-times">times</a>
       
@@ -289,7 +291,7 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-plus~2">plus</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-minus">minus</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-minus~2">minus</a>
       
     </div>
   </div>
@@ -423,11 +425,13 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2A%29~2">operator(*)</a>
       
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28.o.%29">operator(.o.)</a>
+      
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28SLASH%29">operator(/)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28%2B%29~2">operator(+)</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28-%29">operator(-)</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-operator%28-%29~2">operator(-)</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-times">times</a>
       
@@ -437,7 +441,7 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-plus~2">plus</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-minus">minus</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-minus~2">minus</a>
       
     </div>
   </div>
@@ -4361,7 +4365,7 @@ private function vector_find_householder_normal(self, destination) result(normal
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2A%29~2"></span><h3>generic, public :: <strong>operator(*)</strong>  => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_, times_vec_ 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2A%29~2"></span><h3>generic, public :: <strong>operator(*)</strong>  => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_ 
     
   </h3></div>
   
@@ -4607,13 +4611,25 @@ private elemental function vector_times_scalar_r64(self, scalar) result(v2)
       
       </li>
     
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28.o.%29"></span><h3>generic, public :: <strong>operator(.o.)</strong>  => hadamard_vec_ 
+    
+  </h3></div>
+  
+  <ul class="list-group">
+    
       <li class="list-group-item">
       
          
             
     
     <h3>
-private elemental function vector_times_vector(self, v2) result(v3)
+private elemental function vector_hadamard_vector(self, v2) result(v3)
     
     
    
@@ -5105,7 +5121,7 @@ private elemental function vector_plus_vector(self, v2) result(v3)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28-%29"></span><h3>generic, public :: <strong>operator(-)</strong>  => minus_, unary_minus_ 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28-%29~2"></span><h3>generic, public :: <strong>operator(-)</strong>  => minus_, unary_minus_ 
     
   </h3></div>
   
@@ -6001,7 +6017,7 @@ private elemental subroutine vector_plus_vector_sub(self, v2)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-minus"></span><h3>generic, public :: <strong>minus</strong>  => minus_vector_sub_ 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-minus~2"></span><h3>generic, public :: <strong>minus</strong>  => minus_vector_sub_ 
     
   </h3></div>
   

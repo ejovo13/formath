@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>36.8% of total for derived types.</p>Including implementation: 577 statements, 41.7% of total for derived types.">53 statements</a>
+    title="<p>44.6% of total for derived types.</p>Including implementation: 717 statements, 46.8% of total for derived types.">68 statements</a>
      </li> 
      
      
@@ -217,6 +217,12 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array">as_array</a>
       
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-id">id</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-create_hh">create_hh</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-fill">fill</a>
+      
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-set~2">set</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-assignment%28%3D%29~2">assignment(=)</a>
@@ -247,11 +253,17 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2B%29">operator(+)</a>
       
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28-%29">operator(-)</a>
+      
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2A%29">operator(*)</a>
       
-      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28.o.%29">operator(.o.)</a>
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28.o.%29~2">operator(.o.)</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-plus">plus</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-minus">minus</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-times~2">times</a>
       
     </div>
   </div>
@@ -327,6 +339,12 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array">as_array</a>
       
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-id">id</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-create_hh">create_hh</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-fill">fill</a>
+      
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-set~2">set</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-assignment%28%3D%29~2">assignment(=)</a>
@@ -357,11 +375,17 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2B%29">operator(+)</a>
       
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28-%29">operator(-)</a>
+      
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2A%29">operator(*)</a>
       
-      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28.o.%29">operator(.o.)</a>
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28.o.%29~2">operator(.o.)</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-plus">plus</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-minus">minus</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-times~2">times</a>
       
     </div>
   </div>
@@ -399,7 +423,7 @@
     
     
     <h3>
-private elemental function matrix_ctr_nk(n, k) result(m)
+private elemental function matrix_ctr_nk(n, k) result(A)
     
     
    
@@ -408,7 +432,7 @@ private elemental function matrix_ctr_nk(n, k) result(m)
 
 
 
-<p>Create a new matrix <script type="math/tex">m_{i, j}</script> by passing the number of rows (\n) and the number of columns <script type="math/tex">k</script>
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing the number of rows <script type="math/tex">n</script> and the number of columns <script type="math/tex">k</script>
 </p>
     
     <h4>Arguments</h4>
@@ -453,6 +477,532 @@ private elemental function matrix_ctr_nk(n, k) result(m)
   <td></td><td>::</td>
   <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
 </p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function matrix_ctr_nk_int(n, k, val) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing the number of rows <script type="math/tex">n</script> and the number of columns <script type="math/tex">k</script>
+</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td><p>The number of rows in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function matrix_ctr_nk_r32(n, k, val) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing the number of rows <script type="math/tex">n</script> and the number of columns <script type="math/tex">k</script>
+</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td><p>The number of rows in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function matrix_ctr_nk_r64(n, k, val) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing the number of rows <script type="math/tex">n</script> and the number of columns <script type="math/tex">k</script>
+</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td><p>The number of rows in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private pure function matrix_ctr_matrix(m2) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing a rank2 integer array</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>m2</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private pure function matrix_ctr_int(array) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing a rank2 integer array</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:,:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private pure function matrix_ctr_r32(array) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing a rank2 integer array</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:,:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private pure function matrix_ctr_r64(array) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Create a new <script type="math/tex">n</script>-by-<script type="math/tex">k</script> matrix <script type="math/tex">A</script> by passing a rank2 integer array</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:,:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
   
 </tr>
 
@@ -1262,6 +1812,385 @@ private pure function matrix_as_array(self) result(array)
     
      
 <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-id"></span><h3>procedure, public :: <strong>id</strong>  => identity_matrix 
+    
+  </h3></div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+        
+          
+    
+    <h3>
+private elemental function identity_matrix(self, n) result(I_n)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Return <script type="math/tex">I_n</script>
+</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td></td>
+  <td>optional</td>
+  
+  <td>value</td><td>::</td>
+  <td><strong>n</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+        
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-create_hh"></span><h3>generic, public :: <strong>create_hh</strong>  => create_hh_vec_ 
+    
+  </h3></div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private pure function matrix_create_householder_vec(normal) result(m)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>normal</strong></td><td><p>A UNIT vector that is normal to a plane of rotation</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-fill"></span><h3>generic, public :: <strong>fill</strong>  => fill_int_, fill_r32_, fill_r64_ 
+    
+  </h3></div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental subroutine matrix_fill_int(self, val)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental subroutine matrix_fill_r32(self, val)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental subroutine matrix_fill_r64(self, val)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
   <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-set~2"></span><h3>generic, public :: <strong>set</strong>  => set_int_, set_r32_, set_r64_ 
     
   </h3></div>
@@ -1281,7 +2210,7 @@ private pure function matrix_as_array(self) result(array)
             
     
     <h3>
-private subroutine set_index_matrix_int(self, i, j, x)
+private elemental subroutine set_index_matrix_int(self, i, j, x)
     
     
    
@@ -1308,7 +2237,7 @@ private subroutine set_index_matrix_int(self, i, j, x)
 <tr>
   
   <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
-  <td>intent(in)</td>
+  <td>intent(inout)</td>
   <td></td>
   
   <td></td><td>::</td>
@@ -1378,7 +2307,7 @@ private subroutine set_index_matrix_int(self, i, j, x)
             
     
     <h3>
-private subroutine set_index_matrix_r32(self, i, j, x)
+private elemental subroutine set_index_matrix_r32(self, i, j, x)
     
     
    
@@ -1405,7 +2334,7 @@ private subroutine set_index_matrix_r32(self, i, j, x)
 <tr>
   
   <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
-  <td>intent(in)</td>
+  <td>intent(inout)</td>
   <td></td>
   
   <td></td><td>::</td>
@@ -1449,8 +2378,8 @@ private subroutine set_index_matrix_r32(self, i, j, x)
   
 <tr>
   
-  <td><span class="anchor" ></span>real(kind=real32)</td>
-  <td></td>
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in)</td>
   <td></td>
   
   <td></td><td>::</td>
@@ -1475,7 +2404,7 @@ private subroutine set_index_matrix_r32(self, i, j, x)
             
     
     <h3>
-private subroutine set_index_matrix_r64(self, i, j, x)
+private elemental subroutine set_index_matrix_r64(self, i, j, x)
     
     
    
@@ -1502,7 +2431,7 @@ private subroutine set_index_matrix_r64(self, i, j, x)
 <tr>
   
   <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
-  <td>intent(in)</td>
+  <td>intent(inout)</td>
   <td></td>
   
   <td></td><td>::</td>
@@ -1546,8 +2475,8 @@ private subroutine set_index_matrix_r64(self, i, j, x)
   
 <tr>
   
-  <td><span class="anchor" ></span>real(kind=real64)</td>
-  <td></td>
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in)</td>
   <td></td>
   
   <td></td><td>::</td>
@@ -2061,7 +2990,7 @@ private elemental function matrix_get_col(self, j) result(col_j)
             
     
     <h3>
-private subroutine matrix_set_row_array_int(self, i, array)
+private pure subroutine matrix_set_row_array_int(self, i, array)
     
     
    
@@ -2143,7 +3072,7 @@ private subroutine matrix_set_row_array_int(self, i, array)
             
     
     <h3>
-private subroutine matrix_set_row_array_r32(self, i, array)
+private pure subroutine matrix_set_row_array_r32(self, i, array)
     
     
    
@@ -2225,7 +3154,7 @@ private subroutine matrix_set_row_array_r32(self, i, array)
             
     
     <h3>
-private subroutine matrix_set_row_array_r64(self, i, array)
+private pure subroutine matrix_set_row_array_r64(self, i, array)
     
     
    
@@ -2307,7 +3236,7 @@ private subroutine matrix_set_row_array_r64(self, i, array)
             
     
     <h3>
-private subroutine matrix_set_row_vec(self, i, vec)
+private elemental subroutine matrix_set_row_vec(self, i, vec)
     
     
    
@@ -2401,7 +3330,7 @@ private subroutine matrix_set_row_vec(self, i, vec)
             
     
     <h3>
-private subroutine matrix_set_col_array_int(self, j, array)
+private pure subroutine matrix_set_col_array_int(self, j, array)
     
     
    
@@ -2483,7 +3412,7 @@ private subroutine matrix_set_col_array_int(self, j, array)
             
     
     <h3>
-private subroutine matrix_set_col_array_r32(self, j, array)
+private pure subroutine matrix_set_col_array_r32(self, j, array)
     
     
    
@@ -2565,7 +3494,7 @@ private subroutine matrix_set_col_array_r32(self, j, array)
             
     
     <h3>
-private subroutine matrix_set_col_array_r64(self, j, array)
+private pure subroutine matrix_set_col_array_r64(self, j, array)
     
     
    
@@ -2647,7 +3576,7 @@ private subroutine matrix_set_col_array_r64(self, j, array)
             
     
     <h3>
-private subroutine matrix_set_col_vec(self, j, vec)
+private elemental subroutine matrix_set_col_vec(self, j, vec)
     
     
    
@@ -2741,7 +3670,7 @@ private subroutine matrix_set_col_vec(self, j, vec)
           
     
     <h3>
-private subroutine matrix_set_row_array_int(self, i, array)
+private pure subroutine matrix_set_row_array_int(self, i, array)
     
     
    
@@ -2835,7 +3764,7 @@ private subroutine matrix_set_row_array_int(self, i, array)
           
     
     <h3>
-private subroutine matrix_set_row_array_r32(self, i, array)
+private pure subroutine matrix_set_row_array_r32(self, i, array)
     
     
    
@@ -2929,7 +3858,7 @@ private subroutine matrix_set_row_array_r32(self, i, array)
           
     
     <h3>
-private subroutine matrix_set_row_array_r64(self, i, array)
+private pure subroutine matrix_set_row_array_r64(self, i, array)
     
     
    
@@ -3023,7 +3952,7 @@ private subroutine matrix_set_row_array_r64(self, i, array)
           
     
     <h3>
-private subroutine matrix_set_row_vec(self, i, vec)
+private elemental subroutine matrix_set_row_vec(self, i, vec)
     
     
    
@@ -3117,7 +4046,7 @@ private subroutine matrix_set_row_vec(self, i, vec)
           
     
     <h3>
-private subroutine matrix_set_col_array_int(self, j, array)
+private pure subroutine matrix_set_col_array_int(self, j, array)
     
     
    
@@ -3211,7 +4140,7 @@ private subroutine matrix_set_col_array_int(self, j, array)
           
     
     <h3>
-private subroutine matrix_set_col_array_r32(self, j, array)
+private pure subroutine matrix_set_col_array_r32(self, j, array)
     
     
    
@@ -3305,7 +4234,7 @@ private subroutine matrix_set_col_array_r32(self, j, array)
           
     
     <h3>
-private subroutine matrix_set_col_array_r64(self, j, array)
+private pure subroutine matrix_set_col_array_r64(self, j, array)
     
     
    
@@ -3399,7 +4328,7 @@ private subroutine matrix_set_col_array_r64(self, j, array)
           
     
     <h3>
-private subroutine matrix_set_col_vec(self, j, vec)
+private elemental subroutine matrix_set_col_vec(self, j, vec)
     
     
    
@@ -3503,6 +4432,103 @@ private subroutine matrix_set_col_vec(self, j, vec)
     
     <h3>
 private elemental function matrix_add_matrix(self, m2) result(m3)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>m2</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28-%29"></span><h3>generic, public :: <strong>operator(-)</strong>  => minus_matrix_ 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Operator interface to subtract a matrix
+</p><div class="alert alert-info" role="alert"><h4>Note</h4><p>As an operator, this procedure is a <strong>function</strong> which return a new matrix. 
+ use the functional operator equivalent, use [[]]</p></div>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental function matrix_minus_matrix(self, m2) result(m3)
     
     
    
@@ -3751,7 +4777,7 @@ private function matrix_times_vector(self, v) result(v2)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28.o.%29"></span><h3>generic, public :: <strong>operator(.o.)</strong>  => hadamard_ 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28.o.%29~2"></span><h3>generic, public :: <strong>operator(.o.)</strong>  => hadamard_ 
     
   </h3></div>
   
@@ -3763,7 +4789,7 @@ private function matrix_times_vector(self, v) result(v2)
             
     
     <h3>
-private pure function matrix_hadamard_matrix(self, m2) result(m3)
+private elemental function matrix_hadamard_matrix(self, m2) result(m3)
     
     
    
@@ -3911,6 +4937,306 @@ private elemental subroutine matrix_add_matrix_sub(self, m2)
   
   <td></td><td>::</td>
   <td><strong>m2</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-minus"></span><h3>generic, public :: <strong>minus</strong>  => minus_matrix_sub_ 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Subroutine interface to add two matrices
+</p><div class="alert alert-info" role="alert"><h4>Note</h4><p>This subroutine will alter the passed matrix. To use the functional operator equivalent, use <script type="math/tex">+</script></p></div>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental subroutine matrix_minus_matrix_sub(self, m2)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>m2</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-times~2"></span><h3>generic, public :: <strong>times</strong>  => times_int_sub_, times_r32_sub_, times_r64_sub_ 
+    
+  </h3></div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental subroutine matrix_times_int_sub(self, val)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental subroutine matrix_times_r32_sub(self, val)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental subroutine matrix_times_r64_sub(self, val)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td>
   
 </tr>
 
