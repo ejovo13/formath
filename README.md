@@ -10,6 +10,12 @@ A Matrix object allows certain Linear Algebra algorithms to be called from and o
 
 Formath has no dependencies and can be built using cmake. Formath was succesfully built on my linux machine when using gfortran.
 
+During the build process, `bin`, `lib`, and `modules` will get built.
+
 # Documentation
 
 Complete documentation generated with [FORD](https://github.com/Fortran-FOSS-Programmers/ford) is hosted [here](https://ejovo13.github.io/formath/).
+
+# Tests
+
+After having build Formath with cmake, call make 
