@@ -84,11 +84,17 @@ contains
     !!@Note
     !! As an operator, this procedure is a **function** which return a new matrix. 
     !! use the functional operator equivalent, use [[]]
+    generic, public :: operator(-) => minus_matrix_
+    !! Operator interface to subtract a matrix
+    !!@Note
+    !! As an operator, this procedure is a **function** which return a new matrix. 
+    !! use the functional operator equivalent, use [[]]
     generic, public :: operator(*) => times_matrix_, times_vector_
     !! Operator interface to multiply two matrices
     !!@Note
     !! As an operator, this procedure is a **function** which return a new matrix. 
     !! use the functional operator equivalent, use [[]]
+    generic, public :: operator(.o.) => hadamard_
 
 
     !=================Operator Subroutines===============!
@@ -100,8 +106,10 @@ contains
     ! generic, public :: times => times_matrix_sub_
 
 
+    procedure :: hadamard_ => matrix_hadamard_matrix
     procedure :: add_matrix_ => matrix_add_matrix
     procedure :: add_matrix_sub_ => matrix_add_matrix_sub
+    procedure :: minus_matrix_ => matrix_minus_matrix
     procedure :: times_matrix_ => matrix_times_matrix
     procedure :: times_vector_ => matrix_times_vector
 
@@ -731,6 +739,21 @@ contains
             call v2%set(i, self%get_row(i) .dot. v)
 
         end do
+
+    end function
+
+    elemental function matrix_hadamard_matrix(self, m2) result(m3)
+
+        class(matrix), intent(in) :: self
+        class(matrix), intent(in) :: m2
+
+        type(matrix) :: m3
+
+        if(.not. self%conform_(m2)) error stop "Cannot multiply two nonconforming matrices"
+
+        m3 = self
+
+        call m3%m%times(m2%m) ! Use elemental function call to multiply all the columns by eachother!!!
 
     end function
 
