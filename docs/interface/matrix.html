@@ -10,7 +10,7 @@
     <meta name="author" content="Evan Voyles" >
     <link rel="icon" href="../favicon.png">
 
-    <title>operator(/) &ndash; Fortran Program</title>
+    <title>matrix &ndash; Fortran Program</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -112,7 +112,7 @@
     
   
   <div class="row">
-    <h1>operator(/)
+    <h1>matrix
    <small>Interface</small>
     
     </h1>
@@ -130,24 +130,24 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p> 6.4% of total for procedures.</p>Including implementation: 23 statements, 29.5% of total for procedures.">5 statements</a>
+    title="<p> 3.8% of total for procedures.</p>Including implementation: 9 statements, 11.5% of total for procedures.">3 statements</a>
      </li> 
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/vector.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/matrix.f90"> Source File</a></li>
      
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
     
-     <li><a href='../sourcefile/vector.f90.html'>vector.f90</a></li>
+     <li><a href='../sourcefile/matrix.f90.html'>matrix.f90</a></li>
     
-     <li><a href='../module/vector_m.html'>vector_m</a></li>
+     <li><a href='../module/matrix_m.html'>matrix_m</a></li>
     
   
-     <li class="active">operator(/)</li>
+     <li class="active">matrix</li>
   </ol>
 </div>
 </div>
@@ -192,11 +192,7 @@
   <div id="modprocs-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-int_div_vector">int_div_vector</a>
-      
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-r32_div_vector">r32_div_vector</a>
-      
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-r64_div_vector">r64_div_vector</a>
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk">matrix_ctr_nk</a>
       
     </div>
   </div>
@@ -210,8 +206,8 @@
     </div>
     
     <div class="col-md-9" id='text'>
-      <h2>public interface operator(/)</h2>
-   <p>Extend division operator to allow a scalar divided by a vector</p>
+      <h2>public interface matrix</h2>
+   <p>Construct a matrix</p>
      
      
     <br>
@@ -245,11 +241,7 @@
   <div id="modprocs-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-int_div_vector">int_div_vector</a>
-      
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-r32_div_vector">r32_div_vector</a>
-      
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-r64_div_vector">r64_div_vector</a>
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_nk">matrix_ctr_nk</a>
       
     </div>
   </div>
@@ -270,8 +262,8 @@
    
     
   <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="proc-int_div_vector"></span><h3>
-private elemental function int_div_vector(scalar, vec) result(v2)
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_nk"></span><h3>
+private elemental function matrix_ctr_nk(n, k) result(m)
     
     
    
@@ -279,6 +271,11 @@ private elemental function int_div_vector(scalar, vec) result(v2)
   <div class="panel-body">
        
     
+
+
+
+<p>Create a new matrix <script type="math/tex">m_{i, j}</script> by passing the number of rows (\n) and the number of columns <script type="math/tex">k</script>
+</p>
     
     <h4>Arguments</h4>
     
@@ -304,7 +301,8 @@ private elemental function int_div_vector(scalar, vec) result(v2)
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>scalar</strong></td><td></td>
+  <td><strong>n</strong></td><td><p>The number of rows in <script type="math/tex">m</script>
+</p></td>
   
 </tr>
 
@@ -314,12 +312,13 @@ private elemental function int_div_vector(scalar, vec) result(v2)
   
 <tr>
   
-  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td><span class="anchor" ></span>integer,</td>
   <td>intent(in)</td>
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>vec</strong></td><td></td>
+  <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
+</p></td>
   
 </tr>
 
@@ -334,157 +333,7 @@ private elemental function int_div_vector(scalar, vec) result(v2)
   
   
   
-     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
-  </small></h4>
-  
-    
-
-  </div>
-  </div>
-
-   
-    
-  <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="proc-r32_div_vector"></span><h3>
-private elemental function r32_div_vector(scalar, vec) result(v2)
-    
-    
-   
-</h3></div>
-  <div class="panel-body">
-       
-    
-    
-    <h4>Arguments</h4>
-    
-      
-      
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>real(kind=real32),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>scalar</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>vec</strong></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-      
-    
-    
-
-  
-  
-  
-  
-     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
-  </small></h4>
-  
-    
-
-  </div>
-  </div>
-
-   
-    
-  <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="proc-r64_div_vector"></span><h3>
-private elemental function r64_div_vector(scalar, vec) result(v2)
-    
-    
-   
-</h3></div>
-  <div class="panel-body">
-       
-    
-    
-    <h4>Arguments</h4>
-    
-      
-      
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>real(kind=real64),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>scalar</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>vec</strong></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-      
-    
-    
-
-  
-  
-  
-  
-     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
   </small></h4>
   
     

@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="27.3% of total for modules and submodules.">263 statements</a>
+    title="36.9% of total for modules and submodules.">411 statements</a>
      </li> 
      
      
@@ -173,6 +173,18 @@
 
 
 
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#inters-0">Interfaces</a></h3></div>
+  <div id="inters-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/matrix_m.html#interface-matrix">matrix</a>
+      
+    </div>
+  </div>
+</div>
 
 
 
@@ -269,6 +281,18 @@
 
 
 
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#inters-1">Interfaces</a></h3></div>
+  <div id="inters-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/matrix_m.html#interface-matrix">matrix</a>
+      
+    </div>
+  </div>
+</div>
+
+
 
 
 <div class="panel panel-primary">
@@ -303,6 +327,111 @@
     
     
     
+    <section>
+   <h2>Interfaces</h2>
+   
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="interface-matrix"></span><h3>public interface <a href='../interface/matrix.html'>matrix</a>
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+    <p>Construct a matrix</p>
+  </div>
+  
+  <ul class="list-group">
+  
+  
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private elemental function matrix_ctr_nk(n, k) result(m)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Create a new matrix <script type="math/tex">m_{i, j}</script> by passing the number of rows (\n) and the number of columns <script type="math/tex">k</script>
+</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td><p>The number of rows in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td><p>The number of cols in <script type="math/tex">m</script>
+</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+  
+  </ul>
+</div>
+
+    
+    </section>
+  <br>
+    
 
     
     
@@ -318,6 +447,23 @@
   <div class="panel-body">
     
      
+     
+     <h4>Constructor</h4>
+       
+         <p>Construct a matrix</p>
+       
+       <table class="table table-striped varlist">
+      <tbody>
+        
+             
+             
+             
+             <tr><td>private elemental function <strong>matrix_ctr_nk</strong>(n, k)</td><td><p>Create a new matrix <script type="math/tex">m_{i, j}</script> by passing the number of rows (\n) and the number of columns <script type="math/tex">k</script>
+</p></td></tr>
+             
+        
+       </tbody>
+       </table>
      
           
      
@@ -355,9 +501,52 @@
        <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-assignment%28%3D%29~2'>assignment(=)</a></strong>  => from_array_int_, from_array_r32_, from_array_r64_, from_matrix </td>
        <td><p>Assign the contents of a matrix from a rank2 Fortran array</p></td></tr>
       
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-get_row'>get_row</a></strong>  => matrix_get_row </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-get_col'>get_col</a></strong>  => matrix_get_col </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-set_row'>set_row</a></strong>  => set_row_int_, set_row_r32_, set_row_r64_, set_row_vec_ </td>
+       <td></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-set_col'>set_col</a></strong>  => set_col_int_, set_col_r32_, set_col_r64_, set_col_vec_ </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-set_row_int_'>set_row_int_</a></strong>  => matrix_set_row_array_int </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-set_row_r32_'>set_row_r32_</a></strong>  => matrix_set_row_array_r32 </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-set_row_r64_'>set_row_r64_</a></strong>  => matrix_set_row_array_r64 </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-set_row_vec_'>set_row_vec_</a></strong>  => matrix_set_row_vec </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-set_col_int_'>set_col_int_</a></strong>  => matrix_set_col_array_int </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-set_col_r32_'>set_col_r32_</a></strong>  => matrix_set_col_array_r32 </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-set_col_r64_'>set_col_r64_</a></strong>  => matrix_set_col_array_r64 </td>
+       <td></td></tr>
+      
+       <tr><td>procedure, public :: <strong><a href='../type/matrix.html#boundprocedure-set_col_vec_'>set_col_vec_</a></strong>  => matrix_set_col_vec </td>
+       <td></td></tr>
+      
        <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-operator%28%2B%29'>operator(+)</a></strong>  => add_matrix_ </td>
        <td><p>Operator interface to add two matrices
 </p><a href="../type/matrix.html#boundprocedure-operator%28%2B%29" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-operator%28%2A%29'>operator(*)</a></strong>  => times_matrix_, times_vector_ </td>
+       <td><p>Operator interface to multiply two matrices
+</p><a href="../type/matrix.html#boundprocedure-operator%28%2A%29" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-operator%28.o.%29'>operator(.o.)</a></strong>  => hadamard_ </td>
+       <td></td></tr>
       
        <tr><td>generic, public :: <strong><a href='../type/matrix.html#boundprocedure-plus'>plus</a></strong>  => add_matrix_sub_ </td>
        <td><p>Subroutine interface to add two matrices

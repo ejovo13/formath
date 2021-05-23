@@ -10,7 +10,7 @@
     <meta name="author" content="Evan Voyles" >
     <link rel="icon" href="../favicon.png">
 
-    <title>operator(/) &ndash; Fortran Program</title>
+    <title>mat_subop_test &ndash; Fortran Program</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -112,8 +112,8 @@
     
   
   <div class="row">
-    <h1>operator(/)
-   <small>Interface</small>
+    <h1>mat_subop_test
+    <small>Program</small>
     
     </h1>
     
@@ -130,24 +130,22 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p> 6.4% of total for procedures.</p>Including implementation: 23 statements, 29.5% of total for procedures.">5 statements</a>
+    title=" 9.0% of total for programs.">25 statements</a>
      </li> 
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/vector.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/mat_oper_test.f90"> Source File</a></li>
      
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
     
-     <li><a href='../sourcefile/vector.f90.html'>vector.f90</a></li>
-    
-     <li><a href='../module/vector_m.html'>vector_m</a></li>
+     <li><a href='../sourcefile/mat_oper_test.f90.html'>mat_oper_test.f90</a></li>
     
   
-     <li class="active">operator(/)</li>
+     <li class="active">mat_subop_test</li>
   </ol>
 </div>
 </div>
@@ -162,7 +160,7 @@
   
   <div class="row">
     <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
-      
+    
 <div id="sidebar">
   
 <h3>Contents</h3>
@@ -170,37 +168,43 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="panel panel-primary">
-  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#modprocs-0">Module Procedures</a></h3></div>
-  <div id="modprocs-0" class="panel-collapse collapse">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-0">Variables</a></h3></div>
+  <div id="vars-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-int_div_vector">int_div_vector</a>
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-m1">m1</a>
       
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-r32_div_vector">r32_div_vector</a>
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-m2">m2</a>
       
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-r64_div_vector">r64_div_vector</a>
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-m3">m3</a>
+      
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-m4">m4</a>
+      
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-v1">v1</a>
+      
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-v2">v2</a>
       
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -210,11 +214,35 @@
     </div>
     
     <div class="col-md-9" id='text'>
-      <h2>public interface operator(/)</h2>
-   <p>Extend division operator to allow a scalar divided by a vector</p>
-     
-     
-    <br>
+    
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+  <h3 class="panel-title">Uses</h3>
+      </div>
+      <ul class="list-group">
+      
+      <li class="list-group-item">
+  <ul class="list-inline">
+    
+    <li><a href='../module/matrix_m.html'>matrix_m</a></li>
+    
+    <li><a href='../module/vector_m.html'>vector_m</a></li>
+    
+    <li><a href="http://fortranwiki.org/fortran/show/ISO_FORTRAN_ENV">iso_fortran_env</a></li>
+    
+  </ul>
+      </li>
+      
+      
+      
+      </ul>
+    </div>
+    
+
+    
+    
+    
 
      <section class="visible-xs visible-sm hidden-md">
        
@@ -223,33 +251,22 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="panel panel-primary">
-  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#modprocs-1">Module Procedures</a></h3></div>
-  <div id="modprocs-1" class="panel-collapse collapse">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-1">Variables</a></h3></div>
+  <div id="vars-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-int_div_vector">int_div_vector</a>
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-m1">m1</a>
       
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-r32_div_vector">r32_div_vector</a>
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-m2">m2</a>
       
-      <a class="list-group-item" href="../interface/operator%28SLASH%29.html#moduleprocedure-r64_div_vector">r64_div_vector</a>
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-m3">m3</a>
+      
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-m4">m4</a>
+      
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-v1">v1</a>
+      
+      <a class="list-group-item" href="../program/mat_subop_test.html#variable-v2">v2</a>
       
     </div>
   </div>
@@ -258,247 +275,151 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      </section>
      <br class="visible-xs visible-sm hidden-md">
-     
-  
 
-  
-
-  
-   <h2>Module Procedures</h2>
-   
-    
-  <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="proc-int_div_vector"></span><h3>
-private elemental function int_div_vector(scalar, vec) result(v2)
-    
-    
-   
-</h3></div>
-  <div class="panel-body">
-       
-    
-    
-    <h4>Arguments</h4>
-    
-      
-      
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>integer,</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>scalar</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>vec</strong></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-      
-    
-    
-
-  
-  
-  
-  
-     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
-  </small></h4>
-  
-    
-
-  </div>
-  </div>
-
-   
-    
-  <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="proc-r32_div_vector"></span><h3>
-private elemental function r32_div_vector(scalar, vec) result(v2)
-    
-    
-   
-</h3></div>
-  <div class="panel-body">
-       
-    
-    
-    <h4>Arguments</h4>
-    
-      
-      
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>real(kind=real32),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>scalar</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>vec</strong></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-      
-    
-    
-
-  
-  
-  
-  
-     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
-  </small></h4>
-  
-    
-
-  </div>
-  </div>
-
-   
-    
-  <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="proc-r64_div_vector"></span><h3>
-private elemental function r64_div_vector(scalar, vec) result(v2)
-    
-    
-   
-</h3></div>
-  <div class="panel-body">
-       
-    
-    
-    <h4>Arguments</h4>
-    
-      
-      
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>real(kind=real64),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>scalar</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>vec</strong></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-      
-    
-    
-
-  
-  
-  
-  
-     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
-  </small></h4>
-  
-    
-
-  </div>
-  </div>
-
-   
      
 
- </div>
-</div>
+    
+    <section>
+    <h2>Variables</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
 
 
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-m1"></span>type(<a href='../type/matrix.html'>matrix</a>)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>m1</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-m2"></span>type(<a href='../type/matrix.html'>matrix</a>)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>m2</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-m3"></span>type(<a href='../type/matrix.html'>matrix</a>)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>m3</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-m4"></span>type(<a href='../type/matrix.html'>matrix</a>)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>m4</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-v1"></span>type(<a href='../type/vector.html'>vector</a>)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>v1</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-v2"></span>type(<a href='../type/vector.html'>vector</a>)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>v2</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+    
+    
+    
+    
+    </div>
+  </div>
+
+  
     <hr>    
     </div> <!-- /container -->
     <footer>
