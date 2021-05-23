@@ -118,7 +118,8 @@ contains
     generic, public :: operator(.proj.) => proj_
     generic, public :: operator(.hh.) => householder_
     generic, public :: operator(.hhnorm.) => householder_normal_
-    generic, public :: operator(*) => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_, times_vec_
+    generic, public :: operator(*) => scalar_mult_int_, scalar_mult_r32_, scalar_mult_r64_
+    generic, public :: operator(.o.) => hadamard_vec_
     generic, public :: operator(/) => scalar_div_int_, scalar_div_r32_, scalar_div_r64_, div_vec_
     generic, public :: operator(+) => plus_
     generic, public :: operator(-) => minus_, unary_minus_
@@ -153,7 +154,7 @@ contains
     procedure :: from_array_r32_ => vector_from_array_r32
     procedure :: from_array_r64_ => vector_from_array_r64
     procedure :: from_vector_ => vector_from_vector
-    procedure :: times_vec_ => vector_times_vector
+    procedure :: hadamard_vec_ => vector_hadamard_vector
     procedure :: div_vec_ => vector_div_vector
 
     final :: vector_destructor    
@@ -889,7 +890,7 @@ contains
     
     end function
 
-    elemental function vector_times_vector(self, v2) result(v3)
+    elemental function vector_hadamard_vector(self, v2) result(v3)
 
         class(vector), intent(in) :: self
         class(vector), intent(in) :: v2
