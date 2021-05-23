@@ -9,9 +9,6 @@ implicit none
     type(matrix) :: m1, m2, m3, m4
     type(vector) :: v1
 
-    real(real64), allocatable, dimension(:,:) :: dat
-
-
     m1 = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9],[3, 2])
     m2 = m1
     m3 = m2%as_array()
