@@ -17,10 +17,11 @@ module vector_m
 !! The internal representaion of a vector is an allocatable array.
 !! This way we can use the fundamental data of an array within our specific class
 use iso_fortran_env, only: real64, real32, int32, int64
+! use formath
 
 implicit none
 private
-public :: print_basis, gram_schmidt, is_orthonormal, operator(*), operator(/)!, deallocate_vector_data
+public :: operator(*), operator(/)!, deallocate_vector_data
 
 real(real64), parameter :: vector_epsilon = 1d-14
 
@@ -792,6 +793,14 @@ contains
 
         real(real64), dimension(self%dim, v2%dim) :: array
 
+        integer :: i 
+
+        do i = 1, self%dim
+
+            array(i,:) = self%at(i) * v2%data()
+
+        end do      
+
     end function
 
     elemental function vector_householder(self, normal) result(rotated)
@@ -1221,86 +1230,6 @@ contains
 !=                              Gram-Schmidt                                 =!
 !=============================================================================!
     
-    function gram_schmidt(vector_array) result(ortho)
 
-        class(vector), dimension(:) :: vector_array
-        type(vector), dimension(:), allocatable :: ortho
-
-        integer i, j, k, n
-
-        n = vector_array(1)%dim
-        k = size(vector_array)
-
-        allocate(ortho(k))
-        call ortho%zero(n)
-
-        print *, "dimension of input basis = ", vector_array(1)%dim
-        print *, "number of basis vectors = ", size(vector_array)
-        print *, "orthonormal_basis set to 0"
-
-        ortho(1) = vector_array(1)%normalized()
-
-        do i = 2,k
-
-            ortho(i) = vector_array(i)
-
-            do j = 1,i-1
-
-                ortho(i) = ortho(i) - (ortho(i) .proj. ortho(j))
-
-            end do
-
-            call ortho(i)%normalize()
-
-        end do
-
-        
-    end function
-
-    subroutine print_basis(basis) 
-
-        class(vector), dimension(:), intent(in) :: basis
-
-        integer :: i, k
-        
-        k = size(basis)
-
-        do i = 1, k
-
-            call basis(i)%print()
-
-        end do
-
-    end subroutine 
-    
-    function is_orthonormal(basis) result(bool)
-
-        class(vector), dimension(:), intent(in) :: basis
-        logical :: bool
-
-        integer :: k, i, j
-
-        k = size(basis)
-
-        if(all(basis%is_normal())) then
-
-            do i = 1,k
-                do j = i+1,k
-                    if (.not. basis(i)%is_ortho(basis(j))) then
-                        bool = .false.
-                        return
-                    end if
-                end do
-            end do
-
-            bool = .true.
-
-        else 
-
-            bool = .false.
-
-        end if     
-
-    end function
     
 end module
