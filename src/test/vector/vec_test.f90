@@ -12,8 +12,7 @@ implicit none
     type(vector) :: v1, v2, origin, v3, v4, u1, u2, u3, proj, v1_norm, v2_norm
     ! type(nd_vector(n = 10)) :: nd_10
     ! type(nd_vector(n = 3)) :: nd_3
-    type(vector), dimension(2) :: orthonormal_basis
-    type(vector), dimension(3) :: basis, copy_basis, ortho_3
+    type(vector), dimension(3) :: basis
     type(vector), dimension(2) :: basis_2
     type(matrix) :: test_matrix
     type(matrix) :: t2_mat, ortho_m
@@ -126,37 +125,9 @@ implicit none
     basis(2) = [0, 1, 0]
     basis(3) = [0, 0, 1]
 
-    copy_basis = basis
-
-    call copy_basis(2)%set(2, 10)
-
-    print *, "copy_basis: "
-    call print_basis(copy_basis)
 
 
 
-
-    print *, "original_basis: "
-    call print_basis(basis)
-
-    print *, "4 dimensional 0 basis of 2 vectors:"
-
-    ! call basis_2%zero()
-
-    ! call basis_2(1)%print()
-
-    call print_basis(basis_2)
-    ! call nd_test(nd_10)
-    ! call nd_test(nd_3)
-
-    orthonormal_basis = gram_schmidt(basis_2)
-    ortho_3 = gram_schmidt(basis)
-
-    call print_basis(orthonormal_basis)
-    call print_basis(ortho_3)
-
-    print *, "is orthonormal_basis orthonormal? ", is_orthonormal(orthonormal_basis)
-    print *, "is ortho_3 orthonormal? ", is_orthonormal(ortho_3)
 
     print *
     print *
