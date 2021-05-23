@@ -79,15 +79,15 @@ contains
     generic, public :: set_row => set_row_int_, set_row_r32_, set_row_r64_, set_row_vec_
     generic, public :: set_col => set_col_int_, set_col_r32_, set_col_r64_, set_col_vec_
 
-    procedure, public :: set_row_int_ => matrix_set_row_array_int
-    procedure, public :: set_row_r32_ => matrix_set_row_array_r32
-    procedure, public :: set_row_r64_ => matrix_set_row_array_r64
-    procedure, public :: set_row_vec_ => matrix_set_row_vec
+    procedure :: set_row_int_ => matrix_set_row_array_int
+    procedure :: set_row_r32_ => matrix_set_row_array_r32
+    procedure :: set_row_r64_ => matrix_set_row_array_r64
+    procedure :: set_row_vec_ => matrix_set_row_vec
 
-    procedure, public :: set_col_int_ => matrix_set_col_array_int
-    procedure, public :: set_col_r32_ => matrix_set_col_array_r32
-    procedure, public :: set_col_r64_ => matrix_set_col_array_r64
-    procedure, public :: set_col_vec_ => matrix_set_col_vec
+    procedure :: set_col_int_ => matrix_set_col_array_int
+    procedure :: set_col_r32_ => matrix_set_col_array_r32
+    procedure :: set_col_r64_ => matrix_set_col_array_r64
+    procedure :: set_col_vec_ => matrix_set_col_vec
 
     !=================Operator Functions===============!
     generic, public :: operator(+) => add_matrix_
