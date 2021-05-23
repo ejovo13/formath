@@ -13,9 +13,11 @@ implicit none
     m2 = matrix(real(reshape([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [4,3]), real32))
     m3 = matrix(real(reshape([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [4,3]), real64))
 
-    m4 = matrix(3, 3, 0)
+    m4 = matrix(3, 3, 13)
 
     m5 = matrix(m4)
+
+    call m5%set_col(3, [1, 2, 3])
 
     m6 = matrix(3,3)
 

@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 1.6% of total for source files.">24 statements</a>
+    title=" 1.5% of total for source files.">23 statements</a>
      </li> 
      
      
@@ -276,35 +276,32 @@
 <a name="ln-9"></a><span class="k">    type</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span> <span class="kd">::</span> <span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">,</span> <span class="n">m4</span>
 <a name="ln-10"></a>    <span class="k">type</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="kd">::</span> <span class="n">v1</span>
 <a name="ln-11"></a>
-<a name="ln-12"></a>    <span class="kt">real</span><span class="p">(</span><span class="n">real64</span><span class="p">),</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(:,:)</span> <span class="kd">::</span> <span class="n">dat</span>
-<a name="ln-13"></a>
-<a name="ln-14"></a>
-<a name="ln-15"></a>    <span class="n">m1</span> <span class="o">=</span> <span class="nb">reshape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<a name="ln-16"></a>    <span class="n">m2</span> <span class="o">=</span> <span class="n">m1</span>
-<a name="ln-17"></a>    <span class="n">m3</span> <span class="o">=</span> <span class="n">m2</span><span class="p">%</span><span class="n">as_array</span><span class="p">()</span>
-<a name="ln-18"></a>    <span class="k">call </span><span class="n">m3</span><span class="p">%</span><span class="n">set_row</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
-<a name="ln-19"></a>    <span class="k">call </span><span class="n">m3</span><span class="p">%</span><span class="n">set_col</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
-<a name="ln-20"></a>
-<a name="ln-21"></a>    <span class="n">v1</span> <span class="o">=</span> <span class="n">m3</span><span class="p">%</span><span class="n">get_col</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<a name="ln-22"></a>
-<a name="ln-23"></a>    <span class="k">call </span><span class="n">v1</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
-<a name="ln-24"></a>
-<a name="ln-25"></a>    <span class="n">v1</span> <span class="o">=</span> <span class="n">m3</span><span class="p">%</span><span class="n">get_col</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a name="ln-12"></a>    <span class="n">m1</span> <span class="o">=</span> <span class="nb">reshape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<a name="ln-13"></a>    <span class="n">m2</span> <span class="o">=</span> <span class="n">m1</span>
+<a name="ln-14"></a>    <span class="n">m3</span> <span class="o">=</span> <span class="n">m2</span><span class="p">%</span><span class="n">as_array</span><span class="p">()</span>
+<a name="ln-15"></a>    <span class="k">call </span><span class="n">m3</span><span class="p">%</span><span class="n">set_row</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<a name="ln-16"></a>    <span class="k">call </span><span class="n">m3</span><span class="p">%</span><span class="n">set_col</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
+<a name="ln-17"></a>
+<a name="ln-18"></a>    <span class="n">v1</span> <span class="o">=</span> <span class="n">m3</span><span class="p">%</span><span class="n">get_col</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a name="ln-19"></a>
+<a name="ln-20"></a>    <span class="k">call </span><span class="n">v1</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
+<a name="ln-21"></a>
+<a name="ln-22"></a>    <span class="n">v1</span> <span class="o">=</span> <span class="n">m3</span><span class="p">%</span><span class="n">get_col</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a name="ln-23"></a>
+<a name="ln-24"></a>    <span class="k">call </span><span class="n">v1</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
+<a name="ln-25"></a>
 <a name="ln-26"></a>
-<a name="ln-27"></a>    <span class="k">call </span><span class="n">v1</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
-<a name="ln-28"></a>
+<a name="ln-27"></a>    <span class="n">m4</span> <span class="o">=</span> <span class="kt">real</span><span class="p">(</span><span class="n">m3</span><span class="p">%</span><span class="n">as_array</span><span class="p">(),</span> <span class="n">real64</span><span class="p">)</span>
+<a name="ln-28"></a>    <span class="k">call </span><span class="n">m4</span><span class="p">%</span><span class="n">set_row</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">])</span>
 <a name="ln-29"></a>
-<a name="ln-30"></a>    <span class="n">m4</span> <span class="o">=</span> <span class="kt">real</span><span class="p">(</span><span class="n">m3</span><span class="p">%</span><span class="n">as_array</span><span class="p">(),</span> <span class="n">real64</span><span class="p">)</span>
-<a name="ln-31"></a>    <span class="k">call </span><span class="n">m4</span><span class="p">%</span><span class="n">set_row</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">])</span>
-<a name="ln-32"></a>
-<a name="ln-33"></a>    <span class="k">call </span><span class="n">m1</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
-<a name="ln-34"></a>    <span class="k">call </span><span class="n">m2</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
-<a name="ln-35"></a>    <span class="k">call </span><span class="n">m3</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
-<a name="ln-36"></a>    <span class="k">call </span><span class="n">m4</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
-<a name="ln-37"></a>
-<a name="ln-38"></a>
-<a name="ln-39"></a>
-<a name="ln-40"></a><span class="k">end program</span>
+<a name="ln-30"></a>    <span class="k">call </span><span class="n">m1</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
+<a name="ln-31"></a>    <span class="k">call </span><span class="n">m2</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
+<a name="ln-32"></a>    <span class="k">call </span><span class="n">m3</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
+<a name="ln-33"></a>    <span class="k">call </span><span class="n">m4</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>
+<a name="ln-34"></a>
+<a name="ln-35"></a>
+<a name="ln-36"></a>
+<a name="ln-37"></a><span class="k">end program</span>
 </pre></div>
 
     </section>
