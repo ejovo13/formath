@@ -10,7 +10,7 @@ author: Evan Voyles
 author_description: Learning Fortran by writing Fortran
 github: https://github.com/ejovo13 
 email: Evan.Voyles@kzoo.edu
-author_pic: ../media/thomas_1.png
+author_pic: ./media/thomas_1.png
 display: public
 exclude: vec_test.f90
     gram_schmidt_test.f90
