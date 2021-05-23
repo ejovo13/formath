@@ -54,6 +54,8 @@ contains
     procedure, public :: as_array => matrix_as_array !! Return a rank2 Fortran array
 
     procedure :: conform_ => matrix_conform
+    procedure :: mult_conform => matrix_mult_conform
+    !! Check if two matrices are conforming for matrix multiplication (The number of cols of A should match the number of rows of B)
     
     generic, public :: set => set_int_, set_r32_, set_r64_ !! Set the value of \(a_{i,j})
     generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_matrix !! Assign the contents of a matrix from a rank2 Fortran array
@@ -61,9 +63,29 @@ contains
     procedure :: new_ => new_matrix
     procedure :: new_matrix_ => new_matrix_from_matrix
 
+    procedure, public :: get_row => matrix_get_row
+    procedure, public :: get_col => matrix_get_col
+    generic, public :: set_row => set_row_int_, set_row_r32_, set_row_r64_, set_row_vec_
+    generic, public :: set_col => set_col_int_, set_col_r32_, set_col_r64_, set_col_vec_
+
+    procedure, public :: set_row_int_ => matrix_set_row_array_int
+    procedure, public :: set_row_r32_ => matrix_set_row_array_r32
+    procedure, public :: set_row_r64_ => matrix_set_row_array_r64
+    procedure, public :: set_row_vec_ => matrix_set_row_vec
+
+    procedure, public :: set_col_int_ => matrix_set_col_array_int
+    procedure, public :: set_col_r32_ => matrix_set_col_array_r32
+    procedure, public :: set_col_r64_ => matrix_set_col_array_r64
+    procedure, public :: set_col_vec_ => matrix_set_col_vec
+
     !=================Operator Functions===============!
     generic, public :: operator(+) => add_matrix_
     !! Operator interface to add two matrices
+    !!@Note
+    !! As an operator, this procedure is a **function** which return a new matrix. 
+    !! use the functional operator equivalent, use [[]]
+    generic, public :: operator(*) => times_matrix_, times_vector_
+    !! Operator interface to multiply two matrices
     !!@Note
     !! As an operator, this procedure is a **function** which return a new matrix. 
     !! use the functional operator equivalent, use [[]]
@@ -75,8 +97,13 @@ contains
     !!@Note
     !! This subroutine will alter the passed matrix. To use the functional operator equivalent, use \(+\)
 
+    ! generic, public :: times => times_matrix_sub_
+
+
     procedure :: add_matrix_ => matrix_add_matrix
     procedure :: add_matrix_sub_ => matrix_add_matrix_sub
+    procedure :: times_matrix_ => matrix_times_matrix
+    procedure :: times_vector_ => matrix_times_vector
 
     procedure :: from_array_int_ => matrix_from_rank2_array_int
     procedure :: from_array_r32_ => matrix_from_rank2_array_r32
@@ -92,8 +119,20 @@ contains
 
 end type
 
+interface matrix
+!! Construct a matrix
+    procedure :: matrix_ctr_nk
+    !! Construct a matrix by specifying its number of rows \(n\) and number of cols \(k\)
+
+
+end interface
+
 
 contains
+
+!=============================================================================!
+!=                          Constructor  Functions                           =!
+!=============================================================================!
 
     elemental subroutine new_matrix(self, n, k)
     !! Wipe the contents of a matrix and allocate the proper amount of space
@@ -111,6 +150,20 @@ contains
         call self%alloc_()  
 
     end subroutine
+
+    elemental function matrix_ctr_nk(n, k) result(m)
+    !! Create a new matrix \(m_{i, j}\) by passing the number of rows (\n\) and the number of columns \(k\)
+
+        integer, intent(in) :: n !! The number of rows in \(m\)
+        integer, intent(in) :: k !! The number of cols in \(m\)
+
+        type(matrix) :: m 
+
+        call m%new_(n, k)
+
+
+
+    end function
 
     elemental subroutine new_matrix_from_matrix(self, m2)
     !! Wipe the contents of a matrix and allocate the proper amount of space
@@ -274,6 +327,10 @@ contains
 
     end subroutine
 
+!=============================================================================!
+!=                           Inquiry Functions                               =!
+!=============================================================================!
+
     elemental function at_index_matrix(self, i, j) result(element)
 
         class(matrix), intent(in) :: self
@@ -332,6 +389,155 @@ contains
         vec = self%m(v)
 
     end function
+
+    elemental function matrix_get_row(self, i) result(row_i)
+
+        class(matrix), intent(in) :: self
+        integer, intent(in) :: i !! \(i\)th row
+
+        type(vector) :: row_i
+
+        integer :: irow
+
+        row_i = vector(self%k) ! Create vector with dimension = number of self's cols
+
+        do irow = 1,self%k
+
+            call row_i%set(irow, self%at(i,irow))
+
+        end do
+
+    end function
+
+    elemental function matrix_get_col(self, j) result(col_j)
+
+        class(matrix), intent(in) :: self
+        integer, intent(in) :: j !! \(j\)th row
+
+        type(vector) :: col_j
+
+        col_j = self%m(j)
+
+    end function
+
+    subroutine matrix_set_col_vec(self, j, vec) 
+
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: j !! Column number
+        class(vector), intent(in) :: vec
+
+        self%m(j) = vec
+
+    end subroutine
+
+    subroutine matrix_set_col_array_int(self, j, array) 
+
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: j !! Column number
+        integer, dimension(:), intent(in) :: array
+
+        if(size(array) /= self%n) error stop "Length of passed array not compatible with matrix n"
+
+        self%m(j) = array
+
+    end subroutine
+
+    subroutine matrix_set_col_array_r32(self, j, array) 
+
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: j !! Column number
+        real(real32), dimension(:), intent(in) :: array
+
+        if(size(array) /= self%n) error stop "Length of passed array not compatible with matrix n"
+
+        self%m(j) = array
+
+    end subroutine
+
+    subroutine matrix_set_col_array_r64(self, j, array) 
+
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: j !! Column number
+        real(real64), dimension(:), intent(in) :: array
+
+        if(size(array) /= self%n) error stop "Length of passed array not compatible with matrix n"
+
+        self%m(j) = array
+
+    end subroutine
+
+    subroutine matrix_set_row_vec(self, i, vec) 
+
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: i !! Row number
+        class(vector), intent(in) :: vec
+
+        integer :: icol
+
+        if(vec%size() /= self%k) error stop "Length of passed array not compatible with matrix k"
+
+        do icol = 1, self%k
+
+            call self%set(i, icol, vec%at(icol))
+
+        end do
+
+    end subroutine
+
+    subroutine matrix_set_row_array_int(self, i, array) 
+
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: i !! Row number
+        integer, dimension(:), intent(in) :: array
+
+        integer :: icol
+
+        if(size(array) /= self%k) error stop "Length of passed array not compatible with matrix k"
+
+
+        do icol = 1, self%k
+
+            call self%set(i, icol, array(icol))
+
+        end do
+
+    end subroutine
+
+    subroutine matrix_set_row_array_r32(self, i, array) 
+
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: i !! Row number
+        real(real32), dimension(:), intent(in) :: array
+
+        integer :: icol
+
+        if(size(array) /= self%k) error stop "Length of passed array not compatible with matrix k"
+
+        do icol = 1, self%k
+
+            call self%set(i, icol, array(icol))
+
+        end do
+    end subroutine
+
+    subroutine matrix_set_row_array_r64(self, i, array) 
+
+        class(matrix), intent(inout) :: self
+        integer, intent(in) :: i !! Row number
+        real(real64), dimension(:), intent(in) :: array
+
+        integer :: icol
+
+        if(size(array) /= self%k) error stop "Length of passed array not compatible with matrix k"
+
+        do icol = 1, self%k
+
+            call self%set(i, icol, array(icol))
+
+        end do
+
+    end subroutine
+    
 
     elemental function gram_schmidt_matrix(self) result(ortho)
 
@@ -404,13 +610,13 @@ contains
         class(matrix), intent(in) :: self
         real(real64), dimension(self%n, self%k) :: array
 
-        integer :: i
+        integer :: j
 
-        forall(i = 1:self%k) 
+        do j = 1, self%k
 
-            array(i,:) = self%m(i)%data()
+            array(:,j) = self%m(j)%data()
 
-        end forall
+        end do
 
     end function
 
@@ -422,6 +628,17 @@ contains
         logical :: bool !! True when self%dim == v2%dim
 
         bool = (self%k == m2%k .and. self%n == m2%n)
+
+    end function
+
+    elemental function matrix_mult_conform(self, m2) result(bool)
+    !! Check if two matrices are conforming (have the same dimensions)
+        class(matrix), intent(in) :: self
+        class(matrix), intent(in) :: m2
+
+        logical :: bool !! True when self%k == v2%n
+
+        bool = (self%k == m2%n)
 
     end function
 
@@ -471,6 +688,52 @@ contains
 
     end function
 
+    function matrix_times_matrix(self, m2) result(m3)
+
+        class(matrix), intent(in) :: self
+        class(matrix), intent(in) :: m2    
+
+        type(matrix) :: m3        
+
+        integer :: i, j
+
+        if(.not. self%conform_(m2)) error stop "Cannot add nonconforming matrices"
+
+        m3 = matrix(self%n, m2%k)        
+
+        do i = 1, m3%n
+
+            do j = 1, m3%k
+
+                call m3%set(i,j, (self%get_row(i) .dot. m2%get_col(j)))
+                ! The i,j element is equal to the ith row of self times the jth column of m2
+
+            end do
+
+        end do
+
+    end function
+
+    function matrix_times_vector(self, v) result(v2)
+
+        class(matrix), intent(in) :: self
+        class(vector), intent(in) :: v    
+
+        type(vector) :: v2 
+
+        integer :: i
+        if(self%k /= v%size()) error stop "Cannot add nonconforming matrices"
+
+        v2 = vector(self%n)  
+
+        do i = 1, self%n
+
+            call v2%set(i, self%get_row(i) .dot. v)
+
+        end do
+
+    end function
+
 !=============================================================================!
 !=                          Subroutine Operators                             =!
 !=============================================================================!
@@ -510,5 +773,7 @@ contains
         end do
 
     end subroutine
+
+
 
 end module
