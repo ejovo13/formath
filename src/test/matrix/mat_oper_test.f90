@@ -84,9 +84,12 @@ implicit none
     hh = hh%create_hh(vector([0, 0, 1]))
     call hh%print()
 
-
+    
     v5 = hh * v3
-
+    
     call v5%print()
-
+    
+    hh = hh%create_hh(vector([0, 0, 0, 0, 1]))
+    call hh%print()
+    
 end program
