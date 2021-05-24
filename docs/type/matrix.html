@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>44.6% of total for derived types.</p>Including implementation: 717 statements, 46.8% of total for derived types.">68 statements</a>
+    title="<p>45.9% of total for derived types.</p>Including implementation: 759 statements, 47.9% of total for derived types.">70 statements</a>
      </li> 
      
      
@@ -217,7 +217,7 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array">as_array</a>
       
-      <a class="list-group-item" href="../type/matrix.html#boundprocedure-id">id</a>
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-id~2">id</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-create_hh">create_hh</a>
       
@@ -242,6 +242,8 @@
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2A%29">operator(*)</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28.o.%29~2">operator(.o.)</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2A%2A%29">operator(**)</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-plus">plus</a>
       
@@ -323,7 +325,7 @@
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array">as_array</a>
       
-      <a class="list-group-item" href="../type/matrix.html#boundprocedure-id">id</a>
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-id~2">id</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-create_hh">create_hh</a>
       
@@ -348,6 +350,8 @@
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2A%29">operator(*)</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28.o.%29~2">operator(.o.)</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-operator%28%2A%2A%29">operator(**)</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-plus">plus</a>
       
@@ -971,6 +975,279 @@ private pure function matrix_ctr_r64(array) result(A)
   
   <td>dimension(:,:)</td><td>::</td>
   <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private pure function matrix_ctr_rank1_int(array, n, k) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Construct a <script type="math/tex">n</script>-by-<script type="math/tex">k</script> given a rank1 array of ints</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private pure function matrix_ctr_rank1_r32(array, n, k) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Construct a <script type="math/tex">n</script>-by-<script type="math/tex">k</script> given a rank1 array of ints</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private pure function matrix_ctr_rank1_r64(array, n, k) result(A)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Construct a <script type="math/tex">n</script>-by-<script type="math/tex">k</script> given a rank1 array of ints</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td></td>
   
 </tr>
 
@@ -1780,7 +2057,7 @@ private pure function matrix_as_array(self) result(array)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-id"></span><h3>procedure, public :: <strong>id</strong>  => identity_matrix 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-id~2"></span><h3>procedure, public :: <strong>id</strong>  => identity_matrix 
     
   </h3></div>
   
@@ -1873,7 +2150,7 @@ private elemental function identity_matrix(self, n) result(I_n)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-create_hh"></span><h3>generic, public :: <strong>create_hh</strong>  => create_hh_vec_ 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-create_hh"></span><h3>generic, public :: <strong>create_hh</strong>  => create_hh_ 
     
   </h3></div>
   
@@ -1885,7 +2162,7 @@ private elemental function identity_matrix(self, n) result(I_n)
             
     
     <h3>
-private pure function matrix_create_householder_vec(normal) result(m)
+private elemental function matrix_create_householder_matrix(normal) result(m)
     
     
    
@@ -3841,7 +4118,7 @@ private elemental function matrix_minus_matrix(self, m2) result(m3)
             
     
     <h3>
-private function matrix_times_matrix(self, m2) result(m3)
+private elemental function matrix_times_matrix(self, m2) result(m3)
     
     
    
@@ -3917,7 +4194,7 @@ private function matrix_times_matrix(self, m2) result(m3)
             
     
     <h3>
-private function matrix_times_vector(self, v) result(v2)
+private elemental function matrix_times_vector(self, v) result(v2)
     
     
    
@@ -4052,6 +4329,98 @@ private elemental function matrix_hadamard_matrix(self, m2) result(m3)
   
   <td></td><td>::</td>
   <td><strong>m2</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2A%2A%29"></span><h3>generic, public :: <strong>operator(**)</strong>  => to_the_n_ 
+    
+  </h3></div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental function matrix_to_the_n(self, n) result(m2)
+    
+    
+   
+</h3>
+    
+
+
+
+<p>Raise a matrix to the nth power. Must be a square matrix</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td></td>
   
 </tr>
 

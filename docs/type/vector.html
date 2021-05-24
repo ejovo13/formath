@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>55.4% of total for derived types.</p>Including implementation: 815 statements, 53.2% of total for derived types.">87 statements</a>
+    title="<p>54.1% of total for derived types.</p>Including implementation: 827 statements, 52.1% of total for derived types.">88 statements</a>
      </li> 
      
      
@@ -243,7 +243,7 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-householder_transform">householder_transform</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-eye">eye</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-id">id</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-is_ortho">is_ortho</a>
       
@@ -252,6 +252,8 @@
       <a class="list-group-item" href="../type/vector.html#boundprocedure-data">data</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-zero">zero</a>
+      
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-set_zero">set_zero</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-allocated">allocated</a>
       
@@ -393,7 +395,7 @@
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-householder_transform">householder_transform</a>
       
-      <a class="list-group-item" href="../type/vector.html#boundprocedure-eye">eye</a>
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-id">id</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-is_ortho">is_ortho</a>
       
@@ -402,6 +404,8 @@
       <a class="list-group-item" href="../type/vector.html#boundprocedure-data">data</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-zero">zero</a>
+      
+      <a class="list-group-item" href="../type/vector.html#boundprocedure-set_zero">set_zero</a>
       
       <a class="list-group-item" href="../type/vector.html#boundprocedure-allocated">allocated</a>
       
@@ -2602,7 +2606,7 @@ private elemental subroutine vector_householder_sub(self, normal)
     
      
 <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-eye"></span><h3>procedure, public :: <strong>eye</strong>  => vector_constructor_eye 
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-id"></span><h3>procedure, public :: <strong>id</strong>  => vector_constructor_eye 
     
   </h3></div>
   
@@ -2992,7 +2996,95 @@ private pure function vector_as_array(self) result(array)
           
     
     <h3>
-private elemental subroutine vector_zero(self, dim)
+private elemental function vector_zero(self, dim) result(zero)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/vector.html'>vector</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>dim</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/vector.html'>vector</a>)
+  </small></h4>
+  
+    
+
+        
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-set_zero"></span><h3>procedure, public :: <strong>set_zero</strong>  => vector_zero_sub 
+    
+  </h3></div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+        
+          
+    
+    <h3>
+private elemental subroutine vector_zero_sub(self, dim)
     
     
    
@@ -4207,6 +4299,10 @@ private elemental function vector_householder(self, normal) result(rotated)
    
 </h3>
     
+
+
+
+<p>Perform a householder reflection about a normal vector</p>
     
     <h4>Arguments</h4>
     
@@ -4289,12 +4385,16 @@ private elemental function vector_householder(self, normal) result(rotated)
             
     
     <h3>
-private function vector_find_householder_normal(self, destination) result(normal)
+private function vector_find_householder_normal(self, direction) result(normal)
     
     
    
 </h3>
     
+
+
+
+<p>Find the normal vector about which to rotate a vector when given a destination direction</p>
     
     <h4>Arguments</h4>
     
@@ -4335,7 +4435,7 @@ private function vector_find_householder_normal(self, destination) result(normal
   <td></td>
   
   <td></td><td>::</td>
-  <td><strong>destination</strong></td><td></td>
+  <td><strong>direction</strong></td><td><p>A Unit vector pointing in the direction that we would like to end up at</p></td>
   
 </tr>
 

@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>26.3% of total for procedures.</p>Including implementation: 61 statements, 160.5% of total for procedures.">10 statements</a>
+    title="<p>31.7% of total for procedures.</p>Including implementation: 88 statements, 214.6% of total for procedures.">13 statements</a>
      </li> 
      
      
@@ -208,6 +208,12 @@
       
       <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_r64">matrix_ctr_r64</a>
       
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_rank1_int">matrix_ctr_rank1_int</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_rank1_r32">matrix_ctr_rank1_r32</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_rank1_r64">matrix_ctr_rank1_r64</a>
+      
     </div>
   </div>
 </div>
@@ -270,6 +276,12 @@
       <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_r32">matrix_ctr_r32</a>
       
       <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_r64">matrix_ctr_r64</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_rank1_int">matrix_ctr_rank1_int</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_rank1_r32">matrix_ctr_rank1_r32</a>
+      
+      <a class="list-group-item" href="../interface/matrix.html#moduleprocedure-matrix_ctr_rank1_r64">matrix_ctr_rank1_r64</a>
       
     </div>
   </div>
@@ -894,6 +906,288 @@ private pure function matrix_ctr_r64(array) result(A)
   
   <td>dimension(:,:)</td><td>::</td>
   <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_rank1_int"></span><h3>
+private pure function matrix_ctr_rank1_int(array, n, k) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Construct a <script type="math/tex">n</script>-by-<script type="math/tex">k</script> given a rank1 array of ints</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_rank1_r32"></span><h3>
+private pure function matrix_ctr_rank1_r32(array, n, k) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Construct a <script type="math/tex">n</script>-by-<script type="math/tex">k</script> given a rank1 array of ints</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real32),</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+   
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-matrix_ctr_rank1_r64"></span><h3>
+private pure function matrix_ctr_rank1_r64(array, n, k) result(A)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+<p>Construct a <script type="math/tex">n</script>-by-<script type="math/tex">k</script> given a rank1 array of ints</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=real64),</td>
+  <td>intent(in),</td>
+  <td></td>
+  
+  <td>dimension(:)</td><td>::</td>
+  <td><strong>array</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td></td>
   
 </tr>
 

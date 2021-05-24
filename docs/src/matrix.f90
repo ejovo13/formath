@@ -55,8 +55,8 @@ contains
     procedure, public :: id => identity_matrix
 
 
-    generic, public :: create_hh => create_hh_vec_
-    procedure, nopass :: create_hh_vec_ => matrix_create_householder_vec
+    generic, public :: create_hh => create_hh_
+    procedure, nopass :: create_hh_ => matrix_create_householder_matrix
 
     generic, public :: fill => fill_int_, fill_r32_, fill_r64_
 
@@ -107,6 +107,8 @@ contains
     !! use the functional operator equivalent, use [[]]
     generic, public :: operator(.o.) => hadamard_
 
+    generic, public :: operator(**) => to_the_n_
+
 
     !=================Operator Subroutines===============!
     generic, public :: plus => add_matrix_sub_
@@ -124,6 +126,7 @@ contains
 
 
     procedure :: hadamard_ => matrix_hadamard_matrix
+    procedure :: to_the_n_ => matrix_to_the_n
     procedure :: add_matrix_ => matrix_add_matrix
     procedure :: add_matrix_sub_ => matrix_add_matrix_sub
     procedure :: minus_matrix_ => matrix_minus_matrix
@@ -159,6 +162,9 @@ interface matrix
     procedure :: matrix_ctr_int
     procedure :: matrix_ctr_r32
     procedure :: matrix_ctr_r64
+    procedure :: matrix_ctr_rank1_int
+    procedure :: matrix_ctr_rank1_r32
+    procedure :: matrix_ctr_rank1_r64
 
 
 end interface
@@ -286,7 +292,52 @@ contains
         A = m2
 
     end function  
+
+    pure function matrix_ctr_rank1_int(array, n, k) result(A)
+    !! Construct a \(n\)-by-\(k\) given a rank1 array of ints
+
+        integer, dimension(:), intent(in) :: array
+        integer, intent(in) :: n
+        integer, intent(in) :: k
+
+        type(matrix) :: A
+
+        if(size(array) /= (n * k)) error stop "Passed array and matrix size do not conform"
+
+
+        A = reshape(array, [n, k])
+
+    end function
     
+    pure function matrix_ctr_rank1_r32(array, n, k) result(A)
+    !! Construct a \(n\)-by-\(k\) given a rank1 array of ints
+
+        real(real32), dimension(:), intent(in) :: array
+        integer, intent(in) :: n
+        integer, intent(in) :: k
+
+        type(matrix) :: A
+
+        if(size(array) /= (n * k)) error stop "Passed array and matrix size do not conform"
+
+        A = reshape(array, [n, k])
+
+    end function
+
+    pure function matrix_ctr_rank1_r64(array, n, k) result(A)
+    !! Construct a \(n\)-by-\(k\) given a rank1 array of ints
+
+        real(real64), dimension(:), intent(in) :: array
+        integer, intent(in) :: n
+        integer, intent(in) :: k
+
+        type(matrix) :: A
+
+        if(size(array) /= (n * k)) error stop "Passed array and matrix size do not conform"
+
+        A = reshape(array, [n, k])
+
+    end function
 
 
     elemental subroutine new_matrix_from_matrix(self, m2)
@@ -362,6 +413,7 @@ contains
         end do
 
     end subroutine
+
 
     elemental subroutine matrix_from_matrix(self, m) 
     !! 
@@ -483,7 +535,7 @@ contains
 
         allocate(self%m(self%k), STAT=ierr)
 
-        call self%m%zero(self%n)
+        call self%m%set_zero(self%n)
 
         if (ierr /= 0) error stop "Error allocating vector"
 
@@ -876,7 +928,7 @@ contains
 
     end function
 
-    function matrix_times_matrix(self, m2) result(m3)
+    elemental function matrix_times_matrix(self, m2) result(m3)
 
         class(matrix), intent(in) :: self
         class(matrix), intent(in) :: m2    
@@ -902,7 +954,7 @@ contains
 
     end function
 
-    function matrix_times_vector(self, v) result(v2)
+    elemental function matrix_times_vector(self, v) result(v2)
 
         class(matrix), intent(in) :: self
         class(vector), intent(in) :: v    
@@ -934,6 +986,37 @@ contains
         m3 = self
         call m3%m%times(m2%m) ! Use elemental function call to multiply all the columns by eachother!!!
 
+    end function
+
+    elemental function matrix_to_the_n(self, n) result(m2)
+    !! Raise a matrix to the nth power. Must be a square matrix
+        class(matrix), intent(in) :: self
+        integer, intent(in) :: n
+
+        type(matrix) :: m2
+
+        integer :: i
+
+        if(self%k /= self%n) error stop "Cannot raise non-square matrix to the nth power"
+
+        if(n == 0) then
+            m2 = m2%id(self%k)
+            return
+        else if(n == 1) then
+            m2 = self
+            return
+        else if (n < 1) then
+            error stop "Cannot raise matrix to a negative power"
+        end if
+
+        m2 = self
+
+        do i = 1, n
+
+            m2 = self * m2
+
+        end do
+        
     end function
 
 
@@ -1020,7 +1103,7 @@ contains
 
     end function
 
-    pure function matrix_create_householder_vec(normal) result(m)
+    elemental function matrix_create_householder_matrix(normal) result(m)
 
         class(vector), intent(in) :: normal !! A UNIT vector that is normal to a plane of rotation
 
@@ -1033,6 +1116,12 @@ contains
         call m%minus(op)
 
     end function
+
+    ! elemental function matrix_create_krylov(self) result(K)
+
+
+
+    ! end function
 
 
 end module

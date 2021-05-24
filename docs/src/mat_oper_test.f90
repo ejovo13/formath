@@ -7,8 +7,9 @@ use iso_fortran_env, only: real64
 
 implicit none
 
-    type(matrix) :: m1, m2, m3, m4, m5, m6, i1, m7, hh
-    type(vector) :: v1, v2, v3, v4, v5
+    type(matrix) :: m1, m2, m3, m4, m5, m6, i1, m7, hh, m8, m9, o1, o2, m10, m11
+    type(vector) :: v1, v2, v3, v4, v5, v_temp
+    real(real64), dimension(:,:), allocatable :: temp_a
 
     m1 = reshape([2,3,4,5], [2,2])
     m2 = reshape([1, 0, 0, 1], [2,2])
@@ -84,9 +85,91 @@ implicit none
     hh = hh%create_hh(vector([0, 0, 1]))
     call hh%print()
 
-
+    
     v5 = hh * v3
-
+    
     call v5%print()
+    
+    hh = hh%create_hh(vector([0, 0, 0, 0, 1]))
+    call hh%print()
 
+    print *
+    print *
+    print *, "Matrix decomposition methods"
+    print *
+    print *
+
+    allocate(temp_a(3,2))
+
+    call random_number(temp_a)
+
+    m8 = temp_a
+
+    call m8%print()
+
+    o1 = m8%gram_schmidt()
+
+    print *, "Calling gram_schmidt"
+
+    print *
+    print *
+
+    call o1%print()
+
+    print *, "is o1 orthonormal? : ", o1%is_orthonormal()
+
+
+    v_temp = o1%get_col(1)
+
+    print *, "Col 1 of o1 length = ", v_temp%length()
+
+    deallocate(temp_a)
+    allocate(temp_a(2, 4))
+
+    call random_number(temp_a)
+
+    m9 = temp_a
+
+    o2 = m9%gram_schmidt()
+
+    print *
+    call m9%print()
+
+    print*
+
+    call o2%print()
+    print *
+
+    m10 = reshape([1, 2, 2, 4], [2,2])
+
+    m11 = m10 ** 0
+
+    call m10%print()
+
+    print*, "m10 ** 0 = "
+    call m11%print()
+
+    m11 = m10**1
+
+    print *, "m10 ** 1 = "
+    call m11%print()
+
+    m11 = m10**2
+
+    print *, "m10 ** 2 = "
+    call m11%print()
+
+    m11 = m10**3
+
+    print *, "m10 ** 3 = "
+    call m11%print()
+
+    m11 = m10**4
+
+    print *, "m10 ** 4 = "
+    call m11%print()
+
+
+    
+    
 end program
