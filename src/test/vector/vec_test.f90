@@ -74,7 +74,7 @@ implicit none
 
     call v1%print()
     call v2%print()
-    call origin%zero(10)
+    call origin%set_zero(10)
 
     call origin%print()
 

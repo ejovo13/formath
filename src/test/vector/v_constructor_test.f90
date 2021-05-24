@@ -16,11 +16,11 @@ implicit none
     v7 = vector([1.4d0, -14.d0])
     v8 = vector(v7)
 
-    v9 = v8%eye()
-    v10 = v10%eye(20)
-    v11 = v11%eye(5, 3)
-    v12 = v7%eye(col=1)
-    v13 = v4%eye(dim=10, col=2)
+    v9 = v8%id()
+    v10 = v10%id(20)
+    v11 = v11%id(5, 3)
+    v12 = v7%id(col=1)
+    v13 = v4%id(dim=10, col=2)
 
     call v1%print_info()
     call v2%print_info()

@@ -5,7 +5,7 @@ use iso_fortran_env
 
 implicit none
 
-    type(vector) :: v1, v2, v3, res, z, x, y
+    type(vector) :: v1, v2, v3, res, z, x, y, v4
     real(real64) :: scal_res
 
     v1 = [1, 2, 4]
@@ -88,8 +88,12 @@ implicit none
     ! res = res * -1/(res%at(1))
     print *, "v1 .hhnorm. x = ", res%data()
 
-    res = v1 .hh. res
+    res = v1%normalized() .hh. res
     print *, "v1 .hh. res = ", res%data()
+
+    v4 = v4%zero(10)
+
+    call v4%print()
 
 
     
