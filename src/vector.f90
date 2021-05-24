@@ -23,7 +23,7 @@ implicit none
 private
 public :: operator(*), operator(/)!, deallocate_vector_data
 
-real(real64), parameter :: vector_epsilon = 1d-14
+real(real64), parameter :: vector_epsilon = 1d-7
 
 type, public :: vector
 
@@ -78,12 +78,13 @@ contains
     !!@Note
     !! This is a subroutine that modifies the passed vector  
     
-    procedure, public :: eye => vector_constructor_eye
+    procedure, public :: id => vector_constructor_eye
     procedure, public :: is_ortho => vector_is_orthogonal
     procedure, public :: is_normal => vector_is_normal
     procedure, public :: data => vector_as_array
     
     procedure, public :: zero => vector_zero
+    procedure, public :: set_zero => vector_zero_sub
     
     procedure, public :: allocated => vector_is_allocated
     
@@ -804,7 +805,7 @@ contains
     end function
 
     elemental function vector_householder(self, normal) result(rotated)
-
+    !! Perform a householder reflection about a normal vector
         class(vector), intent(in) :: self
         class(vector), intent(in) :: normal !! MUST BE A UNIT VECTOR
 
@@ -814,16 +815,16 @@ contains
 
     end function
 
-    function vector_find_householder_normal(self, destination) result(normal)
-
+    function vector_find_householder_normal(self, direction) result(normal)
+    !! Find the normal vector about which to rotate a vector when given a destination direction
         class(vector), intent(in) :: self
-        class(vector), intent(in) :: destination
+        class(vector), intent(in) :: direction !! A Unit vector pointing in the direction that we would like to end up at
 
         type(vector) :: normal
 
-        print *, "Destination set as: ", destination%data()
+        print *, "Destination set as: ", direction%data()
 
-        normal = self - destination
+        normal = self - (self%length() * direction)
         call normal%normalize()
 
     end function
@@ -1192,7 +1193,7 @@ contains
 !=                           Static Functions                                =!
 !=============================================================================!
 
-    elemental subroutine vector_zero(self, dim)
+    elemental subroutine vector_zero_sub(self, dim)
 
         class(vector), intent(inout) :: self
         integer, intent(in), optional :: dim
@@ -1206,6 +1207,23 @@ contains
         self%v = 0
 
     end subroutine
+
+    elemental function vector_zero(self, dim) result(zero)
+
+        class(vector), intent(in) :: self
+        integer, intent(in), optional :: dim
+
+        type(vector) :: zero
+
+        if (present(dim)) then
+            call zero%new_(dim)
+        else
+            call zero%new_(self%dim)
+        end if
+
+        zero%v = 0
+
+    end function
 
 
 
