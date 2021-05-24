@@ -53,6 +53,8 @@ contains
     procedure, public :: is_orthonormal => is_orthonormal_matrix !! Check whether a matrix is orthonormal
     procedure, public :: as_array => matrix_as_array !! Return a rank2 Fortran array
     procedure, public :: id => identity_matrix
+    procedure, public :: ncol => matrix_ncol !! Return the number of cols of A
+    procedure, public :: nrow => matrix_nrow !! Return the number of rows of A
 
 
     generic, public :: create_hh => create_hh_
@@ -162,6 +164,9 @@ interface matrix
     procedure :: matrix_ctr_int
     procedure :: matrix_ctr_r32
     procedure :: matrix_ctr_r64
+    procedure :: matrix_ctr_rank1_int
+    procedure :: matrix_ctr_rank1_r32
+    procedure :: matrix_ctr_rank1_r64
 
 
 end interface
@@ -289,7 +294,52 @@ contains
         A = m2
 
     end function  
+
+    pure function matrix_ctr_rank1_int(array, n, k) result(A)
+    !! Construct a \(n\)-by-\(k\) given a rank1 array of ints
+
+        integer, dimension(:), intent(in) :: array
+        integer, intent(in) :: n
+        integer, intent(in) :: k
+
+        type(matrix) :: A
+
+        if(size(array) /= (n * k)) error stop "Passed array and matrix size do not conform"
+
+
+        A = reshape(array, [n, k])
+
+    end function
     
+    pure function matrix_ctr_rank1_r32(array, n, k) result(A)
+    !! Construct a \(n\)-by-\(k\) given a rank1 array of ints
+
+        real(real32), dimension(:), intent(in) :: array
+        integer, intent(in) :: n
+        integer, intent(in) :: k
+
+        type(matrix) :: A
+
+        if(size(array) /= (n * k)) error stop "Passed array and matrix size do not conform"
+
+        A = reshape(array, [n, k])
+
+    end function
+
+    pure function matrix_ctr_rank1_r64(array, n, k) result(A)
+    !! Construct a \(n\)-by-\(k\) given a rank1 array of ints
+
+        real(real64), dimension(:), intent(in) :: array
+        integer, intent(in) :: n
+        integer, intent(in) :: k
+
+        type(matrix) :: A
+
+        if(size(array) /= (n * k)) error stop "Passed array and matrix size do not conform"
+
+        A = reshape(array, [n, k])
+
+    end function
 
 
     elemental subroutine new_matrix_from_matrix(self, m2)
@@ -365,6 +415,7 @@ contains
         end do
 
     end subroutine
+
 
     elemental subroutine matrix_from_matrix(self, m) 
     !! 
@@ -1065,6 +1116,24 @@ contains
         call op%times(2)     
 
         call m%minus(op)
+
+    end function
+
+    elemental function matrix_ncol(self) result(icol)
+
+        class(matrix), intent(in) :: self
+        integer :: icol
+
+        icol = self%k
+
+    end function
+
+    elemental function matrix_nrow(self) result(irow)
+
+        class(matrix), intent(in) :: self
+        integer :: irow
+
+        irow = self%n
 
     end function
 
