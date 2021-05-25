@@ -130,7 +130,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="<p>45.9% of total for derived types.</p>Including implementation: 759 statements, 47.9% of total for derived types.">70 statements</a>
+    title="<p>46.4% of total for derived types.</p>Including implementation: 771 statements, 48.2% of total for derived types.">72 statements</a>
      </li> 
      
      
@@ -218,6 +218,10 @@
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array">as_array</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-id~2">id</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-ncol">ncol</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-nrow">nrow</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-create_hh">create_hh</a>
       
@@ -326,6 +330,10 @@
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-as_array">as_array</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-id~2">id</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-ncol">ncol</a>
+      
+      <a class="list-group-item" href="../type/matrix.html#boundprocedure-nrow">nrow</a>
       
       <a class="list-group-item" href="../type/matrix.html#boundprocedure-create_hh">create_hh</a>
       
@@ -2136,6 +2144,166 @@ private elemental function identity_matrix(self, n) result(I_n)
   
   
      <h4>Return Value <small>type(<a href='../type/matrix.html'>matrix</a>)
+  </small></h4>
+  
+    
+
+        
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-ncol"></span><h3>procedure, public :: <strong>ncol</strong>  => matrix_ncol 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return the number of cols of A</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+        
+          
+    
+    <h3>
+private elemental function matrix_ncol(self) result(icol)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>integer
+  </small></h4>
+  
+    
+
+        
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+     
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-nrow"></span><h3>procedure, public :: <strong>nrow</strong>  => matrix_nrow 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return the number of rows of A</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+        
+          
+    
+    <h3>
+private elemental function matrix_nrow(self) result(irow)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/matrix.html'>matrix</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>integer
   </small></h4>
   
     

@@ -20,3 +20,12 @@ Formath is a linear algebra framework that is focused on implementing the fundam
 
 @Note This Library is a work in process and is the process of me learning how to implement fundamental numerical algorithms from the ground up. This package is currently configured to my system, as it is intended principally as a learning experience.
 
+## Vector 
+
+A vector object is just an allocatale rank 1 Fortran array with double precision elements. I wanted to learn modern Fortran's approach to object-oriented programming so I decided wrap up a variety of functionality within the vector class. Vectors can be added to one another, they can be orthogonally projected onto eachother, and they can be transformed about eachother (Householder Transformation)
+
+The vector class is my attempt at creating a programming object that conforms to the mathematical definition.
+
+## Matrix
+
+A matrix object is an allocatable rank 1 Fortran array of **vectors**. We can perform matrix multiplication, access rows and columns, and execute a variety of matrix decompositions. 

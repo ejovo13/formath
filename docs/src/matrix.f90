@@ -53,6 +53,8 @@ contains
     procedure, public :: is_orthonormal => is_orthonormal_matrix !! Check whether a matrix is orthonormal
     procedure, public :: as_array => matrix_as_array !! Return a rank2 Fortran array
     procedure, public :: id => identity_matrix
+    procedure, public :: ncol => matrix_ncol !! Return the number of cols of A
+    procedure, public :: nrow => matrix_nrow !! Return the number of rows of A
 
 
     generic, public :: create_hh => create_hh_
@@ -1114,6 +1116,24 @@ contains
         call op%times(2)     
 
         call m%minus(op)
+
+    end function
+
+    elemental function matrix_ncol(self) result(icol)
+
+        class(matrix), intent(in) :: self
+        integer :: icol
+
+        icol = self%k
+
+    end function
+
+    elemental function matrix_nrow(self) result(irow)
+
+        class(matrix), intent(in) :: self
+        integer :: irow
+
+        irow = self%n
 
     end function
 
