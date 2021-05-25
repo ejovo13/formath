@@ -11,7 +11,7 @@ set(FORD_CONFIG ${CMAKE_SOURCE_DIR}/../docs)
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_SOURCE_DIR}/../modules)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../lib)
-set(CMAKE_INSTALL_PREFIX ~/lib)
+set(CMAKE_INSTALL_PREFIX $ENV{HOME}/local)
 
 add_compile_options(-Wall) #-Werror)
 
@@ -23,6 +23,9 @@ message("Updated CMAKE")
 
 # execute_process(COMMAND ford formath-project-file.md COMMENT "Running Ford" WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/../")
 execute_process(COMMAND ford formath-project-file.md WORKING_DIRECTORY ../)
+
+install(TARGETS formath DESTINATION lib)
+install(DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/ DESTINATION include/Formath) # Trailing / makes it so just the files are installed
 
 # add_custom_command(OUTPUT ${FORD_CONFIG} COMMAND ${CMAKE_COMMAND} -E ford formath-project-file.md
 # WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/../" COMMENT "Running Ford Documentation")
