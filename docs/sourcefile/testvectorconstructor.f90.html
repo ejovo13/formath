@@ -10,7 +10,7 @@
     <meta name="author" content="Evan Voyles" >
     <link rel="icon" href="../favicon.png">
 
-    <title>v_fnc_op_speed.f90 &ndash; Formath</title>
+    <title>TestVectorConstructor.f90 &ndash; Formath</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -112,7 +112,7 @@
     
   
   <div class="row">
-    <h1>v_fnc_op_speed.f90
+    <h1>TestVectorConstructor.f90
     <small>Source File</small>
     
     </h1>
@@ -130,12 +130,12 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 0.7% of total for source files.">11 statements</a>
+    title=" 1.7% of total for source files.">31 statements</a>
      </li> 
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/v_fnc_op_speed.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/TestVectorConstructor.f90"> Source File</a></li>
      
      
   </ul>
@@ -143,7 +143,7 @@
   
     
   
-     <li class="active">v_fnc_op_speed.f90</li>
+     <li class="active">TestVectorConstructor.f90</li>
   </ol>
 </div>
 </div>
@@ -173,7 +173,7 @@
   <div id="progs-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/v_op_speed.html">v_op_speed</a>
+      <a class="list-group-item" href="../program/v_constructor_test.html">v_constructor_test</a>
       
     </div>
   </div>
@@ -198,7 +198,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
-    <a class="list-group-item" href="../sourcefile/v_fnc_op_speed.f90.html#src">v_fnc_op_speed.f90</a>
+    <a class="list-group-item" href="../sourcefile/testvectorconstructor.f90.html#src">TestVectorConstructor.f90</a>
   </div>
 </div>
 
@@ -229,7 +229,7 @@
   <div id="progs-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/v_op_speed.html">v_op_speed</a>
+      <a class="list-group-item" href="../program/v_constructor_test.html">v_constructor_test</a>
       
     </div>
   </div>
@@ -254,7 +254,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
-    <a class="list-group-item" href="../sourcefile/v_fnc_op_speed.f90.html#src">v_fnc_op_speed.f90</a>
+    <a class="list-group-item" href="../sourcefile/testvectorconstructor.f90.html#src">TestVectorConstructor.f90</a>
   </div>
 </div>
 
@@ -265,25 +265,45 @@
 
     <section>
       <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl"><pre><span></span><a name="ln-1"></a><span class="k">program </span><span class="n">v_op_speed</span>
-<a name="ln-2"></a>
-<a name="ln-3"></a><span class="k">use </span><span class="n">vector_m</span>
-<a name="ln-4"></a>
-<a name="ln-5"></a><span class="k">implicit none</span>
-<a name="ln-6"></a>
-<a name="ln-7"></a><span class="k">    </span><span class="kt">integer</span><span class="p">,</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">N_LOOPS</span> <span class="o">=</span> <span class="mf">1E8</span>
-<a name="ln-8"></a>    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>
-<a name="ln-9"></a>    <span class="k">type</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="kd">::</span> <span class="n">v1</span>
-<a name="ln-10"></a>
-<a name="ln-11"></a>    <span class="n">v1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<a name="ln-12"></a>
-<a name="ln-13"></a>    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N_LOOPS</span>
-<a name="ln-14"></a>
-<a name="ln-15"></a>        <span class="n">v1</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">*</span> <span class="mi">5</span>
-<a name="ln-16"></a>
-<a name="ln-17"></a>    <span class="k">end do</span>
+    <div class="hl"><pre><span></span><a name="ln-1"></a><span class="k">program </span><span class="n">v_constructor_test</span>
+<a name="ln-2"></a><span class="c">!! Test whether the assignments work as expected</span>
+<a name="ln-3"></a>
+<a name="ln-4"></a><span class="k">use </span><span class="n">vector_m</span>
+<a name="ln-5"></a>
+<a name="ln-6"></a><span class="k">implicit none</span>
+<a name="ln-7"></a>
+<a name="ln-8"></a><span class="k">    type</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="kd">::</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">,</span> <span class="n">v4</span><span class="p">,</span> <span class="n">v5</span><span class="p">,</span> <span class="n">v6</span><span class="p">,</span> <span class="n">v7</span><span class="p">,</span> <span class="n">v8</span><span class="p">,</span> <span class="n">v9</span><span class="p">,</span> <span class="n">v10</span><span class="p">,</span> <span class="n">v11</span><span class="p">,</span> <span class="n">v12</span><span class="p">,</span> <span class="n">v13</span>
+<a name="ln-9"></a>
+<a name="ln-10"></a>    <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>                              <span class="c">!! Create empty vector(zeros) with 5 elements</span>
+<a name="ln-11"></a>    <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>                      <span class="c">!! Create dim 3 vector from [1, 2, 3]</span>
+<a name="ln-12"></a>    <span class="n">v3</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>                           <span class="c">!! Create 4 dim vector and fill it with 0</span>
+<a name="ln-13"></a>    <span class="n">v4</span> <span class="o">=</span> <span class="n">vector</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<a name="ln-14"></a>    <span class="n">v5</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">)</span>    
+<a name="ln-15"></a>    <span class="n">v6</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">1.7d0</span><span class="p">)</span>
+<a name="ln-16"></a>    <span class="n">v7</span> <span class="o">=</span> <span class="n">vector</span><span class="p">([</span><span class="mf">1.4d0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="mf">4.d0</span><span class="p">])</span>
+<a name="ln-17"></a>    <span class="n">v8</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">v7</span><span class="p">)</span>
 <a name="ln-18"></a>
-<a name="ln-19"></a><span class="k">end program</span>
+<a name="ln-19"></a>    <span class="n">v9</span> <span class="o">=</span> <span class="n">v8</span><span class="p">%</span><span class="n">id</span><span class="p">()</span>
+<a name="ln-20"></a>    <span class="n">v10</span> <span class="o">=</span> <span class="n">v10</span><span class="p">%</span><span class="n">id</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<a name="ln-21"></a>    <span class="n">v11</span> <span class="o">=</span> <span class="n">v11</span><span class="p">%</span><span class="n">id</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<a name="ln-22"></a>    <span class="n">v12</span> <span class="o">=</span> <span class="n">v7</span><span class="p">%</span><span class="n">id</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a name="ln-23"></a>    <span class="n">v13</span> <span class="o">=</span> <span class="n">v4</span><span class="p">%</span><span class="n">id</span><span class="p">(</span><span class="nb">dim</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<a name="ln-24"></a>
+<a name="ln-25"></a>    <span class="k">call </span><span class="n">v1</span><span class="p">%</span><span class="n">print_info</span><span class="p">()</span>
+<a name="ln-26"></a>    <span class="k">call </span><span class="n">v2</span><span class="p">%</span><span class="n">print_info</span><span class="p">()</span>
+<a name="ln-27"></a>    <span class="k">call </span><span class="n">v3</span><span class="p">%</span><span class="n">print_info</span><span class="p">()</span>
+<a name="ln-28"></a>    <span class="k">call </span><span class="n">v4</span><span class="p">%</span><span class="n">print_info</span><span class="p">()</span>
+<a name="ln-29"></a>    <span class="k">call </span><span class="n">v5</span><span class="p">%</span><span class="n">print_info</span><span class="p">()</span>
+<a name="ln-30"></a>    <span class="k">call </span><span class="n">v6</span><span class="p">%</span><span class="n">print_info</span><span class="p">()</span>
+<a name="ln-31"></a>    <span class="k">call </span><span class="n">v7</span><span class="p">%</span><span class="n">print_info</span><span class="p">()</span>
+<a name="ln-32"></a>    <span class="k">call </span><span class="n">v8</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>    
+<a name="ln-33"></a>    <span class="k">call </span><span class="n">v9</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>    
+<a name="ln-34"></a>    <span class="k">call </span><span class="n">v10</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>    
+<a name="ln-35"></a>    <span class="k">call </span><span class="n">v11</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>    
+<a name="ln-36"></a>    <span class="k">call </span><span class="n">v12</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>    
+<a name="ln-37"></a>    <span class="k">call </span><span class="n">v13</span><span class="p">%</span><span class="k">print</span><span class="p">()</span>    
+<a name="ln-38"></a>    
+<a name="ln-39"></a><span class="k">end program</span>
 </pre></div>
 
     </section>
