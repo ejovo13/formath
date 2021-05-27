@@ -18,7 +18,7 @@ foreach(tfile ${VECTOR_TEST_FILES})
 
     add_executable(${tfile} ${tfile}.f90)
     add_test(NAME ${tfile} COMMAND ${tfile})
-    target_link_libraries(${tfile} formath)
+    target_link_libraries(${tfile} Formath)
 
 endforeach(tfile)
 
