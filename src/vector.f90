@@ -7,6 +7,7 @@ module vector_m
 !! Addition with another vector
 !! Multiplication with a scalar 
 !! Inner product
+!! Outer product
 !! Norm (which norm?)
 !! Projection of a onto b 
 !!
