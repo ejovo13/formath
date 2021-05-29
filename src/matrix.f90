@@ -33,64 +33,61 @@ private
 
 type, public :: matrix
 
-    private
+private
 
-    integer :: k = 1 !! Number of vectors
-    integer :: n = 1 !! Dimension of vectors
-    type(vector), dimension(:), pointer :: m !! The vectors stored in a matrix
-    logical :: m_allocated = .false. !! Allocation status of pointer
+integer :: k = 1 !! Number of vectors
+integer :: n = 1 !! Dimension of vectors
+type(vector), dimension(:), pointer :: m !! The vectors stored in a matrix
+logical :: m_allocated = .false. !! Allocation status of pointer
 
 contains 
 
-    private
+private 
+!=============================================================================!
+!=                            Public Interface                               =!
+!=============================================================================!
+generic, public :: new => new_, new_matrix_ !! Create a new matrix
+procedure, public :: clear => clear_matrix !! Clear all of the elements of a matrix 
+procedure, public :: print => print_matrix !! Print the contents of a matrix
+procedure, public :: vec => access_vector_matrix !! Get the kth vector in the matrix
+procedure, public :: at => at_index_matrix !! Get the element at the index (i, j)
+procedure, public :: gram_schmidt => gram_schmidt_matrix !! Compute an otrthonormal basis for the vector space spanned by the columns of a matrix
+procedure, public :: is_orthonormal => is_orthonormal_matrix !! Check whether a matrix is orthonormal
+procedure, public :: as_array => matrix_as_array !! Return a rank2 Fortran array
+procedure, public :: id => identity_matrix !! Return the identity matrix of dimension \(n\)
+procedure, public :: ncol => matrix_ncol !! Return the number of cols of A
+procedure, public :: nrow => matrix_nrow !! Return the number of rows of A
+procedure, public :: get_row => matrix_get_row !! Return a vector containing the elements of the given row
+procedure, public :: get_col => matrix_get_col !! Return a vector containing the elements of the given column
 
-    generic, public :: new => new_, new_matrix_ !! Create a new matrix
-    procedure, public :: clear => clear_matrix !! Clear all of the elements of a matrix 
-    procedure, public :: print => print_matrix !! Print the contents of a matrix
-    procedure, public :: vec => access_vector_matrix !! Get the kth vector in the matrix
-    procedure, public :: at => at_index_matrix !! Get the element at the index (i, j)
-    procedure, public :: gram_schmidt => gram_schmidt_matrix !! Compute an otrthonormal basis for the vector space spanned by the columns of a matrix
-    procedure, public :: is_orthonormal => is_orthonormal_matrix !! Check whether a matrix is orthonormal
-    procedure, public :: as_array => matrix_as_array !! Return a rank2 Fortran array
-    procedure, public :: id => identity_matrix
-    procedure, public :: ncol => matrix_ncol !! Return the number of cols of A
-    procedure, public :: nrow => matrix_nrow !! Return the number of rows of A
 
+!=============================================================================!
+!=                            Generics                                       =!
+!=============================================================================!
 
-    generic, public :: create_hh => create_hh_
-    procedure, nopass :: create_hh_ => matrix_create_householder_matrix
-
-    generic, public :: fill => fill_int_, fill_r32_, fill_r64_
-
-    procedure :: fill_int_ => matrix_fill_int
-    procedure :: fill_r32_ => matrix_fill_r32
-    procedure :: fill_r64_ => matrix_fill_r64
-
-    procedure :: conform_ => matrix_conform
-    procedure :: mult_conform => matrix_mult_conform
-    !! Check if two matrices are conforming for matrix multiplication (The number of cols of A should match the number of rows of B)
+    generic, public :: set_row => set_row_int_, set_row_r32_, set_row_r64_, set_row_vec_ !! Set the contents of a row
+    generic, public :: set_col => set_col_int_, set_col_r32_, set_col_r64_, set_col_vec_ !! Set the contents of a column
+    generic, public :: create_hh => create_hh_ !! Create the Householder transformation matrix when given a unit vector of the hyperplane to reflect across
+    generic, public :: fill => fill_int_, fill_r32_, fill_r64_ !! Fill the matrix with a given value
+    generic, public :: set => set_int_, set_r32_, set_r64_ !! Set the value of \(a_{i,j}\) 
+    generic, public :: from_val => from_val_int_, from_val_r32_, from_val_r64_ !! Create a matrix when passed a numeric value other than complex.
     
-    generic, public :: set => set_int_, set_r32_, set_r64_ !! Set the value of \(a_{i,j})
-    generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_matrix !! Assign the contents of a matrix from a rank2 Fortran array
-
-    procedure :: new_ => new_matrix
-    procedure :: new_matrix_ => new_matrix_from_matrix
-
-    procedure, public :: get_row => matrix_get_row
-    procedure, public :: get_col => matrix_get_col
-    generic, public :: set_row => set_row_int_, set_row_r32_, set_row_r64_, set_row_vec_
-    generic, public :: set_col => set_col_int_, set_col_r32_, set_col_r64_, set_col_vec_
-
-    procedure :: set_row_int_ => matrix_set_row_array_int
-    procedure :: set_row_r32_ => matrix_set_row_array_r32
-    procedure :: set_row_r64_ => matrix_set_row_array_r64
-    procedure :: set_row_vec_ => matrix_set_row_vec
-
-    procedure :: set_col_int_ => matrix_set_col_array_int
-    procedure :: set_col_r32_ => matrix_set_col_array_r32
-    procedure :: set_col_r64_ => matrix_set_col_array_r64
-    procedure :: set_col_vec_ => matrix_set_col_vec
-
+    generic, public :: assignment(=) => from_array_int_, from_array_r32_, from_array_r64_, from_matrix!, from_val_int_, from_val_r32_, from_val_r64_ !! Assign the contents of a matrix from a rank2 Fortran array
+    !! A Matrix can get assigned to 2 things, from a rank2 fortran array of integers and reals, and from another matrix. Here is a demo:
+    !!```fortran
+    !!
+    !! type(matrix) :: m1, m2, m3
+    !! integer, dimension(2,2) :: A
+    !!
+    !!A = reshape([1, 2, 3, 4], [2, 2]) ! Create a 2x2 matrix
+    !!
+    !!m1 = A
+    !!m2 = real(A)
+    !!m3 = real(A, real64) 
+    !!     
+    !!
+    
+    
     !=================Operator Functions===============!
     generic, public :: operator(+) => add_matrix_
     !! Operator interface to add two matrices
@@ -101,56 +98,103 @@ contains
     !! Operator interface to subtract a matrix
     !!@Note
     !! As an operator, this procedure is a **function** which return a new matrix. 
-    !! use the functional operator equivalent, use [[]]
+    !! To use the subroutine operator equivalent, use [[plus]]
     generic, public :: operator(*) => times_matrix_, times_vector_
     !! Operator interface to multiply two matrices
     !!@Note
     !! As an operator, this procedure is a **function** which return a new matrix. 
-    !! use the functional operator equivalent, use [[]]
+    !! use the functional operator equivalent, use [[times]]
     generic, public :: operator(.o.) => hadamard_
-
+    !! Operator interface for element by element multiplication. The fancy word for this operation is hadamard multiplication.
+    !!@Note
+    !! This is a function interface to the operation, meaning that calling this operation will return a new matrix and will not modify
+    !! The operands.
+    
     generic, public :: operator(**) => to_the_n_
-
-
+    !! Operator interface for raising a sqaure matrix to a positive integer power.
+    
     !=================Operator Subroutines===============!
     generic, public :: plus => add_matrix_sub_
     !! Subroutine interface to add two matrices
     !!@Note
     !! This subroutine will alter the passed matrix. To use the functional operator equivalent, use \(+\)
-
+    
     ! generic, public :: times => times_matrix_sub_
     generic, public :: minus => minus_matrix_sub_
     !! Subroutine interface to add two matrices
     !!@Note
     !! This subroutine will alter the passed matrix. To use the functional operator equivalent, use \(+\)
-
+    
     generic, public :: times => times_int_sub_, times_r32_sub_, times_r64_sub_
-
-
+    !! Subroutine interface to multiply a matrix by a scalar value.
+    !!@Note
+    !! This subroutine will alter the contents of the passed matrix, and is therefore **much** faster 
+    !! when performing the subroutine call if you are processing thousands of vectors as the cost of copying is avoided.
+    
+    
+    !=============================================================================!
+    !=                           Utility Functions                               =!
+    !=============================================================================!
+    
+    
+    procedure :: new_ => new_matrix
+    procedure :: new_matrix_ => new_matrix_from_matrix
+    
+    procedure :: fill_int_ => matrix_fill_int
+    procedure :: fill_r32_ => matrix_fill_r32
+    procedure :: fill_r64_ => matrix_fill_r64
+    
+    procedure :: conform_ => matrix_conform
+    procedure :: mult_conform => matrix_mult_conform !! Check if two matrices are conforming for matrix multiplication (The number of cols of A should match the number of rows of B)
+    
+    
+    
+    
+    !==========================================================
+    ! Function operators
     procedure :: hadamard_ => matrix_hadamard_matrix
     procedure :: to_the_n_ => matrix_to_the_n
     procedure :: add_matrix_ => matrix_add_matrix
-    procedure :: add_matrix_sub_ => matrix_add_matrix_sub
     procedure :: minus_matrix_ => matrix_minus_matrix
-    procedure :: minus_matrix_sub_ => matrix_minus_matrix_sub
     procedure :: times_matrix_ => matrix_times_matrix
+    procedure :: times_vector_ => matrix_times_vector
+    procedure, nopass :: create_hh_ => matrix_create_householder_matrix
+    
+    !==========================================================
+    ! Subroutines
+    procedure :: add_matrix_sub_ => matrix_add_matrix_sub
+    procedure :: minus_matrix_sub_ => matrix_minus_matrix_sub
     procedure :: times_int_sub_ => matrix_times_int_sub
     procedure :: times_r32_sub_ => matrix_times_r32_sub
     procedure :: times_r64_sub_ => matrix_times_r64_sub
-    procedure :: times_vector_ => matrix_times_vector
-
+    
+    !==========================================================
+    ! Assignments
     procedure :: from_array_int_ => matrix_from_rank2_array_int
     procedure :: from_array_r32_ => matrix_from_rank2_array_r32
     procedure :: from_array_r64_ => matrix_from_rank2_array_r64
     procedure :: from_matrix => matrix_from_matrix
-
+    procedure :: from_val_int_ => matrix_from_val_int
+    procedure :: from_val_r32_ => matrix_from_val_r32
+    procedure :: from_val_r64_ => matrix_from_val_r64
+    
     procedure :: set_int_ => set_index_matrix_int
     procedure :: set_r32_ => set_index_matrix_r32
     procedure :: set_r64_ => set_index_matrix_r64
     
+    procedure :: set_row_int_ => matrix_set_row_array_int
+    procedure :: set_row_r32_ => matrix_set_row_array_r32
+    procedure :: set_row_r64_ => matrix_set_row_array_r64
+    procedure :: set_row_vec_ => matrix_set_row_vec
+
+    procedure :: set_col_int_ => matrix_set_col_array_int
+    procedure :: set_col_r32_ => matrix_set_col_array_r32
+    procedure :: set_col_r64_ => matrix_set_col_array_r64
+    procedure :: set_col_vec_ => matrix_set_col_vec
+
     procedure :: alloc_ => allocate_matrix_data !! Allocate the space for an array containing the matrix's elements
     procedure :: dealloc_ => deallocate_matrix_data  !! Deallocate the underlying container for a matrix's elements
-
+    
 end type
 
 interface matrix
@@ -418,7 +462,7 @@ contains
 
 
     elemental subroutine matrix_from_matrix(self, m) 
-    !! 
+    !! Assign the to the contents of self the elements of \(m\)
         class(matrix), intent(inout) :: self
         class(matrix), intent(in) :: m
 
@@ -438,7 +482,9 @@ contains
     end subroutine
 
     elemental subroutine matrix_from_val_int(self, val)
-
+    !! Assign to \(self\) the value of \(val\)
+    !! If \(self\) has its elements allocated, then call self%fill(val), filling the elements of \(self\) with the value \(val\)
+    !! If \(self\) is not allocated, create a new 1-by-1 matrix and set \(val\) as its only element.
         class(matrix), intent(inout) :: self
         integer, intent(in) :: val
 
