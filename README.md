@@ -10,7 +10,7 @@ A Matrix object allows certain Linear Algebra algorithms to be called from and o
 
 Formath has no dependencies and can be built using cmake. Formath was succesfully built on my linux machine when using gfortran.
 
-During the build process, `bin`, `lib`, and `modules` will get built.
+During the build process, `bin`, `lib`, and `modules` directories will get built. Upon installation (calling `make install`) the Formath library will install the binaries and libraries in standard GNU locations under /usr/local/ as the `CMAKE_INSTALL_PREFIX`. Installation will also install Cmake package config files so that Formath can be used flawlessly in other Cmake projects. An example gist of using Formath in a different project is [here](https://gist.github.com/ejovo13/f2773b441482a6bcbd9471cbd88b0301).
 
 # Documentation
 
@@ -18,4 +18,4 @@ Complete documentation generated with [FORD](https://github.com/Fortran-FOSS-Pro
 
 # Tests
 
-After having build Formath with cmake, call make 
+After having build Formath with cmake, call make test to assure that all the programs compile and run properly.
