@@ -6,7 +6,7 @@ use iso_fortran_env, only: real64
 
 implicit none
 
-    type(matrix) :: m1, m2, m3, m4
+    type(matrix) :: m1, m2, m3, m4, m5, m6
     type(vector) :: v1
 
     m1 = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9],[3, 2])
@@ -27,11 +27,21 @@ implicit none
     m4 = real(m3%as_array(), real64)
     call m4%set_row(3, [50, 60])
 
+    call m5%from_val(10)
+
+    m6 = matrix(5,2)
+    call m6%from_val(3.0)
+
+
+
+
+
     call m1%print()
     call m2%print()
     call m3%print()
     call m4%print()
-
+    call m5%print()
+    call m6%print()
 
 
 end program
