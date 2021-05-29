@@ -98,12 +98,12 @@ procedure, public :: get_col => matrix_get_col !! Return a vector containing the
     !! Operator interface to subtract a matrix
     !!@Note
     !! As an operator, this procedure is a **function** which return a new matrix. 
-    !! To use the subroutine operator equivalent, use [[plus]]
+    !! To use the subroutine operator equivalent, use `plus`
     generic, public :: operator(*) => times_matrix_, times_vector_
     !! Operator interface to multiply two matrices
     !!@Note
     !! As an operator, this procedure is a **function** which return a new matrix. 
-    !! use the functional operator equivalent, use [[times]]
+    !! To use the subroutine operator equivalent, use `times`
     generic, public :: operator(.o.) => hadamard_
     !! Operator interface for element by element multiplication. The fancy word for this operation is hadamard multiplication.
     !!@Note
