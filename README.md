@@ -22,4 +22,4 @@ After having build Formath with cmake, call make test to assure that all the pro
 
 # FPM
 
-Formath is currently incompatible with the work-in-prograss Fortran Packaging Manager, [FPM](https://github.com/fortran-lang/fpm). I hope to make this compatible with FPM soon.
+Formath is currently incompatible with the work-in-prograss Fortran Packaging Manager, [fpm](https://github.com/fortran-lang/fpm). I hope to make this compatible with FPM soon.
