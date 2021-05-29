@@ -567,6 +567,7 @@ contains
             write(*,*) "dimension: ", self%dim
             write(*,*) "data: ", self%v
             write(*,*) "allocated: ", self%allocated()
+            write(*,*) "length: ", self%length()
         end if
         
     end subroutine
