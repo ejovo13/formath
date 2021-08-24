@@ -1,6 +1,8 @@
 # Formath
 
-Formath is a Fortran library that implements a framework for computing fundamental linear algebra routines like QR decomposition, vector operations (projections, householder transformations), Iterative and Direct eigenvalue methods. 
+![cmake](https://github.com/ejovo13/formath/actions/workflows/cmake.yml/badge.svg)
+
+Formath is a Fortran library that implements a framework for computing fundamental linear algebra routines like QR decomposition, vector operations (projections, householder transformations), Iterative and Direct eigenvalue methods.
 
 Formath contains two base derived types, the vector (rank1 array), and matrix (rank1 array of vectors). These based types allow for the rigourous definition of a vector, including some basic operators defined on vectors.
 
