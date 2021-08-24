@@ -1,6 +1,6 @@
 # Formath
 
-![cmake](https://github.com/ejovo13/formath/actions/workflows/cmake.yml/badge.svg)
+![cmake](https://github.com/ejovo13/formath/actions/workflows/cmake.yml/badge.svg?event=push)
 
 Formath is a Fortran library that implements a framework for computing fundamental linear algebra routines like QR decomposition, vector operations (projections, householder transformations), Iterative and Direct eigenvalue methods.
 
